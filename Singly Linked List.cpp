@@ -173,7 +173,7 @@ void deleteList(struct Node** head)
         free(temp);
         temp = next;
     }
-
+    
     *head = nullptr;
 }
 
@@ -189,7 +189,7 @@ int findNodeAtIndex(struct Node* head, int index)
     }
 
     if (head == nullptr) { return 0; }
-
+    
     return head->data;
 }
 
@@ -221,7 +221,6 @@ bool searchNodeRecurse(struct Node* head, int data)
     {
         return true;
     }
-
     return searchNodeRecurse(head->next, data);
 }
 
@@ -238,8 +237,7 @@ int getNodeFromEnd(struct Node* head, int from_end)
     }
 
     if (head == nullptr) { return -1; }
-
-   return head->data;
+    return head->data;
 }
 
 
@@ -271,6 +269,7 @@ void printMiddle(struct Node* head)
 }
 
 
+// detect a loop in a singly linked list
 bool detectLoop(struct Node* head)
 {
     struct Node* faster = head;
@@ -287,26 +286,4 @@ bool detectLoop(struct Node* head)
         }
     }
     return false;
-}
-
-
-int main()
-{
-    struct Node* head = (struct Node*)malloc(sizeof(struct Node));
-    struct Node* second = (struct Node*)malloc(sizeof(struct Node));
-
-    head->data = 1;
-    second->data = 2;
-    head->next = second;
-
-    pushNode(&head, 0);
-    pushNode(&head, -1);
-    appendNode(&head, 3);
-    insertNode(second, 12);
-    deleteNodeIndex(&head, 0);
-    insertNodeIndex(&head, 99, 0);
-    appendNode(&head, 0);
-    appendNode(&head, 0);
-
-    std::cout << detectLoop(head);
 }
