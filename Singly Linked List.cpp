@@ -44,9 +44,7 @@ void appendNode(struct Node** head, int new_node_data)
     }
 
     while (temp->next != nullptr)
-    {
         temp = temp->next;
-    }
 
     temp->next = new_node;
     return;
@@ -78,9 +76,7 @@ void insertNodeIndex(struct Node** head, int new_node_data, int index)
     new_node->data = new_node_data;
 
     for (int i = 1; i < index && temp != nullptr; i++)
-    {
         temp = temp->next;
-    }
 
     if (temp == nullptr) { return; }
 
@@ -108,7 +104,8 @@ void deleteNodeKey(struct Node** head, int key)
         temp = temp->next;
     }
 
-    if (temp == nullptr) { return; }
+    if (temp == nullptr)
+        return;
 
     previous->next = temp->next;
     free(temp);
@@ -128,11 +125,10 @@ void deleteNodeIndex(struct Node** head, int index)
     }
 
     for (int i = 1; i < index && temp != nullptr; i++)
-    {
         temp = temp->next;
-    }
 
-    if (temp == nullptr) { return; }
+    if (temp == nullptr)
+        return;
 
     temp->next = temp->next->next;
     free(temp->next);
@@ -155,7 +151,8 @@ int listLength(struct Node* head)
 // Find the length of a list recursively
 int listLengthRecurse(struct Node* head)
 {
-    if (head == nullptr) { return 0; }
+    if (head == nullptr)
+        return 0;
 
     return 1 + listLengthRecurse(head->next);
 }
@@ -188,7 +185,8 @@ int findNodeAtIndex(struct Node* head, int index)
         counter++;
     }
 
-    if (head == nullptr) { return 0; }
+    if (head == nullptr)
+        return 0;
     
     return head->data;
 }
@@ -200,9 +198,8 @@ bool searchNode(struct Node* head, int data)
     while (head != nullptr)
     {
         if (head->data == data)
-        {
             return true;
-        }
+
         head = head->next;
     }
     return false;
@@ -213,14 +210,11 @@ bool searchNode(struct Node* head, int data)
 bool searchNodeRecurse(struct Node* head, int data)
 {
     if (head == nullptr)
-    {
         return false;
-    }
 
     if (head->data == data)
-    {
         return true;
-    }
+
     return searchNodeRecurse(head->next, data);
 }
 
@@ -232,11 +226,11 @@ int getNodeFromEnd(struct Node* head, int from_end)
     int index = len - from_end;
 
     for (int i = 0; i < index && head != nullptr; i++)
-    {
         head = head->next;
-    }
 
-    if (head == nullptr) { return -1; }
+    if (head == nullptr)
+        return -1;
+    
     return head->data;
 }
 
@@ -281,9 +275,7 @@ bool detectLoop(struct Node* head)
         faster = faster->next->next;
 
         if (slower == faster)
-        {
             return true;
-        }
     }
     return false;
 }
