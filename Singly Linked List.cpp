@@ -1,165 +1,235 @@
 #include <iostream>
 
-
 struct Node
 {
     int data;
     struct Node* next = nullptr;
 };
 
-
-// Prints every element in the list
+// print the contents of a list: O(n) time
 void printList(struct Node* head)
 {
+    if (head == nullptr)
+        return;
+
     while (head != nullptr)
     {
         std::cout << head->data << " ";
         head = head->next;
     }
-    return;
 }
 
-
-// Insert a node at the front of the linked list
-void pushNode(struct Node*& head, int new_node_data)
+// returns the number of nodes in a list: O(n) time
+int length(struct Node* head)
 {
-    struct Node* new_node = new Node;
-    new_node->data = new_node_data;
-    new_node->next = head;
-    head = new_node;
+    int counter = 0;
+
+    if (head != nullptr)
+    {
+        while (head != nullptr)
+        {
+            counter++;
+            head = head->next;
+        }
+    }
+    return counter;
 }
 
-
-// Insert a node at the end of the linked list
-void appendNode(struct Node*& head, int new_node_data)
+// creates a new node and adds it to the beginning of a list: O(1) time
+void push(struct Node*& head, int new_node_data)
 {
-    struct Node* temp = head;
+    // creates new node
     struct Node* new_node = new Node;
     new_node->data = new_node_data;
 
+    // if list is empty
     if (head == nullptr)
     {
         head = new_node;
         return;
     }
 
+    new_node->next = head;
+    head = new_node;
+}
+
+// add existing node to the beginning of a list: O(1) time
+void push(struct Node*& head, struct Node* new_node)
+{
+    // if list is empty
+    if (head == nullptr)
+    {
+        head = new_node;
+        return;
+    }
+
+    new_node->next = head;
+    head = new_node;
+}
+
+// creates a new node and adds it to the end of a list: O(n) time
+void append(struct Node*& head, int new_node_data)
+{
+    // create new node
+    struct Node* new_node = new Node;
+    new_node->data = new_node_data;
+
+    // find the last node of the list
+    struct Node* temp = head;
     while (temp->next != nullptr)
         temp = temp->next;
 
     temp->next = new_node;
-    return;
 }
 
-
-// Insert a node after another node
-void insertNode(struct Node* previous, int new_node_data)
+// add existing node to the end of a list: O(n) time
+void append(struct Node*& head, struct Node* new_node)
 {
+    // find the last node of the list
+    struct Node* temp = head;
+    while (temp->next != nullptr)
+        temp = temp->next;
+
+    temp->next = new_node;
+}
+
+// creates new node and inserts it into the list after a given node: O(1) time
+void insertAfter(struct Node* previous, int new_node_data)
+{
+    // create new node
     struct Node* new_node = new Node;
     new_node->data = new_node_data;
+
     new_node->next = previous->next;
     previous->next = new_node;
 }
 
-
-// Insert a node by index
-void insertNodeIndex(struct Node*& head, int new_node_data, int index)
+// inserts existing node into the list after a given node: O(1) time
+void insertAfter(struct Node* previous, struct Node* new_node)
 {
-   struct Node* temp = head;
+    new_node->next = previous->next;
+    previous->next = new_node;
+}
 
-    if (index == 0)
+// create a new node and insert it into the list by position: O(n) time
+void insertIndex(struct Node*& head, int new_node_data, int index)
+{
+    // if list is empty or node is to be inserted at head
+    if (head == nullptr || index == 0)
     {
-        pushNode(head, new_node_data);
+        push(head, new_node_data);
         return;
     }
 
+    struct Node* temp = head;
+
+    // create new node
     struct Node* new_node = new Node;
     new_node->data = new_node_data;
 
+    // find the node before the index that we want to insert the new node at
     for (int i = 1; i < index && temp != nullptr; i++)
         temp = temp->next;
 
+    // if index is out of list range
     if (temp == nullptr)
+    {
+        append(head, new_node_data);
         return;
+    }
 
     new_node->next = temp->next;
     temp->next = new_node;
 }
 
-
-// Delete a node by value
-void deleteNodeKey(struct Node*& head, int key)
+// insert existing node into the list by position: O(n) time
+void insertIndex(struct Node*& head, struct Node* new_node, int index)
 {
-    struct Node* previous = new Node;
-    struct Node* temp = head;
-
-    if (temp->data == key)
+    // if list is empty or node is to be inserted at head
+    if (head == nullptr || index == 0)
     {
-        head = temp->next;
-        free(temp);
+        push(head, new_node);
         return;
     }
 
-    while (temp != nullptr && temp->data != key)
+    struct Node* temp = head;
+
+    // find the node before the index that we want to insert the new node at
+    for (int i = 1; i < index && temp != nullptr; i++)
+        temp = temp->next;
+
+    // if index is out of list range
+    if (temp == nullptr)
+    {
+        append(head, new_node);
+        return;
+    }
+
+    new_node->next = temp->next;
+    temp->next = new_node;
+}
+
+// delete node by value: O(n) time
+void deleteByValue(struct Node*& head, int value)
+{
+    // create two nodes, one to equal the current node (temp) and one to equal the previous node (previous)
+    struct Node* temp = head;
+    struct Node* previous;
+
+    // if the head is to be deleted
+    if (head->data == value)
+    {
+        head = temp->next;
+        delete temp;
+        return;
+    }
+
+    // find the appropriate node to be deleted (temp)
+    while (temp->data != value && temp != nullptr)
     {
         previous = temp;
         temp = temp->next;
     }
 
+    // if the value to be deleted is not in the list
     if (temp == nullptr)
         return;
 
     previous->next = temp->next;
-    free(temp);
+    delete temp;
 }
 
-
-// Delete a node by position
-void deleteNodeIndex(struct Node*& head, int index)
+// delete a node by position: O(n) time
+void deleteNodeByIndex(struct Node*& head, int index)
 {
+    // create two nodes, one to equal the current node (temp) and one to equal the previous node (previous)
     struct Node* temp = head;
+    struct Node* previous;
 
+    // if the head is to be deleted
     if (index == 0)
     {
         head = temp->next;
-        free(temp);
+        delete temp;
         return;
     }
 
-    for (int i = 1; i < index && temp != nullptr; i++)
+    // find the appropriate node to be deleted (temp)
+    for (int i = 0; i < index && temp != nullptr; i++)
+    {
+        previous = temp;
         temp = temp->next;
+    }
 
+    // if the list index is out of range
     if (temp == nullptr)
         return;
 
-    temp->next = temp->next->next;
-    free(temp->next);
+    previous->next = temp->next;
+    delete temp;
 }
 
-
-// Find the length of the list
-int listLength(struct Node* head)
-{
-    int counter = 0;
-    while (head != nullptr)
-    {
-        head = head->next;
-        counter++;
-    }
-    return counter;
-}
-
-
-// Find the length of a list recursively
-int listLengthRecurse(struct Node* head)
-{
-    if (head == nullptr)
-        return 0;
-
-    return 1 + listLengthRecurse(head->next);
-}
-
-
-// delete an entire linked list
+// delete an entire list: O(n) time
 void deleteList(struct Node*& head)
 {
     struct Node* temp = head;
@@ -168,117 +238,9 @@ void deleteList(struct Node*& head)
     while (temp != nullptr)
     {
         next = temp->next;
-        free(temp);
+        delete temp;
         temp = next;
     }
 
     head = nullptr;
-}
-
-
-// Find the node data at a certain index
-int findNodeAtIndex(struct Node* head, int index)
-{
-    int counter = 0;
-    while (counter < index && head != nullptr)
-    {
-        head = head->next;
-        counter++;
-    }
-
-    if (head == nullptr)
-        return 0;
-
-    return head->data;
-}
-
-
-// see if an integer is in the list or not
-bool searchNode(struct Node* head, int data)
-{
-    while (head != nullptr)
-    {
-        if (head->data == data)
-            return true;
-        head = head->next;
-    }
-    return false;
-}
-
-
-// see if an integer is in a list or not recursively
-bool searchNodeRecurse(struct Node* head, int data)
-{
-    if (head == nullptr)
-        return false;
-
-    if (head->data == data)
-        return true;
-
-    return searchNodeRecurse(head->next, data);
-}
-
-
-// find a node n number of elements from the end of a list
-int getNodeFromEnd(struct Node* head, int from_end)
-{
-    int len = listLength(head);
-    int index = len - from_end;
-
-    for (int i = 0; i < index && head != nullptr; i++)
-        head = head->next;
-
-    if (head == nullptr)
-        return -1;
-
-   return head->data;
-}
-
-
-// count how many times an element occurs in a list
-int countElement(struct Node* head, int element)
-{
-    int counter = 0;
-    while (head != nullptr)
-    {
-        if (head->data == element)
-            counter++;
-        head = head->next;
-    }
-    return counter;
-}
-
-
-// prints the middle element of a linked list
-void printMiddle(struct Node* head)
-{
-    struct Node* faster = head;
-    struct Node* slower = head;
-
-    while (faster != nullptr && faster->next != nullptr)
-    {
-        faster = faster->next->next;
-        slower = slower->next;
-    }
-    std::cout << slower->data;
-}
-
-
-// detects a loop in a linked list
-bool detectLoop(struct Node* head)
-{
-    struct Node* faster = head;
-    struct Node* slower = head;
-
-    while (slower != nullptr && faster != nullptr && faster->next != nullptr)
-    {
-        slower = slower->next;
-        faster = faster->next->next;
-
-        if (slower == faster)
-        {
-            return true;
-        }
-    }
-    return false;
 }
