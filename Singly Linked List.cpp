@@ -21,25 +21,25 @@ void printList(struct Node* head)
 
 
 // Insert a node at the front of the linked list
-void pushNode(struct Node** head, int new_node_data)
+void pushNode(struct Node*& head, int new_node_data)
 {
-    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* new_node = new Node;
     new_node->data = new_node_data;
-    new_node->next = *head;
-    *head = new_node;
+    new_node->next = head;
+    head = new_node;
 }
 
 
 // Insert a node at the end of the linked list
-void appendNode(struct Node** head, int new_node_data)
+void appendNode(struct Node*& head, int new_node_data)
 {
-    struct Node* temp = *head;
-    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* temp = head;
+    struct Node* new_node = new Node;
     new_node->data = new_node_data;
 
-    if (*head == nullptr)
+    if (head == nullptr)
     {
-        *head = new_node;
+        head = new_node;
         return;
     }
 
@@ -54,7 +54,7 @@ void appendNode(struct Node** head, int new_node_data)
 // Insert a node after another node
 void insertNode(struct Node* previous, int new_node_data)
 {
-    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* new_node = new Node;
     new_node->data = new_node_data;
     new_node->next = previous->next;
     previous->next = new_node;
@@ -62,9 +62,9 @@ void insertNode(struct Node* previous, int new_node_data)
 
 
 // Insert a node by index
-void insertNodeIndex(struct Node** head, int new_node_data, int index)
+void insertNodeIndex(struct Node*& head, int new_node_data, int index)
 {
-   struct Node* temp = *head;
+   struct Node* temp = head;
 
     if (index == 0)
     {
@@ -72,13 +72,14 @@ void insertNodeIndex(struct Node** head, int new_node_data, int index)
         return;
     }
 
-    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* new_node = new Node;
     new_node->data = new_node_data;
 
     for (int i = 1; i < index && temp != nullptr; i++)
         temp = temp->next;
 
-    if (temp == nullptr) { return; }
+    if (temp == nullptr)
+        return;
 
     new_node->next = temp->next;
     temp->next = new_node;
@@ -86,14 +87,14 @@ void insertNodeIndex(struct Node** head, int new_node_data, int index)
 
 
 // Delete a node by value
-void deleteNodeKey(struct Node** head, int key)
+void deleteNodeKey(struct Node*& head, int key)
 {
-    struct Node* previous = (struct Node*)malloc(sizeof(struct Node));
-    struct Node* temp = *head;
+    struct Node* previous = new Node;
+    struct Node* temp = head;
 
     if (temp->data == key)
     {
-        *head = temp->next;
+        head = temp->next;
         free(temp);
         return;
     }
@@ -113,13 +114,13 @@ void deleteNodeKey(struct Node** head, int key)
 
 
 // Delete a node by position
-void deleteNodeIndex(struct Node** head, int index)
+void deleteNodeIndex(struct Node*& head, int index)
 {
-    struct Node* temp = *head;
+    struct Node* temp = head;
 
     if (index == 0)
     {
-        *head = temp->next;
+        head = temp->next;
         free(temp);
         return;
     }
@@ -159,9 +160,9 @@ int listLengthRecurse(struct Node* head)
 
 
 // delete an entire linked list
-void deleteList(struct Node** head)
+void deleteList(struct Node*& head)
 {
-    struct Node* temp = *head;
+    struct Node* temp = head;
     struct Node* next;
 
     while (temp != nullptr)
@@ -170,8 +171,8 @@ void deleteList(struct Node** head)
         free(temp);
         temp = next;
     }
-    
-    *head = nullptr;
+
+    head = nullptr;
 }
 
 
@@ -187,7 +188,7 @@ int findNodeAtIndex(struct Node* head, int index)
 
     if (head == nullptr)
         return 0;
-    
+
     return head->data;
 }
 
@@ -199,7 +200,6 @@ bool searchNode(struct Node* head, int data)
     {
         if (head->data == data)
             return true;
-
         head = head->next;
     }
     return false;
@@ -230,8 +230,8 @@ int getNodeFromEnd(struct Node* head, int from_end)
 
     if (head == nullptr)
         return -1;
-    
-    return head->data;
+
+   return head->data;
 }
 
 
@@ -241,7 +241,8 @@ int countElement(struct Node* head, int element)
     int counter = 0;
     while (head != nullptr)
     {
-        if (head->data == element) { counter++; }
+        if (head->data == element)
+            counter++;
         head = head->next;
     }
     return counter;
@@ -263,7 +264,7 @@ void printMiddle(struct Node* head)
 }
 
 
-// detect a loop in a singly linked list
+// detects a loop in a linked list
 bool detectLoop(struct Node* head)
 {
     struct Node* faster = head;
@@ -275,7 +276,9 @@ bool detectLoop(struct Node* head)
         faster = faster->next->next;
 
         if (slower == faster)
+        {
             return true;
+        }
     }
     return false;
 }
