@@ -12,7 +12,7 @@ struct IndexError : public std::exception {
 
 template <class T>
 class Node
-// Defines a node class for singly linked list.
+// Defines a node class for doubly linked list.
 {
     public:
         T data;
