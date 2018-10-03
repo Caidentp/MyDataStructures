@@ -1,4 +1,11 @@
+#include <exception>
 #define MAX 10
+
+
+// defines an empty stack exception
+struct IndexError : public std::exception {
+    const char* what () const throw () { return "Stack is empty."; }
+}
 
 template <class T>
 class Stack
@@ -33,7 +40,7 @@ class Stack
         {
             // if stack is empty
             if (top == -1)
-                return -1;
+                throw IndexError();
 
             T data = arr[top];
             top--;
@@ -45,7 +52,7 @@ class Stack
         {
             // if stack is empty
             if (top == -1)
-                return -1;
+                throw IndexError();
                 
             return arr[top];
         }
