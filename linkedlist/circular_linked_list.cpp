@@ -4,6 +4,7 @@
 #define node Node<T>*
 
 
+// Index error for throwing exceptions when out of range index is requested in linked list methods
 struct IndexError : public std::exception {
     const char* what () const throw () { return "List index out of range."; }
 };
@@ -11,6 +12,7 @@ struct IndexError : public std::exception {
 
 template <class T>
 class Node
+// Defines a node class for circular linked list.
 {
     public:
         T data;
@@ -22,17 +24,21 @@ class Node
 
 template <class T>
 class CircularLinkedList
+// Defines the circular linked list itself.
 {
     private:
+        // head node
         node head;
 
     public:
+        // can optionally pass a node to the constructor that will become the head.
         CircularLinkedList(node head = nullptr)
         {
             this->head = head;
         }
 
         void printList()
+        // prints the contents of a list.
         {
             node temp = head;
 
@@ -48,6 +54,7 @@ class CircularLinkedList
         }
 
         int length()
+        // returns the length of a list.
         {
             int counter = 0;
 
@@ -65,6 +72,7 @@ class CircularLinkedList
         }
 
         void push(T data)
+        // add a node to the beginning of a list.
         {
             node new_node = new Node<T>(data);
 
@@ -84,6 +92,7 @@ class CircularLinkedList
         }
 
         void append(T data)
+        // add a node to the end of a list.
         {
             if (head == nullptr)
             {
@@ -103,13 +112,16 @@ class CircularLinkedList
         }
 
         void insertIndex(int index, T data)
+        // insert a node into a list by position.
         {
+            // if list is empty or index is out of range
             if (head == nullptr || index > this->length())
                 throw IndexError();
 
             node new_node = new Node<T>(data);
             node temp = head;
 
+            // if node is to be inserted at the head
             if (index == 0)
             {
                 do
@@ -131,6 +143,7 @@ class CircularLinkedList
 
         T getIndex(int index)
         {
+            // get the data instance variable of a node object in the list by its position in the list.
             if (head == nullptr || index >= this->length())
                 throw IndexError();
 
@@ -142,13 +155,16 @@ class CircularLinkedList
         }
 
         void deleteIndex(int index)
+        // delete a node from the list by position.
         {
+            // if list is empty or index is out of range
             if (head == nullptr || index >= this->length())
                 throw IndexError();
 
             node temp = head;
             node previous;
 
+            // if head is to be deleted
             if (index == 0)
             {
                 previous = head;
