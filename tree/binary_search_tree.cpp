@@ -160,8 +160,8 @@ class Node
                 counter++;
             return counter;
         }
-
-        void inorder()
+    
+        void preorder()
         {
             std::cout << this->data << " ";
             if (this->left != nullptr)
@@ -169,4 +169,22 @@ class Node
             if (this->right != nullptr)
                 this->right->inorder();
         }
+
+        void inorder()
+        {
+            if (this->left != nullptr)
+                this->left->inorder();
+            std::cout << this->data << " ";
+            if (this->right != nullptr)
+                this->right->inorder();
+        }
+    
+        void postorder()
+            {
+                if (this->left != nullptr)
+                    this->left->inorder();
+                if (this->right != nullptr)
+                    this->right->inorder();
+                std::cout << this->data << " ";
+            }
 };
