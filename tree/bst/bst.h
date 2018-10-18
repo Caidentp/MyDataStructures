@@ -1,5 +1,5 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef BST_H
+#define BST_H
 #include <iostream>
 
 
