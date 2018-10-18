@@ -1,4 +1,4 @@
-#include "Node.h"
+#include "bst.h"
 
 
 // Default constructor
