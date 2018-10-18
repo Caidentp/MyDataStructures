@@ -8,6 +8,7 @@ Node::Node()
     this->parent = nullptr;
 }
 
+
 // Constructor
 Node::Node(int data, Node* parent = nullptr)
 {
@@ -15,21 +16,26 @@ Node::Node(int data, Node* parent = nullptr)
     this->parent = parent;
 }
 
+
 // Get or set data instance variable
 int Node::get_data() { return this->data; }
 void Node::set_data(int new_data) { this->data = new_data; }
+
 
 // Get or set parent instance variable
 Node* Node::get_parent() { return this->parent; }
 void Node::set_parent(Node* new_parent) { this->parent = new_parent; }
 
+
 // Get or set left instance variable
 Node* Node::get_left() { return this->left; }
 void Node::set_left(Node* new_left) { this->left = new_left; }
 
+
 // Get or set right instance variable
 Node* Node::get_right() { return this->right; }
 void Node::set_right(Node* new_right) { this->right = new_right; }
+
 
 // Insert a node int the tree at the appropriate position
 void Node::insertNode(int data)
@@ -60,6 +66,7 @@ void Node::insertNode(int data)
     else
         this->set_data(data);
 }
+
 
 // Remove a node from the tree if it exists
 void Node::deleteNode(int data)
@@ -133,6 +140,7 @@ void Node::deleteNode(int data)
     }
 }
 
+
 // Return a node if it exists in the tree
 Node* Node::lookup(int data)
 {
@@ -153,6 +161,7 @@ Node* Node::lookup(int data)
     else
         return this;
 }
+
 
 // Check whether a node exists in the tree or not
 bool Node::contains(int data)
@@ -175,6 +184,7 @@ bool Node::contains(int data)
         return true;
 }
 
+
 // Return how many children a node has
 int Node::child_count()
 {
@@ -186,6 +196,7 @@ int Node::child_count()
     return counter;
 }
 
+
 // Preorder traversal
 void Node::preorder()
 {
@@ -196,6 +207,7 @@ void Node::preorder()
         this->right->preorder();
 }
 
+
 // Inorder traversal
 void Node::inorder()
 {
@@ -205,6 +217,7 @@ void Node::inorder()
     if (this->get_right() != nullptr)
         this->right->inorder();
 }
+
 
 // Postorder traversal
 void Node::postorder()
