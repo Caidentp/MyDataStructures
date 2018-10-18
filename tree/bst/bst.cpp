@@ -233,7 +233,7 @@ void Node::postorder()
 // Destructor
 Node::~Node()
 {
-    delete  left;
+    delete left;
     delete right;
     delete parent;
 }
