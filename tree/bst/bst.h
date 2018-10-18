@@ -17,7 +17,7 @@ class Node
 
         int get_data();
         void set_data(int new_data);
-        Node* get_parent();  // complete
+        Node* get_parent();
         void set_parent(Node* new_parent);
         Node* get_left();
         void set_left(Node* new_left);
