@@ -12,28 +12,28 @@ class Node
         Node* right = nullptr;
 
     public:
-        Node();  // complete
-        Node(int data, Node* parent);  // complete
+        Node();
+        Node(int data, Node* parent);
 
-        int get_data();  // complete
-        void set_data(int new_data);  // complete
+        int get_data();
+        void set_data(int new_data);
         Node* get_parent();  // complete
-        void set_parent(Node* new_parent);  // complete
-        Node* get_left();  // complete
-        void set_left(Node* new_left);  // complete
-        Node* get_right();  // complete
-        void set_right(Node* new_right);  // complete
+        void set_parent(Node* new_parent);
+        Node* get_left();
+        void set_left(Node* new_left);
+        Node* get_right();
+        void set_right(Node* new_right);
 
-        void insertNode(int data);  // complete
-        void deleteNode(int data);  // complete
-        Node* lookup(int data);  // complete
-        void preorder();  // complete
-        void inorder();  // complete
-        void postorder();  // complete
-        bool contains(int data);  // complete
-        int child_count();  // complete
+        void insertNode(int data);
+        void deleteNode(int data);
+        Node* lookup(int data);
+        void preorder();
+        void inorder();
+        void postorder();
+        bool contains(int data);
+        int child_count();
 
-        virtual ~Node();  // complete
+        virtual ~Node();
 };
 
 
