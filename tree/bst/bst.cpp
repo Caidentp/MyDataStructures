@@ -18,27 +18,27 @@ Node::Node(int data, Node* parent = nullptr)
 
 
 // Get or set data instance variable
-int Node::get_data() { return this->data; }
-void Node::set_data(int new_data) { this->data = new_data; }
+int Node::get_data() const { return this->data; }
+void Node::set_data(const int new_data) { this->data = new_data; }
 
 
 // Get or set parent instance variable
-Node* Node::get_parent() { return this->parent; }
-void Node::set_parent(Node* new_parent) { this->parent = new_parent; }
+Node* Node::get_parent() const { return this->parent; }
+void Node::set_parent(const Node* new_parent) { this->parent = new_parent; }
 
 
 // Get or set left instance variable
-Node* Node::get_left() { return this->left; }
-void Node::set_left(Node* new_left) { this->left = new_left; }
+Node* Node::get_left() const { return this->left; }
+void Node::set_left(const Node* new_left) { this->left = new_left; }
 
 
 // Get or set right instance variable
-Node* Node::get_right() { return this->right; }
-void Node::set_right(Node* new_right) { this->right = new_right; }
+Node* Node::get_right() const { return this->right; }
+void Node::set_right(const Node* new_right) { this->right = new_right; }
 
 
 // Insert a node int the tree at the appropriate position
-void Node::insertNode(int data)
+void Node::insertNode(const int data)
 {
     if (this->data != '\0')
     {
@@ -69,7 +69,7 @@ void Node::insertNode(int data)
 
 
 // Remove a node from the tree if it exists
-void Node::deleteNode(int data)
+void Node::deleteNode(const int data)
 {
     Node* node = this->lookup(data);
     Node* parent = node->get_parent();
@@ -142,7 +142,7 @@ void Node::deleteNode(int data)
 
 
 // Return a node if it exists in the tree
-Node* Node::lookup(int data)
+Node* Node::lookup(const int data)
 {
     if (data < this->get_data())
     {
@@ -164,7 +164,7 @@ Node* Node::lookup(int data)
 
 
 // Check whether a node exists in the tree or not
-bool Node::contains(int data)
+bool Node::contains(const int data) const
 {
     if (data < this->get_data())
     {
@@ -186,7 +186,7 @@ bool Node::contains(int data)
 
 
 // Return how many children a node has
-int Node::child_count()
+int Node::child_count() const
 {
     int counter = 0;
     if (this->left != nullptr)
@@ -198,7 +198,7 @@ int Node::child_count()
 
 
 // Preorder traversal
-void Node::preorder()
+void Node::preorder() const 
 {
     std::cout << this->get_data() << " ";
     if (this->get_left() != nullptr)
@@ -209,7 +209,7 @@ void Node::preorder()
 
 
 // Inorder traversal
-void Node::inorder()
+void Node::inorder() const
 {
     if (this->get_left() != nullptr)
         this->left->inorder();
@@ -220,7 +220,7 @@ void Node::inorder()
 
 
 // Postorder traversal
-void Node::postorder()
+void Node::postorder() const
 {
     if (this->get_left() != nullptr)
         this->left->postorder();
