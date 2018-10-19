@@ -15,23 +15,23 @@ class Node
         Node();
         Node(int data, Node* parent);
 
-        int get_data();
-        void set_data(int new_data);
-        Node* get_parent();
-        void set_parent(Node* new_parent);
-        Node* get_left();
-        void set_left(Node* new_left);
-        Node* get_right();
-        void set_right(Node* new_right);
+        int get_data() const;
+        void set_data(const int new_data);
+        Node* get_parent() const;
+        void set_parent(const Node* new_parent);
+        Node* get_left() const;
+        void set_left(const Node* new_left);
+        Node* get_right() const;
+        void set_right(const Node* new_right);
 
-        void insertNode(int data);
-        void deleteNode(int data);
-        Node* lookup(int data);
-        void preorder();
-        void inorder();
-        void postorder();
-        bool contains(int data);
-        int child_count();
+        void insertNode(const int data);
+        void deleteNode(const int data);
+        Node* lookup(const int data);
+        void preorder() const;
+        void inorder() const;
+        void postorder() const;
+        bool contains(const int data);
+        int child_count() const;
 
         virtual ~Node();
 };
