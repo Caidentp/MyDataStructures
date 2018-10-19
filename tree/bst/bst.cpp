@@ -19,22 +19,22 @@ Node::Node(int data, Node* parent = nullptr)
 
 // Get or set data instance variable
 int Node::get_data() const { return this->data; }
-void Node::set_data(const int new_data) { this->data = new_data; }
+void Node::set_data(int new_data) { this->data = new_data; }
 
 
 // Get or set parent instance variable
 Node* Node::get_parent() const { return this->parent; }
-void Node::set_parent(const Node* new_parent) { this->parent = new_parent; }
+void Node::set_parent(Node* new_parent) { this->parent = new_parent; }
 
 
 // Get or set left instance variable
 Node* Node::get_left() const { return this->left; }
-void Node::set_left(const Node* new_left) { this->left = new_left; }
+void Node::set_left(Node* new_left) { this->left = new_left; }
 
 
 // Get or set right instance variable
 Node* Node::get_right() const { return this->right; }
-void Node::set_right(const Node* new_right) { this->right = new_right; }
+void Node::set_right(Node* new_right) { this->right = new_right; }
 
 
 // Insert a node int the tree at the appropriate position
@@ -198,7 +198,7 @@ int Node::child_count() const
 
 
 // Preorder traversal
-void Node::preorder() const 
+void Node::preorder() const
 {
     std::cout << this->get_data() << " ";
     if (this->get_left() != nullptr)
