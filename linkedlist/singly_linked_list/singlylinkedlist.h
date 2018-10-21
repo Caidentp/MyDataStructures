@@ -47,7 +47,7 @@ class SinglyLinkedList
 
         Node* get_head() const;
         Node* get_tail() const;
-        int length();
+        int length() const;
 
         SinglyLinkedList& operator += (SinglyLinkedList& right);
         SinglyLinkedList& operator -= (SinglyLinkedList& right);
