@@ -1,5 +1,5 @@
-#ifndef SLL_H
-#define SLL_H
+#ifndef SINGLYLINKEDLIST_H
+#define SINGLYLINKEDLIST_H
 #include <iostream>
 #include <exception>
 
