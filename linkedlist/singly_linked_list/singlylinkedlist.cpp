@@ -37,7 +37,7 @@ Node* SinglyLinkedList::get_tail() const { return this->tail; }
 
 
 // Return the list_length instance variable of a linked list
-int SinglyLinkedList::length() { return this->list_length; }
+int SinglyLinkedList::length() const { return this->list_length; }
 
 
 // Add the contents of one list to another
