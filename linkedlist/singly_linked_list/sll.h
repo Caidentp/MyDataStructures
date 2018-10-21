@@ -3,6 +3,11 @@
 #include <iostream>
 #include <exception>
 
+// TODO: Define copy constructor for the Node class
+// TODO: Define copy constructor for the SinglyLinkedList class
+// TODO: Operator overload assignment operator for Node class
+// TODO: Operator overload assignment operator for SinglyLinkedList class
+
 
 struct IndexError : public std::exception
 {
