@@ -28,18 +28,6 @@ SinglyLinkedList::~SinglyLinkedList()
 }
 
 
-// Return the head node of a linked list
-Node* SinglyLinkedList::get_head() const { return this->head; }
-
-
-// Return the tail node of a linked list
-Node* SinglyLinkedList::get_tail() const { return this->tail; }
-
-
-// Return the list_length instance variable of a linked list
-int SinglyLinkedList::length() const { return this->list_length; }
-
-
 // Add the contents of one list to another
 SinglyLinkedList& SinglyLinkedList::operator += (SinglyLinkedList& right)
 {
