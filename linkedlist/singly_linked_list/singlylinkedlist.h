@@ -24,7 +24,7 @@ class Node
     public:
         Node();
         Node(const int data);
-        ~Node();
+        virtual ~Node();
 
         int get_data() const { return this->data; }
         void set_data(const int data) { this->data = data; }
@@ -43,7 +43,7 @@ class SinglyLinkedList
     public:
         SinglyLinkedList();
         SinglyLinkedList(const int data);
-        ~SinglyLinkedList();
+        virtual ~SinglyLinkedList();
 
         Node* get_head() const { return this->head; }
         Node* get_tail() const { return this->tail; }
