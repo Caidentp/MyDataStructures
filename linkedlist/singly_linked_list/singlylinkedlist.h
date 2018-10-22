@@ -26,10 +26,10 @@ class Node
         Node(const int data);
         ~Node();
 
-        int get_data() const;
-        void set_data(const int data);
-        Node* get_next() const;
-        void set_next(Node* next);
+        int get_data() const { return this->data; }
+        void set_data(const int data) { this->data = data; }
+        Node* get_next() const { return this->next; }
+        void set_next(Node* next) { this->next = next; }
 };
 
 
@@ -45,9 +45,9 @@ class SinglyLinkedList
         SinglyLinkedList(const int data);
         ~SinglyLinkedList();
 
-        Node* get_head() const;
-        Node* get_tail() const;
-        int length() const;
+        Node* get_head() const { return this->head; }
+        Node* get_tail() const { return this->tail; }
+        int length() const { return this->list_length; }
 
         SinglyLinkedList& operator += (SinglyLinkedList& right);
         SinglyLinkedList& operator -= (SinglyLinkedList& right);
