@@ -7,6 +7,8 @@
 // TODO: Define copy constructor for the SinglyLinkedList class
 // TODO: Operator overload assignment operator for Node class
 // TODO: Operator overload assignment operator for SinglyLinkedList class
+// TODO: Turn SinglyLinkedList into a template class
+// TODO: Turn Node into a template class
 
 
 struct IndexError : public std::exception
