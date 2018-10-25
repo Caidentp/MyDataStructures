@@ -12,7 +12,7 @@ class Node
 
     public:
         Node(const T data) { this->data = data; }
-        ~Node() { delete next; }
+        virtual ~Node() { delete next; }
 
         T get_data() const { return this->data; }
         void set_data(const T data) { this->data = data; }
@@ -31,7 +31,7 @@ class Stack
     public:
         Stack();
         Stack(const T data);
-        ~Stack() { delete head; }
+        virtual ~Stack() { delete head; }
 
         void push(const T data);
         T pop();
