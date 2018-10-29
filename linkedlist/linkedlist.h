@@ -12,6 +12,10 @@
  *      - Defaults to int.
  * template class T2: The type of linked list node that the list will consist of.
  *      - This type will default to the appropriate node based on the linked list type.
+ *
+ * @var head : First node in the list.
+ * @var tail : Last node in the list.
+ * @var len : Running total number of nodes in a list.
  */
 template <class T1, class T2>
 class LinkedListABC
