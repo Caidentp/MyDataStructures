@@ -112,7 +112,7 @@ class SinglyLinkedList : public LinkedListABC<T1, T2>
         virtual ~SinglyLinkedList() {}
 
         /// Adds capability to initialize linked list with initialization list.
-        SinglyLinkedList(const std::initializer_list<T1> li);
+        SinglyLinkedList(const std::initializer_list<T1> il);
 
         /// Overload index at operator [].
         T2* operator [] (const int index);
