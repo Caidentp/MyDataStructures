@@ -108,7 +108,7 @@ class SinglyLinkedList : public LinkedListABC<T1, T2>
     public:
         SinglyLinkedList();
         SinglyLinkedList(const T1 data);
-        SinglyLinkedList<T1, T2>(const SinglyLinkedList<T1, T2>& other);
+        SinglyLinkedList(const SinglyLinkedList<T1, T2>& other);
         virtual ~SinglyLinkedList() {}
 
         /// Adds capability to initialize linked list with initialization list.
