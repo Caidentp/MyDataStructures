@@ -7,6 +7,9 @@
  *
  * template class t1: Data instance variable type
  *      - Defaults to int.
+ *
+ * @var data : Data that the node holds.
+ * @var next : next node in the list.
  */
 template <class T1 = int>
 class SNode
@@ -60,6 +63,9 @@ std::ostream& operator << (std::ostream& os, SNode<>* node) {
  *
  * template class t1: Data instance variable type
  *      - Defaults to int.
+ *
+ * @var data : Data that the node holds.
+ * @var next : next node in the list.
  */
 template <class T1 = int>
 class DNode
@@ -119,6 +125,9 @@ std::ostream& operator << (std::ostream& os, DNode<>* node) {
  *
  * template class t1: Data instance variable type
  *      - Defaults to int.
+ *
+ * @var data : Data that the node holds.
+ * @var next : next node in the list.
  */
 template <class T1 = int>
 class CNode
