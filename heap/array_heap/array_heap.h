@@ -115,7 +115,6 @@ class ArrayMaxHeap : public ArrayHeapABC<T>
          * @return The maximum child of the parent index.
          */
         int max_child(int index);
-
 };
 
 
