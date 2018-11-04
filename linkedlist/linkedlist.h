@@ -101,7 +101,7 @@ class LinkedListABC
 
 
 
-/** Singly linked list class. Inherits from LinkedListABC
+/** Singly linked list class. Inherits from LinkedListABC.
  * template class T1: The data type that the linked list nodes will hold.
  *      - Defaults to int.
  * template class T2: The type of linked list node that the list will consist of.
@@ -127,7 +127,7 @@ class SinglyLinkedList : public LinkedListABC<T1, T2>
 
 
 
-/** Doubly linked list class. Inherits from LinkedListABC
+/** Doubly linked list class. Inherits from LinkedListABC.
  * template class T1: The data type that the linked list nodes will hold.
  *      - Defaults to int.
  * template class T2: The type of linked list node that the list will consist of.
@@ -153,7 +153,7 @@ class DoublyLinkedList : public LinkedListABC<T1, T2>
 
 
 
-/** Circular linked list class. Inherits from LinkedListABC
+/** Circular linked list class. Inherits from LinkedListABC.
  * template class T1: The data type that the linked list nodes will hold.
  *      - Defaults to int.
  * template class T2: The type of linked list node that the list will consist of.
