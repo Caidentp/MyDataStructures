@@ -39,7 +39,7 @@ class LinkedListABC
         void set_len(int len)   { this->len = len;   }
 
     public:
-        LinkedListABC();
+        LinkedListABC() : len(0);
         LinkedListABC(const T1 data);
         virtual ~LinkedListABC() { delete head; }
 
@@ -111,8 +111,8 @@ template <class T1 = int, class T2 = SNode<>>
 class SinglyLinkedList : public LinkedListABC<T1, T2>
 {
     public:
-        SinglyLinkedList();
-        SinglyLinkedList(const T1 data);
+        SinglyLinkedList() : LinkedListABC<T1, T2>();
+        SinglyLinkedList(const T1 data) : LinkedListABC<T1, T2>(data);
         virtual ~SinglyLinkedList() { }
 
         SinglyLinkedList(const std::initializer_list<T1> il);
@@ -137,8 +137,8 @@ template <class T1 = int, class T2 = DNode<>>
 class DoublyLinkedList : public LinkedListABC<T1, T2>
 {
     public:
-        DoublyLinkedList();
-        DoublyLinkedList(const T1 data);
+        DoublyLinkedList() : LinkedListABC<T1, T2>();
+        DoublyLinkedList(const T1 data) : LinkedListABC<T1, T2>(data);
         virtual ~DoublyLinkedList() {}
 
         DoublyLinkedList(const std::initializer_list<T1> il);
@@ -163,8 +163,8 @@ template <class T1 = int, class T2 = CNode<>>
 class CircularLinkedList : public LinkedListABC<T1, T2>
 {
     public:
-        CircularLinkedList();
-        CircularLinkedList(const T1 data);
+        CircularLinkedList() : LinkedListABC<T1, T2>();
+        CircularLinkedList(const T1 data) : LinkedListABC<T1, T2>(data);
         virtual ~CircularLinkedList() {}
 
         CircularLinkedList(const std::initializer_list<T1> il);
