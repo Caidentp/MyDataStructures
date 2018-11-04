@@ -2,6 +2,7 @@
 #define LINKEDLIST_H
 
 #include <iostream>
+#include <exception>
 #include "node.h"
 
 
@@ -14,8 +15,8 @@
  *      - This type will default to the appropriate node based on the linked list type.
  *
  * @var head : First node in the list.
- * @var tail : Last node in the list.
- * @var len : Running total number of nodes in a list.
+ * @var tail : List node in the list.
+ * @var len : Running total number of node
  */
 template <class T1, class T2>
 class LinkedListABC
@@ -28,14 +29,14 @@ class LinkedListABC
         T2* tail = nullptr;
 
         /// The total number of nodes currently in a linked list
-        int len = 0;
+        int len;
 
     protected:
         T2* get_head() const    { return this->head; }
         void set_head(T2* head) { this->head = head; }
         T2* get_tail() const    { return this->tail; }
         void set_tail(T2* tail) { this->tail = tail; }
-        void set_len(int len)   { this->len = len; }
+        void set_len(int len)   { this->len = len;   }
 
     public:
         LinkedListABC();
@@ -45,7 +46,7 @@ class LinkedListABC
         /**
             @return len instance variable.
         */
-        int length() const { return this->len; }
+        int size() const { return this->len; }
 
         /**
             Check to see if a node exists in a list by its data instance variable.
@@ -61,7 +62,7 @@ class LinkedListABC
             @param data : Data to search the list for.
             @return Index of node that contains data.
         */
-        int find_index_of(const T1 data);
+        int index(const T1 data);
 
         /**
             Print the list in order starting at the head and ending at the tail.
@@ -83,19 +84,19 @@ class LinkedListABC
         virtual void append(const T1 data) = 0;
 
         /**
-            Remove a node from a list by index; index counting starts at 0.
-
-            @param index : Position of node to remove from list.
-        */
-        virtual void delete_node(const int index) = 0;
-
-        /**
             Insert a node into a list by index; index counting starts at 0.
 
             @param data : Data instance variable of new node.
             @param index : Position in list to insert new node at.
         */
-        virtual void insert_node(const T1 data, const int index) = 0;
+        virtual void insert(const T1 data, const int index) = 0;
+
+        /**
+            Remove a node from a list by index; index counting starts at 0.
+
+            @param index : Position of node to remove from list.
+        */
+        virtual void delete_node(const int index) = 0;
 };
 
 
@@ -112,24 +113,15 @@ class SinglyLinkedList : public LinkedListABC<T1, T2>
     public:
         SinglyLinkedList();
         SinglyLinkedList(const T1 data);
-        SinglyLinkedList(const SinglyLinkedList<T1, T2>& other);
-        virtual ~SinglyLinkedList() {}
+        virtual ~SinglyLinkedList() { }
 
-        /// Adds capability to initialize linked list with initialization list.
         SinglyLinkedList(const std::initializer_list<T1> il);
-
-        /// Overload index at operator [].
-        T2* operator [] (const int index);
-
-        /// Overload assignment operator.
-        SinglyLinkedList<T1, T2>& operator = (const SinglyLinkedList& other);
-
-        /// Overload binary left shift operator for printing string representation of linked list.
+        T1& operator [] (const int index);
         friend std::ostream& operator << (std::ostream& os, SinglyLinkedList<>& linked_list);
 
         void push(const T1 data);
         void append(const T1 data);
-        void insert_node(const T1 data, const int index);
+        void insert(const T1 data, const int index);
         void delete_node(const int index);
 };
 
@@ -149,25 +141,14 @@ class DoublyLinkedList : public LinkedListABC<T1, T2>
         DoublyLinkedList(const T1 data);
         virtual ~DoublyLinkedList() {}
 
-        /// Adds capability to initialize linked list with initialization list.
-        DoublyLinkedList(const std::initializer_list<T1> li);
-
-        /// Overload index at operator [].
-        T2* operator [] (const int index);
-
-        /// Overload assignment operator.
-        DoublyLinkedList<T1, T2>& operator = (const DoublyLinkedList& other);
-
-        /// Overload binary left shift operator for printing string representation of linked list.
+        DoublyLinkedList(const std::initializer_list<T1> il);
+        T1& operator [] (const int index);
         friend std::ostream& operator << (std::ostream& os, DoublyLinkedList<>& linked_list);
 
         void push(const T1 data);
         void append(const T1 data);
-        void insert_node(const T1 data, const int index);
+        void insert(const T1 data, const int index);
         void delete_node(const int index);
-
-        /// Print list in reverse.
-        void print_reverse() const;
 };
 
 
@@ -178,7 +159,7 @@ class DoublyLinkedList : public LinkedListABC<T1, T2>
  * template class T2: The type of linked list node that the list will consist of.
  *      - Defaults to CNode<>.
  */
-template <class T1 = int, class T2 = DNode<>>
+template <class T1 = int, class T2 = CNode<>>
 class CircularLinkedList : public LinkedListABC<T1, T2>
 {
     public:
@@ -186,21 +167,13 @@ class CircularLinkedList : public LinkedListABC<T1, T2>
         CircularLinkedList(const T1 data);
         virtual ~CircularLinkedList() {}
 
-        /// Adds capability to initialize linked list with initialization list.
-        CircularLinkedList(const std::initializer_list<T1> li);
-
-        /// Overload index at operator [].
-        T2* operator [] (const int index);
-
-        /// Overload assignment operator.
-        CircularLinkedList<T1, T2>& operator = (const CircularLinkedList& other);
-
-        /// Overload binary left shift operator for printing string representation of linked list.
+        CircularLinkedList(const std::initializer_list<T1> il);
+        T1& operator [] (const int index);
         friend std::ostream& operator << (std::ostream& os, CircularLinkedList<>& linked_list);
 
         void push(const T1 data);
         void append(const T1 data);
-        void insert_node(const T1 data, const int index);
+        void insert(const T1 data, const int index);
         void delete_node(const int index);
 };
 
@@ -212,7 +185,6 @@ struct IndexError : public std::exception {
 
 
 
-// Include functions for linked lists
 #include "linkedlistabc.tpp"
 #include "singlylinkedlist.tpp"
 #include "doublylinkedlist.tpp"
