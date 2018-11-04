@@ -23,7 +23,7 @@ class Stack
         Node<T>* head;
 
     public:
-        Stack();
+        Stack() : head(nullptr) : len(0) { }
         Stack(const T data);
         virtual ~Stack() { delete head; }
 
