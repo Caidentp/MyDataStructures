@@ -1,10 +1,3 @@
-/// Default constructor
-template <class T1, class T2>
-LinkedListABC<T1, T2>::LinkedListABC()
-    : len(0)
-{ }
-
-
 /// Constructor
 template <class T1, class T2>
 LinkedListABC<T1, T2>::LinkedListABC(const T1 data)
