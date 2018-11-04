@@ -1,15 +1,18 @@
 /// Default constructor
 template <class T1, class T2>
-LinkedListABC<T1, T2>::LinkedListABC() { }
+LinkedListABC<T1, T2>::LinkedListABC()
+    : len(0)
+{ }
 
 
 /// Constructor
 template <class T1, class T2>
-LinkedListABC<T1, T2>::LinkedListABC(const T1 data) {
+LinkedListABC<T1, T2>::LinkedListABC(const T1 data)
+    : len(1)
+{
     T2* new_node = new T2(data);
     this->set_head(new_node);
     this->set_tail(new_node);
-    this->set_len(1);
 }
 
 
@@ -17,37 +20,32 @@ LinkedListABC<T1, T2>::LinkedListABC(const T1 data) {
 template <class T1, class T2>
 bool LinkedListABC<T1, T2>::contains(const T1 data) {
 
-    // If list is not empty
     if (this->get_head() != nullptr) {
         T2* temp = this->get_head();
 
         do {
-            if (temp->get_data() == data)
+            if (temp->data == data)
                 return true;
-            temp = temp->get_next();
+            temp = temp->next;
         }
         while (temp != nullptr && temp != this->get_head());
-        return false;
     }
-    throw IndexError();
+    return false;
 }
 
 
 /// Finds index of data
 template <class T1, class T2>
-int LinkedListABC<T1, T2>::find_index_of(const T1 data) {
+int LinkedListABC<T1, T2>::index(const T1 data) {
 
     if (this->get_head() != nullptr) {
-        int index = 0;
-        T2* temp = this->get_head();
-
-        for (; index < this->length(); index++, temp = temp->get_next()) {
-            if (temp->get_data() == data)
-                return index;
+        T2* t = this->get_head();
+        for (int i = 0; i < this->size(); i++, t = t->next) {
+            if (t->data == data)
+                return i;
         }
-        return -1;
     }
-    throw IndexError();
+    return -1;
 }
 
 
@@ -59,11 +57,9 @@ void LinkedListABC<T1, T2>::print() const {
         T2* temp = this->get_head();
 
         do {
-            std::cout << temp->get_data() << " ";
-            temp = temp->get_next();
+            std::cout << temp->data << " ";
+            temp = temp->next;
         }
         while (temp != nullptr && temp != this->get_head());
     }
-    else
-        throw IndexError();
 }
