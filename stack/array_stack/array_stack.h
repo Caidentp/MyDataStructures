@@ -7,7 +7,7 @@ class Stack
 {
     static const short MAX_SIZE = 10;
 
-    public:
+    private:
         T stack[MAX_SIZE];
         int top;
 
