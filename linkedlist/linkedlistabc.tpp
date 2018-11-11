@@ -1,3 +1,6 @@
+using namespace linkedlist;
+
+
 /// Constructor
 template <class T1, class T2>
 LinkedListABC<T1, T2>::LinkedListABC(const T1 data)
