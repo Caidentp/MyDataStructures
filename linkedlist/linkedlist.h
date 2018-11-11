@@ -6,8 +6,7 @@
 #include "node.h"
 
 
-namespace linkedlist
-{
+namespace linkedlist {
 
 /** Abstract Base Class for Singly, Doubly, and Circular linked lists.
  *
