@@ -1,4 +1,4 @@
-#include "linkedlist.h"
+using namespace linkedlist;
 
 
 /// initializer_list compatibility
