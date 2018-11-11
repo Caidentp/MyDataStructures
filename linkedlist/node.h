@@ -2,6 +2,8 @@
 #define NODE_H_INCLUDED
 
 
+namespace node {
+
 
 /** Defines singly linked list node.
  *
@@ -80,6 +82,9 @@ std::ostream& operator << (std::ostream& os, CNode<>* node) {
     os << node->data;
     return os;
 }
+
+
+} /// namespace node
 
 
 #endif // NODE_H_INCLUDED
