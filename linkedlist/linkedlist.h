@@ -6,6 +6,8 @@
 #include "node.h"
 
 
+namespace linkedlist
+{
 
 /** Abstract Base Class for Singly, Doubly, and Circular linked lists.
  *
@@ -31,7 +33,7 @@ class LinkedListABC
         /// The total number of nodes currently in a linked list
         int len;
 
-    protected:
+    public:
         T2* get_head() const    { return this->head; }
         void set_head(T2* head) { this->head = head; }
         T2* get_tail() const    { return this->tail; }
@@ -39,7 +41,7 @@ class LinkedListABC
         void set_len(int len)   { this->len = len;   }
 
     public:
-        LinkedListABC() : len(0);
+        LinkedListABC();
         LinkedListABC(const T1 data);
         virtual ~LinkedListABC() { delete head; }
 
@@ -101,18 +103,18 @@ class LinkedListABC
 
 
 
-/** Singly linked list class. Inherits from LinkedListABC.
+/** Singly linked list class. Inherits from LinkedListABC
  * template class T1: The data type that the linked list nodes will hold.
  *      - Defaults to int.
  * template class T2: The type of linked list node that the list will consist of.
  *      - Defaults to SNode<>.
  */
-template <class T1 = int, class T2 = SNode<>>
+template <class T1 = int, class T2 = node::SNode<>>
 class SinglyLinkedList : public LinkedListABC<T1, T2>
 {
     public:
-        SinglyLinkedList() : LinkedListABC<T1, T2>();
-        SinglyLinkedList(const T1 data) : LinkedListABC<T1, T2>(data);
+        SinglyLinkedList();
+        SinglyLinkedList(const T1 data);
         virtual ~SinglyLinkedList() { }
 
         SinglyLinkedList(const std::initializer_list<T1> il);
@@ -127,18 +129,18 @@ class SinglyLinkedList : public LinkedListABC<T1, T2>
 
 
 
-/** Doubly linked list class. Inherits from LinkedListABC.
+/** Doubly linked list class. Inherits from LinkedListABC
  * template class T1: The data type that the linked list nodes will hold.
  *      - Defaults to int.
  * template class T2: The type of linked list node that the list will consist of.
  *      - Defaults to DNode<>.
  */
-template <class T1 = int, class T2 = DNode<>>
+template <class T1 = int, class T2 = node::DNode<>>
 class DoublyLinkedList : public LinkedListABC<T1, T2>
 {
     public:
-        DoublyLinkedList() : LinkedListABC<T1, T2>();
-        DoublyLinkedList(const T1 data) : LinkedListABC<T1, T2>(data);
+        DoublyLinkedList();
+        DoublyLinkedList(const T1 data);
         virtual ~DoublyLinkedList() {}
 
         DoublyLinkedList(const std::initializer_list<T1> il);
@@ -153,18 +155,18 @@ class DoublyLinkedList : public LinkedListABC<T1, T2>
 
 
 
-/** Circular linked list class. Inherits from LinkedListABC.
+/** Circular linked list class. Inherits from LinkedListABC
  * template class T1: The data type that the linked list nodes will hold.
  *      - Defaults to int.
  * template class T2: The type of linked list node that the list will consist of.
  *      - Defaults to CNode<>.
  */
-template <class T1 = int, class T2 = CNode<>>
+template <class T1 = int, class T2 = node::CNode<>>
 class CircularLinkedList : public LinkedListABC<T1, T2>
 {
     public:
-        CircularLinkedList() : LinkedListABC<T1, T2>();
-        CircularLinkedList(const T1 data) : LinkedListABC<T1, T2>(data);
+        CircularLinkedList();
+        CircularLinkedList(const T1 data);
         virtual ~CircularLinkedList() {}
 
         CircularLinkedList(const std::initializer_list<T1> il);
@@ -184,10 +186,18 @@ struct IndexError : public std::exception {
     const char* what() const throw() { return "List index out of range."; } };
 
 
+} /// namespace list
+
 
 #include "linkedlistabc.tpp"
 #include "singlylinkedlist.tpp"
 #include "doublylinkedlist.tpp"
 #include "circularlinkedlist.tpp"
+
+
+typedef linkedlist::SinglyLinkedList<int, node::SNode<int>>   sList;
+typedef linkedlist::DoublyLinkedList<int, node::DNode<int>>   dList;
+typedef linkedlist::CircularLinkedList<int, node::CNode<int>> cList;
+
 
 #endif  // LINKEDLIST_H
