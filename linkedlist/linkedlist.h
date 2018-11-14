@@ -185,7 +185,7 @@ struct IndexError : public std::exception {
     const char* what() const throw() { return "List index out of range."; } };
 
 
-} /// namespace list
+} /// namespace linkedlist
 
 
 #include "linkedlistabc.tpp"
