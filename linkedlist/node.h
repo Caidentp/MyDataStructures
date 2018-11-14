@@ -18,7 +18,7 @@ class SNode
         SNode<T1>* next = nullptr;
 
     public:
-        SNode(T1 data = '\0') { this->data = data; }
+        SNode(T1 data = '\0') : data(data) { }
         friend std::ostream& operator << (std::ostream& os, SNode<>* node);
 };
 
@@ -45,7 +45,7 @@ class DNode
         DNode* previous = nullptr;
 
     public:
-        DNode(T1 data = '\0') { this->data = data; }
+        DNode(T1 data = '\0') : data(data) { }
         friend std::ostream& operator << (std::ostream& os, DNode<>* node);
 };
 
@@ -71,7 +71,7 @@ class CNode
         CNode* next = this;
 
     public:
-        CNode(T1 data = '\0') { this->data = data; }
+        CNode(T1 data = '\0') : data(data) { }
         friend std::ostream& operator << (std::ostream& os, CNode<>* node);
 
 };
