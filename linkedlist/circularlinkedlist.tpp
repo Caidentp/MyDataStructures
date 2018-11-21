@@ -3,42 +3,48 @@ using namespace list;
 
 /// Default constructor
 template <class T1, class T2>
-SinglyLinkedList<T1, T2>::SinglyLinkedList()
+CircularLinkedList<T1, T2>::CircularLinkedList()
     : LinkedListABC<T1, T2>()
 { }
 
 
 /// Constructor
 template <class T1, class T2>
-SinglyLinkedList<T1, T2>::SinglyLinkedList(const T1 data)
+CircularLinkedList<T1, T2>::CircularLinkedList(const T1 data)
     : LinkedListABC<T1, T2>(data)
 { }
 
 
 /// initializer_list compatibility
 template <class T1, class T2>
-SinglyLinkedList<T1, T2>::SinglyLinkedList(const std::initializer_list<T1> il) {
+CircularLinkedList<T1, T2>::CircularLinkedList(const std::initializer_list<T1> il) {
+
     for (const T1* index = il.begin(); index < il.end(); index++)
         this->append(*index);
 }
 
+
 /// Add item to beginning of a list
 template <class T1, class T2>
-void SinglyLinkedList<T1, T2>::push(const T1 data) {
+void CircularLinkedList<T1, T2>::push(const T1 data) {
     T2* new_node = new T2(data);
 
-    if (this->get_head() == nullptr)
+    if (this->get_head() == nullptr) {
+        this->set_head(new_node);
         this->set_tail(new_node);
-    else
+    }
+    else {
         new_node->next = this->get_head();
-    this->set_head(new_node);
+        this->get_tail()->next = new_node;
+        this->set_head(new_node);
+    }
     this->set_len(this->size()+1);
 }
 
 
 /// Add item to end of a list
 template <class T1, class T2>
-void SinglyLinkedList<T1, T2>::append(const T1 data)
+void CircularLinkedList<T1, T2>::append(const T1 data)
 {
     T2* new_node = new T2(data);
 
@@ -48,6 +54,7 @@ void SinglyLinkedList<T1, T2>::append(const T1 data)
     }
     else {
         this->get_tail()->next = new_node;
+        new_node->next = this->get_head();
         this->set_tail(new_node);
     }
     this->set_len(this->size()+1);
@@ -56,7 +63,7 @@ void SinglyLinkedList<T1, T2>::append(const T1 data)
 
 /// Insert item into a list by index
 template <class T1, class T2>
-void SinglyLinkedList<T1, T2>::insert(const T1 data, const int index) {
+void CircularLinkedList<T1, T2>::insert(const T1 data, const int index) {
 
     if (this->get_head() == nullptr || this->size() <= index)
         throw IndexError();
@@ -78,7 +85,7 @@ void SinglyLinkedList<T1, T2>::insert(const T1 data, const int index) {
 
 /// Delete item from list by index
 template <class T1, class T2>
-void SinglyLinkedList<T1, T2>::delete_node(const int index) {
+void CircularLinkedList<T1, T2>::delete_node(const int index) {
 
     if (this->get_head() == nullptr || this->size() <= index)
         throw IndexError();
@@ -87,10 +94,10 @@ void SinglyLinkedList<T1, T2>::delete_node(const int index) {
 
         if (this->get_head() == this->get_tail()) {
             this->set_head(nullptr);
-            this->set_tail(nullptr);
         }
         else
             this->set_head(this->get_head()->next);
+            this->get_tail()->next = this->get_head();
     }
     else {
         T2* temp = this->get_head();
@@ -102,16 +109,17 @@ void SinglyLinkedList<T1, T2>::delete_node(const int index) {
         }
         previous->next = temp->next;
 
-        if (temp == this->get_tail())
+        if (temp == this->get_tail()) {
             this->set_tail(previous);
+        }
     }
     this->set_len(this->size()-1);
 }
 
 
 /// Print char representation of list with std::cout
-std::ostream& operator << (std::ostream& os, SinglyLinkedList<>& linked_list) {
-    os << "<SinglyLinkedList object at " << &linked_list
+std::ostream& operator << (std::ostream& os, CircularLinkedList<>& linked_list) {
+    os << "<CircularLinkedList object at " << &linked_list
        << "; length: " << linked_list.size() << ">";
     return os;
 }
