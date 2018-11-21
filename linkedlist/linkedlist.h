@@ -28,13 +28,14 @@ class LinkedListABC
         T2* tail = nullptr;
         int len;
 
-    public:
+    protected:
         T2* get_head() const    { return this->head; }
         void set_head(T2* head) { this->head = head; }
         T2* get_tail() const    { return this->tail; }
         void set_tail(T2* tail) { this->tail = tail; }
         void set_len(int len)   { this->len = len;   }
 
+    public:
         LinkedListABC();
         LinkedListABC(const T1 data);
         virtual ~LinkedListABC() { delete head; delete tail; }
@@ -92,7 +93,6 @@ class LinkedListABC
                 iterator(node iter)
                     : iter(iter) { }
                 ~iterator() { delete iter; }
-
                 self operator ++ () {
                     iter = iter->next;
                     return *this;
@@ -128,7 +128,7 @@ class LinkedListABC
  *      - Defaults to SNode<>.
  */
 template <class T1 = int, class T2 = node::SNode<>>
-class SinglyLinkedList : public LinkedListABC<T1, T2>
+class SinglyLinkedList final : public LinkedListABC<T1, T2>
 {
     public:
         SinglyLinkedList();
@@ -138,10 +138,10 @@ class SinglyLinkedList : public LinkedListABC<T1, T2>
         SinglyLinkedList(const std::initializer_list<T1> il);
         friend std::ostream& operator << (std::ostream& os, SinglyLinkedList<>& linked_list);
 
-        void push(const T1 data);
-        void append(const T1 data);
-        void insert(const T1 data, const int index);
-        void delete_node(const int index);
+        void push(const T1 data) final;
+        void append(const T1 data) final;
+        void insert(const T1 data, const int index) final;
+        void delete_node(const int index) final;
 };
 
 
@@ -153,7 +153,7 @@ class SinglyLinkedList : public LinkedListABC<T1, T2>
  *      - Defaults to DNode<>.
  */
 template <class T1 = int, class T2 = node::DNode<>>
-class DoublyLinkedList : public LinkedListABC<T1, T2>
+class DoublyLinkedList final : public LinkedListABC<T1, T2>
 {
     public:
         DoublyLinkedList();
@@ -163,10 +163,10 @@ class DoublyLinkedList : public LinkedListABC<T1, T2>
         DoublyLinkedList(const std::initializer_list<T1> il);
         friend std::ostream& operator << (std::ostream& os, DoublyLinkedList<>& linked_list);
 
-        void push(const T1 data);
-        void append(const T1 data);
-        void insert(const T1 data, const int index);
-        void delete_node(const int index);
+        void push(const T1 data) final;
+        void append(const T1 data) final;
+        void insert(const T1 data, const int index) final;
+        void delete_node(const int index) final;
 };
 
 
@@ -178,7 +178,7 @@ class DoublyLinkedList : public LinkedListABC<T1, T2>
  *      - Defaults to CNode<>.
  */
 template <class T1 = int, class T2 = node::CNode<>>
-class CircularLinkedList : public LinkedListABC<T1, T2>
+class CircularLinkedList final : public LinkedListABC<T1, T2>
 {
     public:
         CircularLinkedList();
@@ -188,10 +188,10 @@ class CircularLinkedList : public LinkedListABC<T1, T2>
         CircularLinkedList(const std::initializer_list<T1> il);
         friend std::ostream& operator << (std::ostream& os, CircularLinkedList<>& linked_list);
 
-        void push(const T1 data);
-        void append(const T1 data);
-        void insert(const T1 data, const int index);
-        void delete_node(const int index);
+        void push(const T1 data) final;
+        void append(const T1 data) final;
+        void insert(const T1 data, const int index) final;
+        void delete_node(const int index) final;
 };
 
 
