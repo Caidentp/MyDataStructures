@@ -1,41 +1,37 @@
-using namespace linkedlist;
+using namespace list;
+
+
+/// Default constructor
+template <class T1, class T2>
+SinglyLinkedList<T1, T2>::SinglyLinkedList()
+    : LinkedListABC<T1, T2>()
+{ }
+
+
+/// Constructor
+template <class T1, class T2>
+SinglyLinkedList<T1, T2>::SinglyLinkedList(const T1 data)
+    : LinkedListABC<T1, T2>(data)
+{ }
 
 
 /// initializer_list compatibility
 template <class T1, class T2>
 SinglyLinkedList<T1, T2>::SinglyLinkedList(const std::initializer_list<T1> il) {
-
     for (const T1* index = il.begin(); index < il.end(); index++)
         this->append(*index);
 }
-
-
-/// Get item operator compatibility
-template <class T1, class T2>
-T1& SinglyLinkedList<T1, T2>::operator [] (const int index) {
-
-    if (this->get_head() == nullptr || this->size() <= index)
-        throw IndexError();
-    T2* t = this->get_head();
-
-    for (int i = 0; i < index; i++, t = t->next);
-    return t->data;
-}
-
 
 /// Add item to beginning of a list
 template <class T1, class T2>
 void SinglyLinkedList<T1, T2>::push(const T1 data) {
     T2* new_node = new T2(data);
 
-    if (this->get_head() == nullptr) {
-        this->set_head(new_node);
+    if (this->get_head() == nullptr)
         this->set_tail(new_node);
-    }
-    else {
+    else
         new_node->next = this->get_head();
-        this->set_head(new_node);
-    }
+    this->set_head(new_node);
     this->set_len(this->size()+1);
 }
 
