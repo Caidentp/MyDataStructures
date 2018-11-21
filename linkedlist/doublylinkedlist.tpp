@@ -1,4 +1,18 @@
-using namespace linkedlist;
+using namespace list;
+
+
+/// Default constructor
+template <class T1, class T2>
+DoublyLinkedList<T1, T2>::DoublyLinkedList()
+    : LinkedListABC<T1, T2>()
+{ }
+
+
+/// Constructor
+template <class T1, class T2>
+DoublyLinkedList<T1, T2>::DoublyLinkedList(const T1 data)
+    : LinkedListABC<T1, T2>(data)
+{ }
 
 
 /// initializer_list compatibility
@@ -7,19 +21,6 @@ DoublyLinkedList<T1, T2>::DoublyLinkedList(const std::initializer_list<T1> il) {
 
     for (const T1* index = il.begin(); index < il.end(); index++)
         this->append(*index);
-}
-
-
-/// Get item operator compatibility
-template <class T1, class T2>
-T1& DoublyLinkedList<T1, T2>::operator [] (const int index) {
-
-    if (this->get_head() == nullptr || this->size() <= index)
-        throw IndexError();
-    T2* t = this->get_head();
-
-    for (int i = 0; i < index; i++, t = t->next);
-    return t->data;
 }
 
 
