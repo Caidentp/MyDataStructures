@@ -1,4 +1,11 @@
-using namespace linkedlist;
+using namespace list;
+
+
+/// Default constructor
+template <class T1, class T2>
+LinkedListABC<T1, T2>::LinkedListABC()
+    : len(0)
+{ }
 
 
 /// Constructor
@@ -9,6 +16,17 @@ LinkedListABC<T1, T2>::LinkedListABC(const T1 data)
     T2* new_node = new T2(data);
     this->set_head(new_node);
     this->set_tail(new_node);
+}
+
+
+/// Get item operator compatibility
+template <class T1, class T2>
+T1& LinkedListABC<T1, T2>::operator [] (const int index) {
+    if (this->get_head() == nullptr || this->size() <= index)
+        throw IndexError();
+    T2* t = this->get_head();
+    for (int i = 0; i < index; i++, t = t->next);
+        return t->data;
 }
 
 
