@@ -6,7 +6,8 @@
 #include "node.h"
 
 
-namespace linkedlist {
+namespace list
+{
 
 /** Abstract Base Class for Singly, Doubly, and Circular linked lists.
  *
@@ -23,13 +24,8 @@ template <class T1, class T2>
 class LinkedListABC
 {
     private:
-        /// The head node of a linked list
         T2* head = nullptr;
-
-        /// The tail node of a linked list
         T2* tail = nullptr;
-
-        /// The total number of nodes currently in a linked list
         int len;
 
     public:
@@ -39,65 +35,88 @@ class LinkedListABC
         void set_tail(T2* tail) { this->tail = tail; }
         void set_len(int len)   { this->len = len;   }
 
-    public:
         LinkedListABC();
         LinkedListABC(const T1 data);
-        virtual ~LinkedListABC() { delete head; }
+        virtual ~LinkedListABC() { delete head; delete tail; }
+        T1& operator [] (const int index);
 
-        /**
-            @return len instance variable.
+        /** @return len instance variable.
         */
         int size() const { return this->len; }
 
-        /**
-            Check to see if a node exists in a list by its data instance variable.
-
+        /** Check to see if a node exists in a list by its data instance variable.
             @param data : The data instance variable to search the list for.
             @return True : if a node in the list contains the data, false otherwise.
         */
         bool contains(const T1 data);
 
-        /**
-            Find the index of a node by its data instance variable.
-
+        /** Find the index of a node by its data instance variable.
             @param data : Data to search the list for.
             @return Index of node that contains data.
         */
         int index(const T1 data);
 
-        /**
-            Print the list in order starting at the head and ending at the tail.
+        /** Print the list in order starting at the head and ending at the tail.
         */
         void print() const;
 
-        /**
-            Add a node to the beginning of a list.
-
+        /** Add a node to the beginning of a list.
             @param data : Data instance variable of new node.
         */
         virtual void push(const T1 data) = 0;
 
-        /**
-            Add a node to the end of a list.
-
+        /** Add a node to the end of a list.
             @param data : Data instance variable of new node.
         */
         virtual void append(const T1 data) = 0;
 
-        /**
-            Insert a node into a list by index; index counting starts at 0.
-
+        /** Insert a node into a list by index; index counting starts at 0.
             @param data : Data instance variable of new node.
             @param index : Position in list to insert new node at.
         */
         virtual void insert(const T1 data, const int index) = 0;
 
-        /**
-            Remove a node from a list by index; index counting starts at 0.
-
+        /** Remove a node from a list by index; index counting starts at 0.
             @param index : Position of node to remove from list.
         */
         virtual void delete_node(const int index) = 0;
+
+
+        class iterator
+        {
+            public:
+                typedef T2* node;
+                typedef iterator self;
+                typedef std::forward_iterator_tag iterator_category;
+
+                iterator(node iter)
+                    : iter(iter) { }
+                ~iterator() { delete iter; }
+
+                self operator ++ () {
+                    iter = iter->next;
+                    return *this;
+                }
+                self operator ++ (int) {
+                    self i = *this;
+                    iter = iter->next;
+                    return i;
+                }
+                node operator -> ()                { return iter; }
+                bool operator == (const self& rhs) { return iter == rhs.iter; }
+                bool operator != (const self& rhs) { return iter != rhs.iter; }
+
+            private:
+                node iter;
+        };
+
+        iterator begin() {
+            return iterator(head);
+        }
+
+        iterator end() {
+            return iterator(nullptr);
+        }
 };
 
 
@@ -117,7 +136,6 @@ class SinglyLinkedList : public LinkedListABC<T1, T2>
         virtual ~SinglyLinkedList() { }
 
         SinglyLinkedList(const std::initializer_list<T1> il);
-        T1& operator [] (const int index);
         friend std::ostream& operator << (std::ostream& os, SinglyLinkedList<>& linked_list);
 
         void push(const T1 data);
@@ -143,7 +161,6 @@ class DoublyLinkedList : public LinkedListABC<T1, T2>
         virtual ~DoublyLinkedList() {}
 
         DoublyLinkedList(const std::initializer_list<T1> il);
-        T1& operator [] (const int index);
         friend std::ostream& operator << (std::ostream& os, DoublyLinkedList<>& linked_list);
 
         void push(const T1 data);
@@ -166,10 +183,9 @@ class CircularLinkedList : public LinkedListABC<T1, T2>
     public:
         CircularLinkedList();
         CircularLinkedList(const T1 data);
-        virtual ~CircularLinkedList() {}
+        virtual ~CircularLinkedList() { }
 
         CircularLinkedList(const std::initializer_list<T1> il);
-        T1& operator [] (const int index);
         friend std::ostream& operator << (std::ostream& os, CircularLinkedList<>& linked_list);
 
         void push(const T1 data);
@@ -179,13 +195,12 @@ class CircularLinkedList : public LinkedListABC<T1, T2>
 };
 
 
-
-/// Exception to throw when node index requested is longer than the list.
 struct IndexError : public std::exception {
-    const char* what() const throw() { return "List index out of range."; } };
+    const char* what() const throw() { return "List index out of range."; }
+};
 
 
-} /// namespace linkedlist
+} /// namespace list
 
 
 #include "linkedlistabc.tpp"
@@ -194,9 +209,11 @@ struct IndexError : public std::exception {
 #include "circularlinkedlist.tpp"
 
 
-typedef linkedlist::SinglyLinkedList<int, node::SNode<int>>   sList;
-typedef linkedlist::DoublyLinkedList<int, node::DNode<int>>   dList;
-typedef linkedlist::CircularLinkedList<int, node::CNode<int>> cList;
+typedef list::SinglyLinkedList<int, node::SNode<int>>   sList;
+typedef list::DoublyLinkedList<int, node::DNode<int>>   dList;
+typedef list::CircularLinkedList<int, node::CNode<int>> cList;
 
 
 #endif  // LINKEDLIST_H
+
+
