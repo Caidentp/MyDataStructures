@@ -173,7 +173,7 @@ void Dequeue<T>::LinkedList::print() const {
 }  /// namespace dequeue
 
 
-typedef dequeue::Dequeue<T> dequeue;
+typedef dequeue::Dequeue<int> dequeue;
 
 
 #endif /// DEQUEUE_H
