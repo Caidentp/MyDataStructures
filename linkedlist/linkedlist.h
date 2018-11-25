@@ -36,7 +36,7 @@ class LinkedListABC
         void set_len(int len)   { this->len = len;   }
 
     public:
-        LinkedListABC();
+        LinkedListABC() : len(0) { }
         LinkedListABC(const T1 data);
         virtual ~LinkedListABC() { delete head; delete tail; }
         T1& operator [] (const int index);
