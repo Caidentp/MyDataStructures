@@ -131,8 +131,8 @@ template <class T1 = int, class T2 = node::SNode<>>
 class SinglyLinkedList final : public LinkedListABC<T1, T2>
 {
     public:
-        SinglyLinkedList();
-        SinglyLinkedList(const T1 data);
+        SinglyLinkedList() : LinkedListABC<T1, T2>() { }
+        SinglyLinkedList(const T1 data) : LinkedListABC<T1, T2>(data) { }
         virtual ~SinglyLinkedList() { }
 
         SinglyLinkedList(const std::initializer_list<T1> il);
@@ -156,8 +156,8 @@ template <class T1 = int, class T2 = node::DNode<>>
 class DoublyLinkedList final : public LinkedListABC<T1, T2>
 {
     public:
-        DoublyLinkedList();
-        DoublyLinkedList(const T1 data);
+        DoublyLinkedList() : LinkedListABC<T1, T2>() { }
+        DoublyLinkedList(const T1 data) : LinkedListABC<T1, T2>(data) { }
         virtual ~DoublyLinkedList() {}
 
         DoublyLinkedList(const std::initializer_list<T1> il);
@@ -181,8 +181,8 @@ template <class T1 = int, class T2 = node::CNode<>>
 class CircularLinkedList final : public LinkedListABC<T1, T2>
 {
     public:
-        CircularLinkedList();
-        CircularLinkedList(const T1 data);
+        CircularLinkedList() : LinkedListABC<T1, T2>() { }
+        CircularLinkedList(const T1 data) : LinkedListABC<T1, T2>(data) { }
         virtual ~CircularLinkedList() { }
 
         CircularLinkedList(const std::initializer_list<T1> il);
