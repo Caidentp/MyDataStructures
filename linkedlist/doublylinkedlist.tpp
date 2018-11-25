@@ -1,20 +1,6 @@
 using namespace list;
 
 
-/// Default constructor
-template <class T1, class T2>
-DoublyLinkedList<T1, T2>::DoublyLinkedList()
-    : LinkedListABC<T1, T2>()
-{ }
-
-
-/// Constructor
-template <class T1, class T2>
-DoublyLinkedList<T1, T2>::DoublyLinkedList(const T1 data)
-    : LinkedListABC<T1, T2>(data)
-{ }
-
-
 /// initializer_list compatibility
 template <class T1, class T2>
 DoublyLinkedList<T1, T2>::DoublyLinkedList(const std::initializer_list<T1> il) {
