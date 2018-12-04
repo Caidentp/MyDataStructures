@@ -47,7 +47,7 @@ class HashTable
                 };  /// HashTable::LinkedList::Node
 
                 Node *head;
-                Node * tail;
+                Node *tail;
 
             public:
                 LinkedList() : head(nullptr) { }
