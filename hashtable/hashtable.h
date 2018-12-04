@@ -20,7 +20,6 @@ class HashTable
     typedef char* K;
 
     private:
-
         /** Linked list class used for collision avoidance.
          *
          * @param head : Pointer to first node in list.
@@ -29,7 +28,6 @@ class HashTable
         class LinkedList
         {
             public:
-
                 /** Nodes for linked lists have keys and values.
                  * @param key : Key for looking up value.
                  * @param val : Value that can be looked up by key.
@@ -48,11 +46,10 @@ class HashTable
 
                 };  /// HashTable::LinkedList::Node
 
-
-            public:
                 Node *head;
                 Node * tail;
 
+            public:
                 LinkedList() : head(nullptr) { }
                 ~LinkedList() { delete head; delete tail; }
 
