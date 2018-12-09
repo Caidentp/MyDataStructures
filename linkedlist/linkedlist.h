@@ -13,9 +13,9 @@ namespace linkedlist
  *
  * template class T1: The data type that the linked list nodes will hold.
  *      - Defaults to int.
- * template class T2: The type of linked list node that the list will 
+ * template class T2: The type of linked list node that the list will
  *                    consist of.
- *      - This type will default to the appropriate node based on the 
+ *      - This type will default to the appropriate node based on the
  *        linked list type.
  *
  * @var head : First node in the list.
@@ -40,7 +40,7 @@ class LinkedListABC
     public:
         LinkedListABC() : len(0) { }
         LinkedListABC(const T1 data);
-        virtual ~LinkedListABC() { delete head; delete tail; }
+        virtual ~LinkedListABC();
         T1& operator [] (const int index);
 
         /** @return len instance variable.
@@ -126,7 +126,7 @@ class LinkedListABC
 /** Singly linked list class. Inherits from LinkedListABC
  * template class T1: The data type that the linked list nodes will hold.
  *      - Defaults to int.
- * template class T2: The type of linked list node that the list will 
+ * template class T2: The type of linked list node that the list will
  *                    consist of.
  *      - Defaults to SNode<>.
  */
@@ -151,7 +151,7 @@ class SinglyLinkedList final : public LinkedListABC<T1, T2>
 /** Doubly linked list class. Inherits from LinkedListABC
  * template class T1: The data type that the linked list nodes will hold.
  *      - Defaults to int.
- * template class T2: The type of linked list node that the list will 
+ * template class T2: The type of linked list node that the list will
  *                    consist of.
  *      - Defaults to DNode<>.
  */
@@ -176,7 +176,7 @@ class DoublyLinkedList final : public LinkedListABC<T1, T2>
 /** Circular linked list class. Inherits from LinkedListABC
  * template class T1: The data type that the linked list nodes will hold.
  *      - Defaults to int.
- * template class T2: The type of linked list node that the list will 
+ * template class T2: The type of linked list node that the list will
  *                    consist of.
  *      - Defaults to CNode<>.
  */
