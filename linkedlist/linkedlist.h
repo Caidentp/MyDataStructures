@@ -6,7 +6,7 @@
 #include "node.h"
 
 
-namespace list
+namespace linkedlist
 {
 
 /** Abstract Base Class for Singly, Doubly, and Circular linked lists.
@@ -209,9 +209,9 @@ struct IndexError : public std::exception {
 #include "circularlinkedlist.tpp"
 
 
-typedef list::SinglyLinkedList<int, node::SNode<int>>   sList;
-typedef list::DoublyLinkedList<int, node::DNode<int>>   dList;
-typedef list::CircularLinkedList<int, node::CNode<int>> cList;
+typedef linkedlist::SinglyLinkedList<int, node::SNode<int>>   sList;
+typedef linkedlist::DoublyLinkedList<int, node::DNode<int>>   dList;
+typedef linkedlist::CircularLinkedList<int, node::CNode<int>> cList;
 
 
 #endif  // LINKEDLIST_H

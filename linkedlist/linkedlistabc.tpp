@@ -1,4 +1,4 @@
-using namespace list;
+using namespace linkedlist;
 
 
 /// Constructor
