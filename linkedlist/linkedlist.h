@@ -138,10 +138,10 @@ class SinglyLinkedList final : public LinkedListABC<T1, T2>
         SinglyLinkedList(const std::initializer_list<T1> il);
         friend std::ostream& operator << (std::ostream& os, SinglyLinkedList<>& linked_list);
 
-        void push(const T1 data) final;
-        void append(const T1 data) final;
-        void insert(const T1 data, const int index) final;
-        void delete_node(const int index) final;
+        void push(const T1 data);
+        void append(const T1 data);
+        void insert(const T1 data, const int index);
+        void delete_node(const int index);
 };
 
 
@@ -163,10 +163,10 @@ class DoublyLinkedList final : public LinkedListABC<T1, T2>
         DoublyLinkedList(const std::initializer_list<T1> il);
         friend std::ostream& operator << (std::ostream& os, DoublyLinkedList<>& linked_list);
 
-        void push(const T1 data) final;
-        void append(const T1 data) final;
-        void insert(const T1 data, const int index) final;
-        void delete_node(const int index) final;
+        void push(const T1 data);
+        void append(const T1 data);
+        void insert(const T1 data, const int index);
+        void delete_node(const int index);
 };
 
 
@@ -188,10 +188,10 @@ class CircularLinkedList final : public LinkedListABC<T1, T2>
         CircularLinkedList(const std::initializer_list<T1> il);
         friend std::ostream& operator << (std::ostream& os, CircularLinkedList<>& linked_list);
 
-        void push(const T1 data) final;
-        void append(const T1 data) final;
-        void insert(const T1 data, const int index) final;
-        void delete_node(const int index) final;
+        void push(const T1 data);
+        void append(const T1 data);
+        void insert(const T1 data, const int index);
+        void delete_node(const int index);
 };
 
 
@@ -200,7 +200,7 @@ struct IndexError : public std::exception {
 };
 
 
-} /// namespace list
+} /// namespace linkedlist
 
 
 #include "linkedlistabc.tpp"
