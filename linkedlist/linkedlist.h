@@ -136,7 +136,6 @@ class SinglyLinkedList final : public LinkedListABC<T1, T2>
     public:
         SinglyLinkedList() : LinkedListABC<T1, T2>() { }
         SinglyLinkedList(const T1 data) : LinkedListABC<T1, T2>(data) { }
-        virtual ~SinglyLinkedList() { }
 
         SinglyLinkedList(const std::initializer_list<T1> il);
         friend std::ostream& operator << (std::ostream& os, SinglyLinkedList<>& linked_list);
@@ -162,7 +161,6 @@ class DoublyLinkedList final : public LinkedListABC<T1, T2>
     public:
         DoublyLinkedList() : LinkedListABC<T1, T2>() { }
         DoublyLinkedList(const T1 data) : LinkedListABC<T1, T2>(data) { }
-        virtual ~DoublyLinkedList() {}
 
         DoublyLinkedList(const std::initializer_list<T1> il);
         friend std::ostream& operator << (std::ostream& os, DoublyLinkedList<>& linked_list);
@@ -188,7 +186,6 @@ class CircularLinkedList final : public LinkedListABC<T1, T2>
     public:
         CircularLinkedList() : LinkedListABC<T1, T2>() { }
         CircularLinkedList(const T1 data) : LinkedListABC<T1, T2>(data) { }
-        virtual ~CircularLinkedList() { }
 
         CircularLinkedList(const std::initializer_list<T1> il);
         friend std::ostream& operator << (std::ostream& os, CircularLinkedList<>& linked_list);
