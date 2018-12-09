@@ -73,7 +73,7 @@ void DoublyLinkedList<T1, T2>::insert(const T1 data, const int index) {
 
 /// Delete item from list by index
 template <class T1, class T2>
-void DoublyLinkedList<T1, T2>::delete_node(const int index) {
+void DoublyLinkedList<T1, T2>::remove(const int index) {
 
     if (this->get_head() == nullptr || this->size() <= index)
         throw IndexError();

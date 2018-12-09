@@ -80,7 +80,7 @@ class LinkedListABC
         /** Remove a node from a list by index; index counting starts at 0.
             @param index : Position of node to remove from list.
         */
-        virtual void delete_node(const int index) = 0;
+        virtual void remove(const int index) = 0;
 
 
         class iterator
@@ -141,7 +141,7 @@ class SinglyLinkedList final : public LinkedListABC<T1, T2>
         void push(const T1 data);
         void append(const T1 data);
         void insert(const T1 data, const int index);
-        void delete_node(const int index);
+        void remove(const int index);
 };
 
 
@@ -166,7 +166,7 @@ class DoublyLinkedList final : public LinkedListABC<T1, T2>
         void push(const T1 data);
         void append(const T1 data);
         void insert(const T1 data, const int index);
-        void delete_node(const int index);
+        void remove(const int index);
 };
 
 
@@ -191,7 +191,7 @@ class CircularLinkedList final : public LinkedListABC<T1, T2>
         void push(const T1 data);
         void append(const T1 data);
         void insert(const T1 data, const int index);
-        void delete_node(const int index);
+        void remove(const int index);
 };
 
 
