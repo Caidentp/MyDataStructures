@@ -40,7 +40,7 @@ class LinkedListABC
     public:
         LinkedListABC() : len(0) { }
         LinkedListABC(const T1 data);
-        virtual ~LinkedListABC() { delete head; delete tail; }
+        virtual ~LinkedListABC();
         T1& operator [] (const int index);
 
         /** @return len instance variable.

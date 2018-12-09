@@ -12,6 +12,25 @@ LinkedListABC<T1, T2>::LinkedListABC(const T1 data)
 }
 
 
+/// Destructor
+template <class T1, class T2>
+LinkedListABC<T1, T2>::~LinkedListABC() {
+    // If list is empty
+    if (head == nullptr) {
+        delete head;
+        delete tail;
+    }
+    else {
+        T2 *curr = head;
+        while (curr != nullptr) {
+            T2 *temp = curr;
+            curr = curr->next;
+            delete temp;
+        }
+    }
+}
+
+
 /// Get item operator compatibility
 template <class T1, class T2>
 T1& LinkedListABC<T1, T2>::operator [] (const int index) {
