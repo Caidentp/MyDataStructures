@@ -108,7 +108,8 @@ void DoublyLinkedList<T1, T2>::remove(const int index) {
 
 
 /// Print char representation of list with std::cout
-std::ostream& operator << (std::ostream& os, DoublyLinkedList<>& linked_list) {
+std::ostream& operator << (std::ostream& os,
+                           DoublyLinkedList<>& linked_list) {
     os << "<DoublyLinkedList object at " << &linked_list
        << "; length: " << linked_list.size() << ">";
     return os;

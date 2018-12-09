@@ -104,7 +104,8 @@ void CircularLinkedList<T1, T2>::remove(const int index) {
 
 
 /// Print char representation of list with std::cout
-std::ostream& operator << (std::ostream& os, CircularLinkedList<>& linked_list) {
+std::ostream& operator << (std::ostream& os, 
+                           CircularLinkedList<>& linked_list) {
     os << "<CircularLinkedList object at " << &linked_list
        << "; length: " << linked_list.size() << ">";
     return os;

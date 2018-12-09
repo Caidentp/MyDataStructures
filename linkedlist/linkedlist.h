@@ -13,8 +13,10 @@ namespace linkedlist
  *
  * template class T1: The data type that the linked list nodes will hold.
  *      - Defaults to int.
- * template class T2: The type of linked list node that the list will consist of.
- *      - This type will default to the appropriate node based on the linked list type.
+ * template class T2: The type of linked list node that the list will 
+ *                    consist of.
+ *      - This type will default to the appropriate node based on the 
+ *        linked list type.
  *
  * @var head : First node in the list.
  * @var tail : List node in the list.
@@ -124,7 +126,8 @@ class LinkedListABC
 /** Singly linked list class. Inherits from LinkedListABC
  * template class T1: The data type that the linked list nodes will hold.
  *      - Defaults to int.
- * template class T2: The type of linked list node that the list will consist of.
+ * template class T2: The type of linked list node that the list will 
+ *                    consist of.
  *      - Defaults to SNode<>.
  */
 template <class T1 = int, class T2 = node::SNode<>>
@@ -149,7 +152,8 @@ class SinglyLinkedList final : public LinkedListABC<T1, T2>
 /** Doubly linked list class. Inherits from LinkedListABC
  * template class T1: The data type that the linked list nodes will hold.
  *      - Defaults to int.
- * template class T2: The type of linked list node that the list will consist of.
+ * template class T2: The type of linked list node that the list will 
+ *                    consist of.
  *      - Defaults to DNode<>.
  */
 template <class T1 = int, class T2 = node::DNode<>>
@@ -174,7 +178,8 @@ class DoublyLinkedList final : public LinkedListABC<T1, T2>
 /** Circular linked list class. Inherits from LinkedListABC
  * template class T1: The data type that the linked list nodes will hold.
  *      - Defaults to int.
- * template class T2: The type of linked list node that the list will consist of.
+ * template class T2: The type of linked list node that the list will 
+ *                    consist of.
  *      - Defaults to CNode<>.
  */
 template <class T1 = int, class T2 = node::CNode<>>
@@ -196,7 +201,9 @@ class CircularLinkedList final : public LinkedListABC<T1, T2>
 
 
 struct IndexError : public std::exception {
-    const char* what() const throw() { return "List index out of range."; }
+    const char* what() const throw() { 
+        return "List index out of range."; 
+    }
 };
 
 
