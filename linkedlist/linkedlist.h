@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <exception>
-#include "node.h"
+#include "src/node.h"
 
 
 namespace linkedlist
@@ -207,10 +207,10 @@ struct IndexError : public std::exception {
 } /// namespace linkedlist
 
 
-#include "linkedlistabc.tpp"
-#include "singlylinkedlist.tpp"
-#include "doublylinkedlist.tpp"
-#include "circularlinkedlist.tpp"
+#include "src/linkedlistabc.tpp"
+#include "src/singlylinkedlist.tpp"
+#include "src/doublylinkedlist.tpp"
+#include "src/circularlinkedlist.tpp"
 
 
 typedef linkedlist::SinglyLinkedList<int, node::SNode<int>>   sList;
