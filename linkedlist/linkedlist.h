@@ -219,5 +219,3 @@ typedef linkedlist::CircularLinkedList<int, node::CNode<int>> cList;
 
 
 #endif  /// LINKEDLIST_H
-
-
