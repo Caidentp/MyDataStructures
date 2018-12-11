@@ -218,6 +218,4 @@ typedef linkedlist::DoublyLinkedList<int, node::DNode<int>>   dList;
 typedef linkedlist::CircularLinkedList<int, node::CNode<int>> cList;
 
 
-#endif  // LINKEDLIST_H
-
-
+#endif  /// LINKEDLIST_H
