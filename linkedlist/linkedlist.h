@@ -51,7 +51,7 @@ class LinkedListABC
             @param data : The data instance variable to search the list for.
             @return True : if a node in the list contains the data, false otherwise.
         */
-        bool contains(const T1 data);
+        bool contains(const T1 data) const;
 
         /** Find the index of a node by its data instance variable.
             @param data : Data to search the list for.

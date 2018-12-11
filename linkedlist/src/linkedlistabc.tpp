@@ -44,7 +44,7 @@ T1& LinkedListABC<T1, T2>::operator [] (const int index) {
 
 /// Returns true if list contains data passed to the function
 template <class T1, class T2>
-bool LinkedListABC<T1, T2>::contains(const T1 data) {
+bool LinkedListABC<T1, T2>::contains(const T1 data) const {
 
     if (this->get_head() != nullptr) {
         T2* temp = this->get_head();
