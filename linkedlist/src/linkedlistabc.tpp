@@ -62,7 +62,7 @@ bool LinkedListABC<T1, T2>::contains(const T1 data) const {
 
 /// Finds index of data
 template <class T1, class T2>
-int LinkedListABC<T1, T2>::index(const T1 data) {
+int LinkedListABC<T1, T2>::index(const T1 data) const {
 
     if (this->get_head() != nullptr) {
         T2* t = this->get_head();
