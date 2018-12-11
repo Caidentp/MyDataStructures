@@ -38,4 +38,3 @@ int main() {
 	test_push_empty_list();
 	test_append_empty_list();
 }
-
