@@ -1,6 +1,8 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
+// #define TEST
+
 #include <iostream>
 #include <exception>
 #include "src/node.h"
