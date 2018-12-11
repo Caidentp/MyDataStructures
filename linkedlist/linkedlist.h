@@ -57,7 +57,7 @@ class LinkedListABC
             @param data : Data to search the list for.
             @return Index of node that contains data.
         */
-        int index(const T1 data);
+        int index(const T1 data) const;
 
         /** Print the list in order starting at the head and ending at the tail.
         */
