@@ -30,13 +30,13 @@ class LinkedListABC
         T2* tail = nullptr;
         int len;
 
-   #ifdef TEST
-	public:
-	#endif
+    #ifdef TEST
+    public:
+    #endif
 
-	#ifndef TEST
+    #ifndef TEST
     protected:
-	#endif
+    #endif
 
         T2* get_head() const    { return this->head; }
         void set_head(T2* head) { this->head = head; }
