@@ -1,6 +1,7 @@
 #ifndef BST_H
 #define BST_H
 
+// #define TEST
 
 #include <iostream>
 
@@ -16,6 +17,9 @@ class Node final
         Node *left{nullptr};
         Node *right{nullptr};
 
+
+
+
     public:
         Node() { }
         Node(const T data) : data(data) { }
@@ -23,8 +27,8 @@ class Node final
 
         void insert(const T data);
         void remove(const T data);
-        bool contains(const T data) const;
-        Node* find(const T data) const;
+        bool contains(const T data);
+        Node* find(const T data);
         int children() const;
         void preorder() const;
         void inorder() const;
@@ -61,7 +65,7 @@ void Node<T>::insert(const T data) {
 
 
 template <class T>
-bool Node<T>::contains(const T data) const {
+bool Node<T>::contains(const T data) {
     if (data < this->data) {
         if (this->left == nullptr)
             return false;
@@ -80,7 +84,7 @@ bool Node<T>::contains(const T data) const {
 
 
 template <class T>
-Node<T>* Node<T>::find(const T data) const {
+Node<T>* Node<T>::find(const T data) {
     if (data < this->data) {
         if (this->left == nullptr)
             return nullptr;
