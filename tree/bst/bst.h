@@ -24,6 +24,14 @@ class Node final
     #ifndef TEST
     protected:
     #endif
+        T get_data() const { return this->data; }
+        Node* get_left() const { return this->left; }
+        Node* get_right() const { return this->right; }
+        void set_data(const T data) { this->data = data; }
+        void set_left(Node* left) { this->left = left; }
+        void set_right(Node* right) { this->right = right; }
+
+    public:
         Node() { }
         Node(const T data) : data(data) { }
         ~Node();
