@@ -17,10 +17,13 @@ class Node final
         Node *left{nullptr};
         Node *right{nullptr};
 
-
-
-
+    #ifdef TEST
     public:
+    #endif
+
+    #ifndef TEST
+    protected:
+    #endif
         Node() { }
         Node(const T data) : data(data) { }
         ~Node();
