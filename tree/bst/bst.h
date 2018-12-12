@@ -16,12 +16,10 @@ class Node final
         Node *left{nullptr};
         Node *right{nullptr};
 
-        void destroy(Node *root);
-
     public:
         Node() { }
         Node(const T data) : data(data) { }
-        ~Node() { destroy(this); }
+        ~Node();
 
         void insert(const T data);
         void remove(const T data);
@@ -35,15 +33,9 @@ class Node final
 
 
 template <class T>
-void Node<T>::destroy(Node<T> *root) {
-    if (root->left == nullptr && root->right == nullptr) {
-        delete root;
-        root = nullptr;
-    }
-    else {
-        destroy(root->left);
-        destroy(root->right);
-    }
+void Node<T>::~Node() {
+    delete left;
+    delete right;
 }
 
 
