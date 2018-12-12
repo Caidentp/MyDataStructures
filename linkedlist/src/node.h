@@ -15,7 +15,7 @@ class SNode
 {
     public:
         T1 data;
-        SNode<T1>* next = nullptr;
+        SNode<T1>* next{nullptr};
 
     public:
         SNode(T1 data = '\0') : data(data) { }
@@ -41,8 +41,8 @@ class DNode
 {
     public:
         T1 data;
-        DNode* next = nullptr;
-        DNode* previous = nullptr;
+        DNode* next{nullptr};
+        DNode* previous{nullptr};
 
     public:
         DNode(T1 data = '\0') : data(data) { }
@@ -68,7 +68,7 @@ class CNode
 {
     public:
         T1 data;
-        CNode* next = this;
+        CNode* next{this};
 
     public:
         CNode(T1 data = '\0') : data(data) { }

@@ -1,6 +1,8 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
+// #define TEST
+
 #include <iostream>
 #include <exception>
 #include "src/node.h"
@@ -31,7 +33,14 @@ class LinkedListABC
         T2* tail = nullptr;
         int len;
 
+    #ifdef TEST
+    public:
+    #endif
+
+    #ifndef TEST
     protected:
+    #endif
+
         T2* get_head() const    { return this->head; }
         void set_head(T2* head) { this->head = head; }
         T2* get_tail() const    { return this->tail; }
@@ -52,13 +61,13 @@ class LinkedListABC
             @param data : The data instance variable to search the list for.
             @return True : if a node in the list contains the data, false otherwise.
         */
-        bool contains(const T1 data);
+        bool contains(const T1 data) const;
 
         /** Find the index of a node by its data instance variable.
             @param data : Data to search the list for.
             @return Index of node that contains data.
         */
-        int index(const T1 data);
+        int index(const T1 data) const;
 
         /** Print the list in order starting at the head and ending at the tail.
         */
