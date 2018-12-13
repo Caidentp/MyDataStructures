@@ -1,5 +1,4 @@
-#include <cassert>
-#include <vector>
+#include <assert.h>
 
 #define TEST
 
