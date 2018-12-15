@@ -1,5 +1,5 @@
 #include <cassert>
-#include "linkedlist_testing.h"
+#include "../linkedlist.h"
 
 
 void test_push_empty_list() {
