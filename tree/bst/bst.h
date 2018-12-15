@@ -1,8 +1,6 @@
 #ifndef BST_H
 #define BST_H
 
-// #define TEST
-
 #include <iostream>
 
 
@@ -17,13 +15,7 @@ class Node final
         Node *left{nullptr};
         Node *right{nullptr};
 
-    #ifdef TEST
     public:
-    #endif
-
-    #ifndef TEST
-    protected:
-    #endif
         T get_data() const { return this->data; }
         Node* get_left() const { return this->left; }
         Node* get_right() const { return this->right; }
