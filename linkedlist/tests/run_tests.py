@@ -1,7 +1,6 @@
-from os import version
-from subprocess import call
+from os import name, system
 
-if version == 'nt':
-    call(['./run_script.bat'])
+if name == 'nt':
+    system(r'.\run_tests.bat')
 else:
-    call(['./run_script.bash'])
+    system(r'.\run_script.bash')
