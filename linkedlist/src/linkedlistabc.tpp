@@ -16,17 +16,19 @@ LinkedListABC<T1, T2>::LinkedListABC(const T1 data)
 template <class T1, class T2>
 LinkedListABC<T1, T2>::~LinkedListABC() {
     // If list is empty
-    if (head == nullptr) {
+    if (head == nullptr || head == tail) {
         delete head;
         delete tail;
     }
     else {
         T2 *curr = head;
-        while (curr != nullptr) {
+        // Need do while loop so circular linked lists are also properly deleted
+        do {
             T2 *temp = curr;
             curr = curr->next;
             delete temp;
         }
+        while (curr != nullptr && curr != head);
     }
 }
 
