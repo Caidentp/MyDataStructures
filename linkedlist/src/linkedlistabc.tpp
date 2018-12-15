@@ -47,7 +47,6 @@ T1& LinkedListABC<T1, T2>::operator [] (const int index) {
 /// Returns true if list contains data passed to the function
 template <class T1, class T2>
 bool LinkedListABC<T1, T2>::contains(const T1 data) const {
-
     if (head != nullptr) {
         T2* temp = head;
         // Need do while loop for circular linked lists
