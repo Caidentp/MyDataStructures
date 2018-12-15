@@ -28,8 +28,8 @@ template <class T1, class T2>
 class LinkedListABC
 {
     private:
-        T2* head = nullptr;
-        T2* tail = nullptr;
+        T2* head{nullptr};
+        T2* tail{nullptr};
         int len;
 
     public:
