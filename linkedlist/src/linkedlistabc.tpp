@@ -36,9 +36,9 @@ LinkedListABC<T1, T2>::~LinkedListABC() {
 /// Get item operator compatibility
 template <class T1, class T2>
 T1& LinkedListABC<T1, T2>::operator [] (const int index) {
-    if (this->get_head() == nullptr || this->size() <= index)
+    if (head == nullptr || len <= index)
         throw IndexError();
-    T2* t = this->get_head();
+    T2* t = head;
     for (int i = 0; i < index; i++, t = t->next);
         return t->data;
 }
@@ -48,15 +48,15 @@ T1& LinkedListABC<T1, T2>::operator [] (const int index) {
 template <class T1, class T2>
 bool LinkedListABC<T1, T2>::contains(const T1 data) const {
 
-    if (this->get_head() != nullptr) {
-        T2* temp = this->get_head();
-
+    if (head != nullptr) {
+        T2* temp = head;
+        // Need do while loop for circular linked lists
         do {
             if (temp->data == data)
                 return true;
             temp = temp->next;
         }
-        while (temp != nullptr && temp != this->get_head());
+        while (temp != nullptr && temp != head);
     }
     return false;
 }
@@ -66,12 +66,11 @@ bool LinkedListABC<T1, T2>::contains(const T1 data) const {
 template <class T1, class T2>
 int LinkedListABC<T1, T2>::index(const T1 data) const {
 
-    if (this->get_head() != nullptr) {
-        T2* t = this->get_head();
-        for (int i = 0; i < this->size(); i++, t = t->next) {
+    if (head != nullptr) {
+        T2* t = head;
+        for (int i = 0; i < len; i++, t = t->next)
             if (t->data == data)
                 return i;
-        }
     }
     return -1;
 }
@@ -81,13 +80,13 @@ int LinkedListABC<T1, T2>::index(const T1 data) const {
 template <class T1, class T2>
 void LinkedListABC<T1, T2>::print() const {
 
-    if (this->get_head() != nullptr) {
-        T2* temp = this->get_head();
-
+    if (head != nullptr) {
+        T2* temp = head;
+        // Need do while loop for curcular linked lists
         do {
             std::cout << temp->data << " ";
             temp = temp->next;
         }
-        while (temp != nullptr && temp != this->get_head());
+        while (temp != nullptr && temp != head);
     }
 }
