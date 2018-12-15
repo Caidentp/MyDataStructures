@@ -68,29 +68,30 @@ void SinglyLinkedList<T1, T2>::remove(const int index) {
 
     if (this->get_head() == nullptr || this->size() <= index)
         throw IndexError();
+    T2 *temp = this->get_head();
 
     if (index == 0) {
-
         if (this->get_head() == this->get_tail()) {
+            T2 *tail_temp = this->get_tail();
             this->set_head(nullptr);
             this->set_tail(nullptr);
+            delete tail_temp;
         }
-        else
+        else {
             this->set_head(this->get_head()->next);
+        }
     }
     else {
-        T2* temp = this->get_head();
         T2* previous;
-
         for (int i = 0; i < index && temp != this->get_tail(); i++) {
             previous = temp;
             temp = temp->next;
         }
         previous->next = temp->next;
-
         if (temp == this->get_tail())
-            this->set_tail(previous);
+             this->set_tail(previous);
     }
+    delete temp;
     this->set_len(this->size()-1);
 }
 
