@@ -1,7 +1,4 @@
 #include <assert.h>
-
-#define TEST
-
 #include "bst.h"
 
 
