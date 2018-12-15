@@ -1,7 +1,6 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
-// #define TEST
 
 #include <iostream>
 #include <exception>
@@ -33,14 +32,7 @@ class LinkedListABC
         T2* tail = nullptr;
         int len;
 
-    #ifdef TEST
     public:
-    #endif
-
-    #ifndef TEST
-    protected:
-    #endif
-
         T2* get_head() const    { return this->head; }
         void set_head(T2* head) { this->head = head; }
         T2* get_tail() const    { return this->tail; }
