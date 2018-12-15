@@ -7,8 +7,8 @@ LinkedListABC<T1, T2>::LinkedListABC(const T1 data)
     : len(1)
 {
     T2* new_node = new T2(data);
-    this->set_head(new_node);
-    this->set_tail(new_node);
+    this->head = new_node;
+    this->tail = new_node;
 }
 
 
