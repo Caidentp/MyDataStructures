@@ -30,7 +30,7 @@ class ArrayList final
     public:
         /** Default constructor creates array of 10 members.
          */ 
-        ArrayList(int max_size = 10);
+        ArrayList(int max_size = 10) : max_size(max_size) { array_list = new T[max_size](); }
         ~ArrayList() { delete [] array_list; }
 
         /** Copy constructor.
@@ -98,16 +98,6 @@ void ArrayList<T>::expand() {
 
 
 /// ======================= PUBLIC ========================
-
-
-/// ctor
-template <class T>
-ArrayList<T>::ArrayList(int max_size)
-    : max_size(max_size)
-{
-    T *new_list = new T[max_size]();
-    array_list = new_list;
-}
 
 
 /// Copy ctor
