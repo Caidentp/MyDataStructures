@@ -2,6 +2,7 @@
 #define ARRAY_LIST_H
 
 #include <iostream>
+#include <exception>
 
 namespace arraylist {
 
@@ -17,7 +18,13 @@ namespace arraylist {
 template <class T = int>
 class ArrayList final
 {
+    #ifndef TESTING
     private:
+    #endif
+
+    #ifdef TESTING
+    public:
+    #endif
         int length{0};
         int max_size;
         T *array_list;
@@ -77,6 +84,20 @@ class ArrayList final
          * @return Data that resides at last element of array_list.
          */
         T pop();
+}; /// ArrayList
+
+
+struct IndexError : public std::exception {
+    const char* what() const throw() {
+        return "List index out of range.";
+    }
+};
+
+
+struct EmptyList : public std::exception {
+    const char* what() const throw() {
+        return "List is empty.";
+    }
 };
 
 
@@ -90,7 +111,7 @@ void ArrayList<T>::expand() {
 
     for (int i = 0; i < length; i++)
         new_list[i] = array_list[i];
-    delete array_list;
+    delete [] array_list;
     array_list = new_list;
 }
 
@@ -122,8 +143,8 @@ ArrayList<T>::ArrayList(ArrayList&& rhs)
     , array_list(rhs.array_list)
 {
     rhs.array_list = nullptr;
-    rhs.length = NULL;
-    rhs.max_size = NULL;
+    rhs.length = 0;
+    rhs.max_size = 0;
 }
 
 
@@ -139,9 +160,9 @@ ArrayList<T>& ArrayList<T>::operator = (ArrayList&& rhs) {
     this->max_size = rhs.max_size;
     this->array_list = rhs.array_list;
 
-    rhs.length = NULL;
-    rhs.max_size = NULL;
-    rhs.array_list = NULL;
+    rhs.length = 0;
+    rhs.max_size = 0;
+    rhs.array_list = nullptr;
 
     return *this;
 }
@@ -150,6 +171,8 @@ ArrayList<T>& ArrayList<T>::operator = (ArrayList&& rhs) {
 /// Get item
 template <class T>
 T& ArrayList<T>::operator [] (const int index) {
+    if (index >= length)
+        throw IndexError();
     return array_list[index];
 }
 
@@ -180,17 +203,15 @@ void ArrayList<T>::append(const T data) {
 /// pop
 template <class T>
 T ArrayList<T>::pop() {
-    if (length != 0) {
-        length--;
-        T data = array_list[length];
-        array_list[length] = 0;
-        return data;
-    }
-    return NULL;
+    if (length == 0)
+        throw EmptyList();
+    length--;
+    T data = array_list[length];
+    array_list[length] = 0;
+    return data;
 }
 
 /// ======================= PUBLIC ========================
-
 
 }  /// namespace arraylist
 
