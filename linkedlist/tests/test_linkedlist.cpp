@@ -69,7 +69,7 @@ class TestSingly
             sList singly = sList();
             try {
                 int test = singly[0];
-                (void)test;
+                (void)test;  // ignore unused variable compiler warning
             }
             catch (IndexError) {
                 exception = true;
@@ -207,7 +207,7 @@ class TestSingly
             assert(singly.size() == 1 &&
                    "TestSingly::test_remove_head()");
         }
-        
+
         void test_remove_tail() {
             sList singly = {1, 2};
             singly.remove(1);
@@ -218,7 +218,7 @@ class TestSingly
             assert(singly.size() == 1 &&
                    "TestSingly::test_remove_tail()");
         }
-        
+
         void test_remove_last() {
             sList singly = sList(1);
             singly.remove(0);
@@ -299,7 +299,7 @@ class TestDoubly
             dList doubly = dList();
             try {
                 int test = doubly[0];
-                (void)test;
+                (void)test;  // ignore unused variable compiler warning
             }
             catch (IndexError) {
                 exception = true;
@@ -462,11 +462,243 @@ class TestDoubly
 };
 
 
+class TestCircle
+{
+    public:
+        TestCircle() {
+            this->test_default_ctor();
+            this->test_ctor();
+            this->test_initializer_list();
+            this->test_getitem_in_range();
+            this->test_getitem_out_of_range();
+            this->test_setitem_in_range();
+            this->test_setitem_out_of_range();
+            this->test_contains_true_and_false();
+            this->test_index_true_and_false();
+            this->test_push_empty();
+            this->test_append_empty();
+            this->test_insert_empty();
+            this->test_push_populated();
+            this->test_append_populated();
+            this->test_insert_populated();
+            this->test_remove_empty();
+            this->test_remove_head();
+            this->test_remove_tail();
+            this->test_remove_last();
+        }
+
+    private:
+        void test_default_ctor() {
+            cList circle = cList();
+            assert(circle.get_head() == nullptr &&
+                   "TestCircle::test_default_ctor()");
+            assert(circle.get_tail() == nullptr &&
+                   "TestCircle::test_default_ctor()");
+            assert(circle.size() == 0 &&
+                   "TestCircle::test_default_ctor()");
+        }
+
+        void test_ctor() {
+            cList circle = cList(1);
+            assert(circle.get_head()->data == 1 &&
+                   "TestCircle::test_ctor()");
+            assert(circle.get_tail()->data == 1 &&
+                   "TestCircle::test_ctor()");
+            assert(circle.size() == 1 &&
+                   "TestCircle::test_ctor()");
+        }
+
+        void test_initializer_list() {
+            cList circle = {1, 2, 3};
+            assert(circle.get_head()->data == 1 &&
+                   "TestCircle::test_initializer_list()");
+            assert(circle.get_tail()->data == 3 &&
+                   "TestCircle::test_initializer_list()");
+            assert(circle.size() == 3 &&
+                   "TestCircle::test_initializer_list()");
+        }
+
+        void test_getitem_in_range() {
+            cList circle = cList(1);
+            assert(circle[0] == 1 && 
+                   "TestCircle::test_getitem_in_range()");
+        }
+
+        void test_getitem_out_of_range() {
+            bool exception = false;
+            cList circle = cList();
+            try {
+                int test = circle[0];
+                (void)test;  // ignore unused variable compiler warning
+            }
+            catch (IndexError) {
+                exception = true;
+            }
+            assert(exception == true && 
+                   "TestCircle::test_getitem_out_of_range()");
+        }
+
+        void test_setitem_in_range() {
+            cList circle = cList(1);
+            circle[0] = 2;
+            assert(circle[0] == 2 && 
+                   "TestCircle::test_setitem_in_range()");
+        }
+
+        void test_setitem_out_of_range() {
+            bool exception = false;
+            cList circle = cList();
+            try {
+                circle[0] = 1;
+            }
+            catch (IndexError) {
+                exception = true;
+            }
+            assert(exception == true && 
+                   "TestCircle::test_setitem_out_of_range()");
+        }
+
+        void test_contains_true_and_false() {
+            cList circle = {1, 2, 3};
+            assert(circle.contains(3) == true &&
+                   "TestCircle::test_contains_true_and_false()");
+            assert(circle.contains(4) == false &&
+                   "TestCircle::test_contains_true_and_false()");
+        }
+
+        void test_index_true_and_false() {
+            cList circle = {1, 2, 3};
+            assert(circle.index(1) == 0 &&
+                   "TestCircle::test_index_true_and_false()");
+            assert(circle.index(2) == 1 &&
+                   "TestCircle::test_index_true_and_false()");
+            assert(circle.index(3) == 2 &&
+                   "TestCircle::test_index_true_and_false()");
+            assert(circle.index(4) == -1 &&
+                   "TestCircle::test_index_true_and_false()");
+        }
+
+        void test_push_empty() {
+            cList circle = cList();
+            circle.push(1);
+            assert(circle.get_head()->data == 1 && 
+                   "TestCircle::test_push_empty()");
+            assert(circle.get_tail()->data == 1 &&
+                   "TestCircle::test_push_empty()");
+            assert(circle.size() == 1 &&
+                   "TestCircle::test_push_empty()");
+        }
+
+        void test_append_empty() {
+            cList circle = cList();
+            circle.append(1);
+            assert(circle.get_head()->data == 1 &&
+                   "TestCircle::test_append_empty()");
+            assert(circle.get_tail()->data == 1 &&
+                   "TestCircle::test_append_empty()");
+            assert(circle.size() == 1 &&
+                   "TestCircle::test_append_empty()");
+        }
+
+        void test_insert_empty() {
+            bool exception = false;
+            cList circle = cList();
+            try {
+                circle.insert(1, 0);
+            }
+            catch (IndexError) {
+                exception = true;
+            }
+            assert(exception == true &&
+                   "TestCircle::test_insert_empty()");
+        }
+
+        void test_push_populated() {
+            cList circle = cList(1);
+            circle.push(2);
+            assert(circle.get_head()->data == 2 &&
+                   "TestCircle::test_push_populated()");
+            assert(circle.get_tail()->data == 1 &&
+                   "TestCircle::test_push_populated()");
+            assert(circle.size() == 2 &&
+                   "TestCircle::test_push_populated()");
+        }
+
+        void test_append_populated() {
+            cList circle = cList(1);
+            circle.append(2);
+            assert(circle.get_tail()->data == 2 &&
+                   "TestCircle::test_append_populated()");
+            assert(circle.size() == 2 &&
+                   "TestCircle::test_append_populated()");
+        }
+
+        void test_insert_populated() {
+            cList circle = cList(1);
+            circle.insert(2, 0);
+            assert(circle.get_head()->data == 2 &&
+                   "TestCircle::test_insert_populated()");
+            assert(circle.get_tail()->data == 1 &&
+                   "TestCircle::test_insert_populated()");
+            assert(circle.size() == 2 &&
+                   "TestCircle::test_insert_populated()");
+        }
+
+        void test_remove_empty() {
+            bool exception = false;
+            cList circle = cList();
+            try {
+                circle.remove(0);
+            }
+            catch (IndexError) {
+                exception = true;
+            }
+            assert(exception == true &&
+                   "TestCircle::test_remove_empty()");
+        }
+
+        void test_remove_head() {
+            cList circle = {1, 2};
+            circle.remove(0);
+            assert(circle.get_head()->data == 2 &&
+                   "TestCircle::test_remove_head()");
+            assert(circle.get_tail()->data == 2 &&
+                   "TestCircle::test_remove_head()");
+            assert(circle.size() == 1 &&
+                   "TestCircle::test_remove_head()");
+        }
+
+        void test_remove_tail() {
+            cList circle = {1, 2};
+            circle.remove(1);
+            assert(circle.get_head()->data == 1 &&
+                   "TestCircle::test_remove_tail()");
+            assert(circle.get_tail()->data == 1 &&
+                   "TestCircle::test_remove_tail()");
+            assert(circle.size() == 1 &&
+                   "TestCircle::test_remove_tail()");
+        }
+
+        void test_remove_last() {
+            cList circle = cList(1);
+            circle.remove(0);
+            assert(circle.get_head() == nullptr &&
+                   "TestCircle::test_remove_last()");
+            assert(circle.get_tail() == nullptr &&
+                   "TestCircle::test_remove_last()");
+            assert(circle.size() == 0 &&
+                   "TestCircle::test_remove_last()");
+        }
+};
+
+
 int main() {
     TestSingly singly_test_suite = TestSingly();
     TestDoubly doubly_test_suite = TestDoubly();
-    (void)singly_test_suite;
-    (void)doubly_test_suite;
+    TestCircle circle_test_suite = TestCircle();
+    (void)singly_test_suite;  // ignore unused variable compiler warning
+    (void)doubly_test_suite;  // ignore unused variable compiler warning
+    (void)circle_test_suite;  // ignore unused variable compiler warning
 
     std::cout << std::endl << "All tests passed." << std::endl;
     return 0;
