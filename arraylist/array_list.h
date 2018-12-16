@@ -31,15 +31,17 @@ class ArrayList final
         /** Default constructor creates array of 10 members.
          */ 
         ArrayList();
+        ~ArrayList() { delete [] array_list; }
 
         /** Constructor to set default max_size.
-         *
          * @param max_size : Initial array_list size.
          */
         ArrayList(int max_size);
 
+        /** Copy constructor.
+         * @param rhs : Instance of ArrayList to copy.
+         */
         ArrayList(ArrayList& rhs);
-        ~ArrayList() { delete [] array_list; }
 
         /** Move constructor.
          * @param rhs : Instance of ArrayList to move.
