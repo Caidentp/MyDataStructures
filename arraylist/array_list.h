@@ -7,7 +7,7 @@ namespace arraylist {
 
 /** Class to implement dynamic array that can grow on demand.
  *
- * template class T : Data type that list will hold
+ * template class T : Data type that list will hold.
  *      - Defaults to int.
  *
  * @var length : Number of non-null list members.
@@ -18,7 +18,7 @@ template <class T = int>
 class ArrayList final
 {
     private:
-        int length = 0;
+        int length{0};
         int max_size;
         T *array_list;
 
@@ -30,13 +30,8 @@ class ArrayList final
     public:
         /** Default constructor creates array of 10 members.
          */ 
-        ArrayList();
+        ArrayList(int max_size = 10);
         ~ArrayList() { delete [] array_list; }
-
-        /** Constructor to set default max_size.
-         * @param max_size : Initial array_list size.
-         */
-        ArrayList(int max_size);
 
         /** Copy constructor.
          * @param rhs : Instance of ArrayList to copy.
@@ -104,14 +99,6 @@ void ArrayList<T>::expand() {
 
 /// ======================= PUBLIC ========================
 
-/// Default ctor
-template <class T>
-ArrayList<T>::ArrayList()
-    : max_size(10)
-{
-    T *new_list = new T[max_size]();
-    array_list = new_list;
-}
 
 /// ctor
 template <class T>
