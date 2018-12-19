@@ -28,7 +28,7 @@ class LinkedListABC
     private:
         T2* head{nullptr};
         T2* tail{nullptr};
-        int len;
+        unsigned int len;
 
     public:
         T2* get_head() const    { return this->head; }
