@@ -41,7 +41,7 @@ class LinkedListABC
         LinkedListABC() : len(0) { }
         LinkedListABC(const T1 data);
         virtual ~LinkedListABC();
-        T1& operator [] (const int index);
+        T1& operator[](const int index);
 
        /**
         *  @brief  Count number of nodes in a list.
