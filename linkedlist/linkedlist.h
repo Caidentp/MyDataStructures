@@ -1,28 +1,28 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
-
 #include <iostream>
 #include <exception>
 #include "src/node.h"
 
-
-
 namespace linkedlist
 {
 
-/** Abstract Base Class for Singly, Doubly, and Circular linked lists.
+/**
+ *  @brief Abstract Base Class for Singly, Doubly, and Circular linked lists.
+ *  @var head First node in the list.
+ *  @var tail List node in the list.
+ *  @var len Running total number of node
  *
- * template class T1: The data type that the linked list nodes will hold.
- *      - Defaults to int.
- * template class T2: The type of linked list node that the list will
- *                    consist of.
- *      - This type will default to the appropriate node based on the
- *        linked list type.
+ *  template class T1: The data type that the linked list nodes will hold.
+ *        - Defaults to int.
+ *  template class T2: The type of linked list node that the list will consist of.
+ *        - This type will default to the appropriate node based on the linked list type.
  *
- * @var head : First node in the list.
- * @var tail : List node in the list.
- * @var len : Running total number of node
+ *  Three of the main kinds of linked lists are singly, doubly, and circular. These
+ *  types of linked lists have operations that can be written in code the same way.
+ *  This abstract class defines methods that are common to the three different types
+ *  of linked lists, as well as what methods must be defined by the linked lists.
  */
 template <class T1, class T2>
 class LinkedListABC
@@ -45,44 +45,53 @@ class LinkedListABC
         virtual ~LinkedListABC();
         T1& operator [] (const int index);
 
-        /** @return len instance variable.
+       /**
+        *  @brief Count number of nodes in a list.
+        *  @return len instance variable.
         */
         int size() const { return this->len; }
 
-        /** Check to see if a node exists in a list by its data instance variable.
-            @param data : The data instance variable to search the list for.
-            @return True : if a node in the list contains the data, false otherwise.
+       /** 
+        *  @brief Check to see if a node exists in a list by its data instance variable.
+        *  @param data The data instance variable to search the list for.
+        *  @return True if a node in the list contains the data, false otherwise.
         */
         bool contains(const T1 data) const;
 
-        /** Find the index of a node by its data instance variable.
-            @param data : Data to search the list for.
-            @return Index of node that contains data.
+       /** 
+        *  @brief Find the index of a node by its data instance variable.
+        *  @param data Data to search the list for.
+        *  @return Index of node that contains data.
         */
         int index(const T1 data) const;
 
-        /** Print the list in order starting at the head and ending at the tail.
-        */
+        /** 
+         *  @brief Print the list in order starting at the head and ending at the tail.
+         */
         void print() const;
 
-        /** Add a node to the beginning of a list.
-            @param data : Data instance variable of new node.
+       /** 
+        *  @brief Add a node to the beginning of a list.
+        *  @param data Data instance variable of new node.
         */
         virtual void push(const T1 data) = 0;
 
-        /** Add a node to the end of a list.
-            @param data : Data instance variable of new node.
+       /** 
+        *  @brief Add a node to the end of a list.
+        *  @param data Data instance variable of new node.
         */
         virtual void append(const T1 data) = 0;
 
-        /** Insert a node into a list by index; index counting starts at 0.
-            @param data : Data instance variable of new node.
-            @param index : Position in list to insert new node at.
+       /** 
+        *  @brief Insert a node into a list by index; index counting starts at 0.
+        *  @param data Data instance variable of new node.
+        *  @param index Position in list to insert new node at.
         */
         virtual void insert(const T1 data, const int index) = 0;
 
-        /** Remove a node from a list by index; index counting starts at 0.
-            @param index : Position of node to remove from list.
+       /** 
+        *  @brief Remove a node from a list by index; index counting starts at 0.
+        *  @param index : Position of node to remove from list.
         */
         virtual void remove(const int index) = 0;
 
@@ -124,13 +133,13 @@ class LinkedListABC
 };
 
 
-
-/** Singly linked list class. Inherits from LinkedListABC
- * template class T1: The data type that the linked list nodes will hold.
- *      - Defaults to int.
- * template class T2: The type of linked list node that the list will
- *                    consist of.
- *      - Defaults to SNode<>.
+/** 
+ *  @brief Singly linked list class. Inherits from LinkedListABC
+ *
+ *  template class T1: The data type that the linked list nodes will hold.
+ *       - Defaults to int.
+ *  template class T2: The type of linked list node that the list will consist of.
+ *       - Defaults to SNode<>.
  */
 template <class T1 = int, class T2 = node::SNode<>>
 class SinglyLinkedList final : public LinkedListABC<T1, T2>
@@ -147,7 +156,6 @@ class SinglyLinkedList final : public LinkedListABC<T1, T2>
         void insert(const T1 data, const int index);
         void remove(const int index);
 };
-
 
 
 /** Doubly linked list class. Inherits from LinkedListABC
@@ -174,13 +182,13 @@ class DoublyLinkedList final : public LinkedListABC<T1, T2>
 };
 
 
-
-/** Circular linked list class. Inherits from LinkedListABC
- * template class T1: The data type that the linked list nodes will hold.
- *      - Defaults to int.
- * template class T2: The type of linked list node that the list will
- *                    consist of.
- *      - Defaults to CNode<>.
+/** 
+ *  @brief Circular linked list class. Inherits from LinkedListABC
+ *
+ *  template class T1: The data type that the linked list nodes will hold.
+ *       - Defaults to int.
+ *  template class T2: The type of linked list node that the list will consist of.
+ *       - Defaults to CNode<>.
  */
 template <class T1 = int, class T2 = node::CNode<>>
 class CircularLinkedList final : public LinkedListABC<T1, T2>
@@ -208,16 +216,13 @@ struct IndexError : public std::exception {
 
 } /// namespace linkedlist
 
-
 #include "src/linkedlistabc.tpp"
 #include "src/singlylinkedlist.tpp"
 #include "src/doublylinkedlist.tpp"
 #include "src/circularlinkedlist.tpp"
 
-
 typedef linkedlist::SinglyLinkedList<int, node::SNode<int>>   sList;
 typedef linkedlist::DoublyLinkedList<int, node::DNode<int>>   dList;
 typedef linkedlist::CircularLinkedList<int, node::CNode<int>> cList;
-
 
 #endif  /// LINKEDLIST_H
