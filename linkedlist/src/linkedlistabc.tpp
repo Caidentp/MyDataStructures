@@ -35,7 +35,7 @@ LinkedListABC<T1, T2>::~LinkedListABC() {
 
 /// Get item operator compatibility
 template <class T1, class T2>
-T1& LinkedListABC<T1, T2>::operator [] (const int index) {
+inline T1& LinkedListABC<T1, T2>::operator [] (const int index) {
     if (head == nullptr || len <= index)
         throw IndexError();
     T2* t = head;
