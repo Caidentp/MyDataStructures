@@ -91,7 +91,7 @@ class LinkedListABC
 
        /** 
         *  @brief Remove a node from a list by index; index counting starts at 0.
-        *  @param index : Position of node to remove from list.
+        *  @param index Position of node to remove from list.
         */
         virtual void remove(const int index) = 0;
 
@@ -161,8 +161,7 @@ class SinglyLinkedList final : public LinkedListABC<T1, T2>
 /** Doubly linked list class. Inherits from LinkedListABC
  * template class T1: The data type that the linked list nodes will hold.
  *      - Defaults to int.
- * template class T2: The type of linked list node that the list will
- *                    consist of.
+ * template class T2: The type of linked list node that the list will consist of.
  *      - Defaults to DNode<>.
  */
 template <class T1 = int, class T2 = node::DNode<>>
