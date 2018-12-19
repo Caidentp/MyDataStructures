@@ -12,7 +12,7 @@ namespace linkedlist
  *  @brief  Abstract Base Class for Singly, Doubly, and Circular linked lists.
  *  @var  head  First node in the list.
  *  @var  tail  List node in the list.
- *  @var  len  Running total number of node
+ *  @var  len  Total number of nodes in list.
  *
  *  @tparam  T1  Data type nodes will hold.
  *  @tparam  T2  Type of node used for linked list.
