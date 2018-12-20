@@ -29,7 +29,7 @@ class Dequeue
     public:
 #endif
         /** 
-		 *  @brief  Doubly circular linked list used to represent dequeue.
+         *  @brief  Doubly circular linked list used to represent dequeue.
          *  @var  head  Pointer to first node in list.
          *  @var  tail  Pointer to last node in list.
          *
