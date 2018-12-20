@@ -126,13 +126,13 @@ class TestArrayList
                    "TestArrayList::test_setitem_out_of_range()");
         }
 
-		void test_size() {
-			ArrayList array = ArrayList();
-			array.append(1);
-			array.append(2);
-			assert(array.size() == 2 &&
-			       "TestArrayList::test_size()");
-		}
+        void test_size() {
+            ArrayList array = ArrayList();
+            array.append(1);
+            array.append(2);
+            assert(array.size() == 2 &&
+                   "TestArrayList::test_size()");
+        }
 };
 
 
