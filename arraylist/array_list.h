@@ -6,7 +6,7 @@
 
 namespace arraylist {
 
-/** 
+/**
  *  @brief Class to implement dynamic array that can grow on demand.
  *  @var  length  Number of non-null list members.
  *  @var  max_size  Total number of members list can hold at a given time.
@@ -33,73 +33,73 @@ class ArrayList final
         T *array_list;
 
     protected:
-        /** 
-		 *  @brief Doubles size of array_list.
-		 *
-		 *  New array is created twice the size of the current array.
-		 *  Members from original array are coppied to new array and 
-		 *  old array is deleted.
+        /**
+	 *  @brief Doubles size of array_list.
+	 *
+	 *  New array is created twice the size of the current array.
+	 *  Members from original array are coppied to new array and
+	 *  old array is deleted.
          */
         void expand();
 
     public:
-        /** 
-		 *  @brief  Default constructor creates array of 10 members.
-		 *  @param  max_size  The starting total size of the array.
-         */ 
+        /**
+	 *  @brief  Default constructor creates array of 10 members.
+	 *  @param  max_size  The starting total size of the array.
+         */
         ArrayList(int max_size = 10) : max_size(max_size) { array_list = new T[max_size](); }
         ~ArrayList() { delete [] array_list; }
 
-        /** 
-		 *  @brief  Copy constructor.
+        /**
+	 *  @brief  Copy constructor.
          *  @param  rhs  Instance of ArrayList to copy.
          */
         ArrayList(ArrayList& rhs);
 
-        /** 
-		 *  @brief  Move constructor.
+        /**
+	 *  @brief  Move constructor.
          *  @param  rhs  Instance of ArrayList to move.
          */
         ArrayList(ArrayList&& rhs);
 
-        /** 
-		 *  @brief  Move assignment operator.
+        /**
+	 *  @brief  Move assignment operator.
          *  @param  rhs  Instance of ArrayList to move.
          *  @return ArrayList at new location.
          */
         ArrayList& operator=(ArrayList&& rhs);
 
-        /** 
-		 *  @brief  Operator overload get item.
+        /**
+	 *  @brief  Operator overload get item.
          *  @param  index  Position of data member to retrieve.
          *  @return Position of index argument passed in array_list member variable.
          */
         T& operator[](const int index);
 
-        /** 
-		 *  @brief  Assignment operator to create deep copy of an instance of ArrayList.
+        /**
+	 *  @brief  Assignment operator to create deep copy of an instance of ArrayList.
          *  @param  rhs  ArrayList instance to create a copy of.
          *  @return Deep copy of rhs argument.
          */
         ArrayList& operator=(const ArrayList& rhs);
 
-        /** 
-		 *  @brief  Total number of non-null members in array_list.
-         *  @return  Running total of members in array_list. 
+        /**
+	 *  @brief  Total number of non-null members in array_list.
+         *  @return  Running total of members in array_list.
          */
         int size() const { return length; }
 
-        /** 
-		 *  @brief  Add a data member to the end of array_list.
+        /**
+	 *  @brief  Add a data member to the end of array_list.
          *  @param  data  Data member to add to end of array_list.
-		 *
-		 *  If the length of the list is equal to the max_size then
+	 *
+	 *  If the length of the list is equal to the max_size then
          *  this method will call expand() to double the size of array_list.
          */
         void append(const T data);
 
-        /** 
-		 *  @brief  Remove the last member of array_list and return it.
+        /**
+	 *  @brief  Remove the last member of array_list and return it.
          *  @return Data that resides at last element of array_list.
          */
         T pop();
