@@ -19,6 +19,7 @@ class TestArrayList
             this->test_getitem_out_of_range();
             this->test_setitem_in_range();
             this->test_setitem_out_of_range();
+			this->test_size();
         }
 
     private:
@@ -28,6 +29,7 @@ class TestArrayList
                    "TestArrayList::test_default_ctor()");
             assert(array.max_size == 10 &&
                    "TestArrayList::test_default_ctor()");
+		    delete array;
         }
 
         void test_ctor() {
@@ -123,6 +125,14 @@ class TestArrayList
             assert(exception == true &&
                    "TestArrayList::test_setitem_out_of_range()");
         }
+
+		void test_size() {
+			ArrayList array = ArrayList();
+			array.append(1);
+			array.append(2);
+			assert(array.size() == 2 &&
+			       "TestArrayList::test_size()");
+		}
 };
 
 
