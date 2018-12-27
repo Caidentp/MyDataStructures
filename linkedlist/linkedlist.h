@@ -270,10 +270,10 @@ struct IndexError : public std::exception {
 
 } /// namespace linkedlist
 
-#include "src/linkedlistabc.cpp"
-#include "src/singlylinkedlist.cpp"
-#include "src/doublylinkedlist.cpp"
-#include "src/circularlinkedlist.cpp"
+#include "src/linkedlistabc.tpp"
+#include "src/singlylinkedlist.tpp"
+#include "src/doublylinkedlist.tpp"
+#include "src/circularlinkedlist.tpp"
 
 typedef linkedlist::SinglyLinkedList<int, node::SNode<int>>   sList;
 typedef linkedlist::DoublyLinkedList<int, node::DNode<int>>   dList;
