@@ -12,9 +12,9 @@ LinkedListABC<T1, T2>::LinkedListABC(const T1 data)
 }
 
 
-/// Destructor
+/// Destroy a linked lsit
 template <class T1, class T2>
-LinkedListABC<T1, T2>::~LinkedListABC() {
+void LinkedListABC<T1, T2>::deleteList() {
     // If list is empty
     if (head == nullptr || head == tail) {
         delete head;
@@ -30,6 +30,9 @@ LinkedListABC<T1, T2>::~LinkedListABC() {
         }
         while (curr != nullptr && curr != head);
     }
+    head = nullptr;
+    tail = nullptr;
+    len = 0;
 }
 
 
