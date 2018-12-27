@@ -40,8 +40,20 @@ class LinkedListABC
     public:
         LinkedListABC() : len(0) { }
         LinkedListABC(const T1 data);
-        virtual ~LinkedListABC();
-        T1& operator[](const int index);
+        virtual ~LinkedListABC() { this->deleteList(); }
+        
+       /**
+        *  @brief  Deletes all nodes in a list.
+        */
+        void deleteList();
+        
+       /**
+        *  @brief  Retirieve data variable from node in list by position.
+        *          Indexing starts at zero.
+        *  @param  index  Position of node to print data of.
+        *  @return Data instance variable of node at position index.
+        */
+        T1& operator [](const int index);
 
        /**
         *  @brief  Count number of nodes in a list.
@@ -63,9 +75,9 @@ class LinkedListABC
         */
         int index(const T1 data) const;
 
-        /** 
-         *  @brief  Print the list in order starting at the head and ending at the tail.
-         */
+       /** 
+        *  @brief  Print the list in order starting at the head and ending at the tail.
+        */
         void print() const;
 
        /** 
@@ -93,7 +105,6 @@ class LinkedListABC
         */
         virtual void remove(const int index) = 0;
 
-
         class iterator
         {
             public:
@@ -104,18 +115,18 @@ class LinkedListABC
                 iterator(node iter)
                     : iter(iter) { }
                 ~iterator() { delete iter; }
-                self operator ++ () {
+                self operator ++() {
                     iter = iter->next;
                     return *this;
                 }
-                self operator ++ (int) {
+                self operator ++(int) {
                     self i = *this;
                     iter = iter->next;
                     return i;
                 }
-                node operator -> ()                { return iter; }
-                bool operator == (const self& rhs) { return iter == rhs.iter; }
-                bool operator != (const self& rhs) { return iter != rhs.iter; }
+                node operator ->()                { return iter; }
+                bool operator ==(const self& rhs) { return iter == rhs.iter; }
+                bool operator !=(const self& rhs) { return iter != rhs.iter; }
 
             private:
                 node iter;
@@ -133,9 +144,16 @@ class LinkedListABC
 
 /** 
  *  @brief  Singly linked list class. Inherits from LinkedListABC.
+ *  @var  head  First node in the list. (LinkedListABC)
+ *  @var  tail  List node in the list. (LinkedListABC)
+ *  @var  len  Total number of nodes in list. (LinkedListABC)
  *
  *  @tparam  T1  Data type nodes will hold.
  *  @tparam  T2  Type of node used for linked list.
+ *
+ *  Implementation of a singly linked list. Constructor, default
+ *  constructor. and operators are inherited from LinkedListABC.
+ *  other implementation details are defined within this class.
  */
 template <class T1 = int, class T2 = node::SNode<>>
 class SinglyLinkedList final : public LinkedListABC<T1, T2>
@@ -143,9 +161,19 @@ class SinglyLinkedList final : public LinkedListABC<T1, T2>
     public:
         SinglyLinkedList() : LinkedListABC<T1, T2>() { }
         SinglyLinkedList(const T1 data) : LinkedListABC<T1, T2>(data) { }
-
         SinglyLinkedList(const std::initializer_list<T1> il);
-        friend std::ostream& operator<<(std::ostream& os, SinglyLinkedList<>& linked_list);
+
+        SinglyLinkedList(const SinglyLinkedList& list);
+        SinglyLinkedList& operator =(const SinglyLinkedList& list);
+        SinglyLinkedList(SinglyLinkedList&& list);
+        SinglyLinkedList& operator =(SinglyLinkedList&& list);
+
+       /**
+        *  @brief  Print a char representation of singly linked list.
+        *  @param  os  std::cout.
+        *  @param  linked_List  Linked list to print representation of.
+        */
+        friend std::ostream& operator <<(std::ostream& os, SinglyLinkedList<>& linked_list);
 
         void push(const T1 data);
         void append(const T1 data);
@@ -155,10 +183,17 @@ class SinglyLinkedList final : public LinkedListABC<T1, T2>
 
 
 /** 
- *  @brief  Doubly  linked list class. Inherits from LinkedListABC.
+ *  @brief  Doubly linked list class. Inherits from LinkedListABC.
+ *  @var  head  First node in the list. (LinkedListABC)
+ *  @var  tail  List node in the list. (LinkedListABC)
+ *  @var  len  Total number of nodes in list. (LinkedListABC)
  *
  *  @tparam  T1  Data type nodes will hold.
  *  @tparam  T2  Type of node used for linked list.
+ *
+ *  Implementation of a doubly linked list. Constructor, default
+ *  constructor. and operators are inherited from LinkedListABC.
+ *  other implementation details are defined within this class.
  */
 template <class T1 = int, class T2 = node::DNode<>>
 class DoublyLinkedList final : public LinkedListABC<T1, T2>
@@ -166,9 +201,19 @@ class DoublyLinkedList final : public LinkedListABC<T1, T2>
     public:
         DoublyLinkedList() : LinkedListABC<T1, T2>() { }
         DoublyLinkedList(const T1 data) : LinkedListABC<T1, T2>(data) { }
-
         DoublyLinkedList(const std::initializer_list<T1> il);
-        friend std::ostream& operator<<(std::ostream& os, DoublyLinkedList<>& linked_list);
+
+        DoublyLinkedList(const DoublyLinkedList& list);
+        DoublyLinkedList& operator =(const DoublyLinkedList& list);
+        DoublyLinkedList(DoublyLinkedList&& list);
+        DoublyLinkedList& operator =(DoublyLinkedList&& list);
+
+       /**
+        *  @brief  Print a char representation of doubly linked list.
+        *  @param  os  std::cout.
+        *  @param  linked_List  Linked list to print representation of.
+        */
+        friend std::ostream& operator <<(std::ostream& os, DoublyLinkedList<>& linked_list);
 
         void push(const T1 data);
         void append(const T1 data);
@@ -179,9 +224,16 @@ class DoublyLinkedList final : public LinkedListABC<T1, T2>
 
 /** 
  *  @brief  Circular linked list class. Inherits from LinkedListABC.
+ *  @var  head  First node in the list. (LinkedListABC)
+ *  @var  tail  List node in the list. (LinkedListABC)
+ *  @var  len  Total number of nodes in list. (LinkedListABC)
  *
  *  @tparam  T1  Data type nodes will hold.
  *  @tparam  T2  Type of node used for linked list.
+ *
+ *  Implementation of a circular linked list. Constructor, default
+ *  constructor. and operators are inherited from LinkedListABC.
+ *  other implementation details are defined within this class.
  */
 template <class T1 = int, class T2 = node::CNode<>>
 class CircularLinkedList final : public LinkedListABC<T1, T2>
@@ -189,9 +241,19 @@ class CircularLinkedList final : public LinkedListABC<T1, T2>
     public:
         CircularLinkedList() : LinkedListABC<T1, T2>() { }
         CircularLinkedList(const T1 data) : LinkedListABC<T1, T2>(data) { }
-
         CircularLinkedList(const std::initializer_list<T1> il);
-        friend std::ostream& operator<<(std::ostream& os, CircularLinkedList<>& linked_list);
+
+        CircularLinkedList(const CircularLinkedList& list);
+        CircularLinkedList& operator =(const CircularLinkedList& list);
+        CircularLinkedList(CircularLinkedList&& list);
+        CircularLinkedList& operator =(CircularLinkedList&& list);
+
+       /**
+        *  @brief  Print a char representation of circular linked list.
+        *  @param  os  std::cout.
+        *  @param  linked_List  Linked list to print representation of.
+        */
+        friend std::ostream& operator <<(std::ostream& os, CircularLinkedList<>& linked_list);
 
         void push(const T1 data);
         void append(const T1 data);
@@ -208,10 +270,10 @@ struct IndexError : public std::exception {
 
 } /// namespace linkedlist
 
-#include "src/linkedlistabc.tpp"
-#include "src/singlylinkedlist.tpp"
-#include "src/doublylinkedlist.tpp"
-#include "src/circularlinkedlist.tpp"
+#include "src/linkedlistabc.cpp"
+#include "src/singlylinkedlist.cpp"
+#include "src/doublylinkedlist.cpp"
+#include "src/circularlinkedlist.cpp"
 
 typedef linkedlist::SinglyLinkedList<int, node::SNode<int>>   sList;
 typedef linkedlist::DoublyLinkedList<int, node::DNode<int>>   dList;
