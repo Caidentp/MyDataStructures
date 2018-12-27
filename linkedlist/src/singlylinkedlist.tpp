@@ -8,6 +8,41 @@ SinglyLinkedList<T1, T2>::SinglyLinkedList(const std::initializer_list<T1> il) {
         this->append(*index);
 }
 
+
+/// Copy constructor
+template <class T1, class T2>
+SinglyLinkedList<T1, T2>::SinglyLinkedList(const SinglyLinkedList& list) {
+    for (T2* i = list.get_head(); i; this->append(i->data), i = i->next);
+}
+
+
+/// Copy assignment
+template <class T1, class T2>
+SinglyLinkedList<T1, T2>& SinglyLinkedList<T1, T2>::operator =(const SinglyLinkedList& list) {
+    this->deleteList();
+    for (T2* i = list.get_head(); i; this->append(i->data), i = i->next);
+    return *this;
+}
+
+
+/// Move constructor
+template <class T1, class T2>
+SinglyLinkedList<T1, T2>::SinglyLinkedList(SinglyLinkedList&& list) {
+    for (T2* i = list.get_head(); i; this->append(i->data), i = i->next);
+    list.deleteList();
+}
+
+
+/// Move assignment
+template <class T1, class T2>
+SinglyLinkedList<T1, T2>& SinglyLinkedList<T1, T2>::operator =(SinglyLinkedList&& list) {
+    this->deleteList();
+    for (T2* i = list.get_head(); i; this->append(i->data), i = i->next);
+    list.deleteList();
+    return *this;
+}
+
+
 /// Add item to beginning of a list
 template <class T1, class T2>
 void SinglyLinkedList<T1, T2>::push(const T1 data) {
