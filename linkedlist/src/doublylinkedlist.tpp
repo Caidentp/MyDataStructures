@@ -10,6 +10,40 @@ DoublyLinkedList<T1, T2>::DoublyLinkedList(const std::initializer_list<T1> il) {
 }
 
 
+/// Copy constructor
+template <class T1, class T2>
+DoublyLinkedList<T1, T2>::DoublyLinkedList(const DoublyLinkedList& list) {
+    for (T2* i = list.get_head(); i; this->append(i->data), i = i->next);
+}
+
+
+/// Copy assignment
+template <class T1, class T2>
+DoublyLinkedList<T1, T2>& DoublyLinkedList<T1, T2>::operator =(const DoublyLinkedList& list) {
+    this->deleteList();
+    for (T2* i = list.get_head(); i; this->append(i->data), i = i->next);
+    return *this;
+}
+
+
+/// Move constructor
+template <class T1, class T2>
+DoublyLinkedList<T1, T2>::DoublyLinkedList(DoublyLinkedList&& list) {
+    for (T2* i = list.get_head(); i; this->append(i->data), i = i->next);
+    list.deleteList();
+}
+
+
+/// Move assignment
+template <class T1, class T2>
+DoublyLinkedList<T1, T2>& DoublyLinkedList<T1, T2>::operator =(DoublyLinkedList&& list) {
+    this->deleteList();
+    for (T2* i = list.get_head(); i; this->append(i->data), i = i->next);
+    list.deleteList();
+    return *this;
+}
+
+
 /// Add item to beginning of a list
 template <class T1, class T2>
 void DoublyLinkedList<T1, T2>::push(const T1 data) {
