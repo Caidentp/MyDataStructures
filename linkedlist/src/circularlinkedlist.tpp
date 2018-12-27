@@ -10,6 +10,40 @@ CircularLinkedList<T1, T2>::CircularLinkedList(const std::initializer_list<T1> i
 }
 
 
+/// Copy constructor
+template <class T1, class T2>
+CircularLinkedList<T1, T2>::CircularLinkedList(const CircularLinkedList& list) {
+    for (T2* i = list.get_head(); i; this->append(i->data), i = i->next);
+}
+
+
+/// Copy assignment
+template <class T1, class T2>
+CircularLinkedList<T1, T2>& CircularLinkedList<T1, T2>::operator =(const CircularLinkedList& list) {
+    this->deleteList();
+    for (T2* i = list.get_head(); i; this->append(i->data), i = i->next);
+    return *this;
+}
+
+
+/// Move constructor
+template <class T1, class T2>
+CircularLinkedList<T1, T2>::CircularLinkedList(CircularLinkedList&& list) {
+    for (T2* i = list.get_head(); i; this->append(i->data), i = i->next);
+    list.deleteList();
+}
+
+
+/// Move assignment
+template <class T1, class T2>
+CircularLinkedList<T1, T2>& CircularLinkedList<T1, T2>::operator =(CircularLinkedList&& list) {
+    this->deleteList();
+    for (T2* i = list.get_head(); i; this->append(i->data), i = i->next);
+    list.deleteList();
+    return *this;
+}
+
+
 /// Add item to beginning of a list
 template <class T1, class T2>
 void CircularLinkedList<T1, T2>::push(const T1 data) {
