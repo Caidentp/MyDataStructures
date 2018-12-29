@@ -2,29 +2,29 @@ using namespace linkedlist;
 
 
 /// Constructor
-template <class T1, class T2>
-LinkedListABC<T1, T2>::LinkedListABC(const T1 data)
+template <class TData, class TNode>
+LinkedListABC<TData, TNode>::LinkedListABC(const TData data)
     : len(1)
 {
-    T2* new_node = new T2(data);
+    TNode* new_node = new TNode(data);
     this->head = new_node;
     this->tail = new_node;
 }
 
 
 /// Destroy a linked lsit
-template <class T1, class T2>
-void LinkedListABC<T1, T2>::deleteList() {
+template <class TData, class TNode>
+void LinkedListABC<TData, TNode>::deleteList() {
     // If list is empty
     if (head == nullptr || head == tail) {
         delete head;
         delete tail;
     }
     else {
-        T2 *curr = head;
+        TNode *curr = head;
         // Need do while loop so circular linked lists are also properly deleted
         do {
-            T2 *temp = curr;
+            TNode *temp = curr;
             curr = curr->next;
             delete temp;
         }
@@ -37,21 +37,21 @@ void LinkedListABC<T1, T2>::deleteList() {
 
 
 /// Get item operator compatibility
-template <class T1, class T2>
-inline T1& LinkedListABC<T1, T2>::operator [] (const int index) {
+template <class TData, class TNode>
+inline TData& LinkedListABC<TData, TNode>::operator [] (const int index) {
     if (head == nullptr || len <= index)
         throw IndexError();
-    T2* t = head;
+    TNode* t = head;
     for (int i = 0; i < index; i++, t = t->next);
         return t->data;
 }
 
 
 /// Returns true if list contains data passed to the function
-template <class T1, class T2>
-bool LinkedListABC<T1, T2>::contains(const T1 data) const {
+template <class TData, class TNode>
+bool LinkedListABC<TData, TNode>::contains(const TData data) const {
     if (head != nullptr) {
-        T2* temp = head;
+        TNode* temp = head;
         // Need do while loop for circular linked lists
         do {
             if (temp->data == data)
@@ -65,11 +65,11 @@ bool LinkedListABC<T1, T2>::contains(const T1 data) const {
 
 
 /// Finds index of data
-template <class T1, class T2>
-int LinkedListABC<T1, T2>::index(const T1 data) const {
+template <class TData, class TNode>
+int LinkedListABC<TData, TNode>::index(const TData data) const {
 
     if (head != nullptr) {
-        T2* t = head;
+        TNode* t = head;
         for (int i = 0; i < len; i++, t = t->next)
             if (t->data == data)
                 return i;
@@ -79,11 +79,11 @@ int LinkedListABC<T1, T2>::index(const T1 data) const {
 
 
 /// Prints list in ascending order
-template <class T1, class T2>
-void LinkedListABC<T1, T2>::print() const {
+template <class TData, class TNode>
+void LinkedListABC<TData, TNode>::print() const {
 
     if (head != nullptr) {
-        T2* temp = head;
+        TNode* temp = head;
         // Need do while loop for curcular linked lists
         do {
             std::cout << temp->data << " ";

@@ -8,23 +8,23 @@ namespace node {
  *  @var  data  Data to be held at this node.
  *  @var  next  Pointer to next node in the list.
  *
- *  @tparam  T1  Data instance variable type
+ *  @tparam  TData  Data instance variable type
  *
- *  This class is meant to be used as a T2 template type
+ *  This class is meant to be used as a TNode template type
  *  for the SinglyLinkedList class.
  */
-template <class T1 = int>
+template <class TData = int>
 class SNode
 {
     public:
-        T1 data;
-        SNode<T1>* next{nullptr};
+        TData data;
+        SNode<TData>* next{nullptr};
 
     public:
        /**
         *  @param  data  Data to initialize node with.
         */
-        SNode(T1 data = '\0') : data(data) { }
+        SNode(TData data = '\0') : data(data) { }
 
        /**
         *  @brief  Print a char representation of singly linked list node.
@@ -44,16 +44,16 @@ class SNode
  *  @var  next  Pointer to next node in the list.
  *  @var  previous  Pointer to the previous node in the list.
  *
- *  @tparam  T1  Data instance variable type
+ *  @tparam  TData  Data instance variable type
  *
- *  This class is meant to be used as a T2 template type
+ *  This class is meant to be used as a TNode template type
  *  for the DoublyLinkedList class.
  */
-template <class T1 = int>
+template <class TData = int>
 class DNode
 {
     public:
-        T1 data;
+        TData data;
         DNode* next{nullptr};
         DNode* previous{nullptr};
 
@@ -61,7 +61,7 @@ class DNode
        /**
         *  @param  data  Data to initialize node with.
         */
-        DNode(T1 data = '\0') : data(data) { }
+        DNode(TData data = '\0') : data(data) { }
 
        /**
         *  @brief  Print a char representation of doubly linked list node.
@@ -80,23 +80,23 @@ class DNode
  *  @var  data  Data to be held at this node.
  *  @var  next  Pointer to next node in the list.
  *
- *  @tparam  T1  Data instance variable type
+ *  @tparam  TData  Data instance variable type
  *
- *  This class is meant to be used as a T2 template type
+ *  This class is meant to be used as a TNode template type
  *  for the CircularLinkedList class.
  */
-template <class T1 = int>
+template <class TData = int>
 class CNode
 {
     public:
-        T1 data;
+        TData data;
         CNode* next{this};
 
     public:
        /**
         *  @param  data  Data to initialize node with.
         */
-        CNode(T1 data = '\0') : data(data) { }
+        CNode(TData data = '\0') : data(data) { }
 
        /**
         *  @brief  Print a char representation of circular linked list node.
