@@ -7,7 +7,7 @@
 
 namespace dequeue {
 
-/** 
+/**
  *  @brief  Dequeue implementation using doubly circular linked list.
  *  @var  dequeue  LinkedList object used as a dequeue.
  *
@@ -19,8 +19,7 @@ namespace dequeue {
  *  from the internal double circular linked list object.
  */
 template <class T>
-class Dequeue
-{
+class Dequeue {
 #ifndef TESTING
     private:
 #endif
@@ -28,7 +27,7 @@ class Dequeue
 #ifdef TESTING
     public:
 #endif
-        /** 
+        /**
          *  @brief  Doubly circular linked list used to represent dequeue.
          *  @var  head  Pointer to first node in list.
          *  @var  tail  Pointer to last node in list.
@@ -38,8 +37,7 @@ class Dequeue
          *  for this linked list container class to make it behave as a
          *  dequeue.
          */
-         class LinkedList
-        {
+         class LinkedList {
 #ifndef TESTING
             private:
 #endif
@@ -47,7 +45,7 @@ class Dequeue
 #ifdef TESTING
             public:
 #endif
-                /** 
+                /**
                  *  @brief  Doubly node used for circular linked list.
                  *  @var  data  Data held by node.
                  *  @var  next  Pointer to next node in list.
@@ -55,10 +53,9 @@ class Dequeue
                  *
                  *  This is the node object for the double circular linked
                  *  list class. This is the most fundamental representation
-                 *  of data in the dequeue. 
+                 *  of data in the dequeue.
                  */
-                class Node
-                {
+                class Node {
                     public:
                         T data;
                         Node* next;
@@ -78,7 +75,7 @@ class Dequeue
                     , tail(nullptr) { }
                 ~LinkedList();
 
-               /**
+                /**
                  *  @brief  Add node to the beginning of a list.
                  *  @param  data  Data that new node will hold.
                  *
@@ -139,7 +136,7 @@ class Dequeue
          */
         void insertFront(const T data) { dequeue.push(data); }
 
-        /**  
+        /**
          *  @brief  Add a node to the end of the dequeue.
          *  @param  data  Data to add to the end of the dequeue.
          */
@@ -147,7 +144,7 @@ class Dequeue
 
         /**
          *  @brief  Remove and return data instance variable of first node.
-         *  @return Data instance variable of the first node. 
+         *  @return Data instance variable of the first node.
          */
         T deleteFront() { return dequeue.leftPop(); }
 
