@@ -109,6 +109,11 @@ class HashTable {
         HashTable(const int size = 127) : size(size) { table = new LinkedList[size]; }
         ~HashTable() { delete [] table; }
 
+        HashTable(const HashTable& table) = delete;
+        HashTable& operator =(const HashTable& table) = delete;
+        HashTable(HashTable&& table) = delete;
+        HashTable& operator =(HashTable&& table) = delete;
+
         /** 
           *  @brief  Put a key-value pair into the hash table. If key already
           *          exists, value will be written over.
