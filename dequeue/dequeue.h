@@ -114,14 +114,19 @@ class Dequeue {
                 T leftPeek() const;
 
                 /**
-                   *  @brief  Return data instance variable of last node.
-                   *  @return Data instance variable of tail.
-                   */
+                    *  @brief  Return data instance variable of last node.
+                    *  @return Data instance variable of tail.
+                    */
                 T rightPeek() const;
 
                 /**
-                   *  @brief  Print data instance variable of every node.
-                   */
+                    *  @return True if linked list is empty, false otherwise.
+                    */
+                bool empty() const { return this->head == nullptr; }
+
+                /**
+                    *  @brief  Print data instance variable of every node.
+                    */
                 void print() const;
         };  /// Dequeue::LinkedList
 
@@ -165,6 +170,11 @@ class Dequeue {
           *  @return Data instance variable of last node.
           */
         T getRear() const { return dequeue.rightPeek(); }
+        
+       /**
+          *  @return True if dequeue is empty, false otherwise.
+          */
+        bool empty() const { return dequeue.empty(); }
 
         /**
           *  @brief  Print every node in the dequeue.
