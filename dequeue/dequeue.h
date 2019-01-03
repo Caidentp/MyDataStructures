@@ -28,15 +28,15 @@ class Dequeue {
     public:
 #endif
         /**
-         *  @brief  Doubly circular linked list used to represent dequeue.
-         *  @var  head  Pointer to first node in list.
-         *  @var  tail  Pointer to last node in list.
-         *
-         *  This circular linked list class is meant to be used internally
-         *  to represent a dequeue. The dequeue class is a wrapper class
-         *  for this linked list container class to make it behave as a
-         *  dequeue.
-         */
+          *  @brief  Doubly circular linked list used to represent dequeue.
+          *  @var  head  Pointer to first node in list.
+          *  @var  tail  Pointer to last node in list.
+          *
+          *  This circular linked list class is meant to be used internally
+          *  to represent a dequeue. The dequeue class is a wrapper class
+          *  for this linked list container class to make it behave as a
+          *  dequeue.
+          */
          class LinkedList {
 #ifndef TESTING
             private:
@@ -46,15 +46,15 @@ class Dequeue {
             public:
 #endif
                 /**
-                 *  @brief  Doubly node used for circular linked list.
-                 *  @var  data  Data held by node.
-                 *  @var  next  Pointer to next node in list.
-                 *  @var  prev  Pointer to previous node in list.
-                 *
-                 *  This is the node object for the double circular linked
-                 *  list class. This is the most fundamental representation
-                 *  of data in the dequeue.
-                 */
+                   *  @brief  Doubly node used for circular linked list.
+                   *  @var  data  Data held by node.
+                   *  @var  next  Pointer to next node in list.
+                   *  @var  prev  Pointer to previous node in list.
+                   *
+                   *  This is the node object for the double circular linked
+                   *  list class. This is the most fundamental representation
+                   *  of data in the dequeue.
+                   */
                 class Node {
                     public:
                         T data;
@@ -76,52 +76,52 @@ class Dequeue {
                 ~LinkedList();
 
                 /**
-                 *  @brief  Add node to the beginning of a list.
-                 *  @param  data  Data that new node will hold.
-                 *
-                 *  If list is empty, new node will become the head
-                 *  and tail of the list. Otherwise, it will only
-                 *  become the head of the list.
-                 */
+                   *  @brief  Add node to the beginning of a list.
+                   *  @param  data  Data that new node will hold.
+                   *
+                   *  If list is empty, new node will become the head
+                   *  and tail of the list. Otherwise, it will only
+                   *  become the head of the list.
+                   */
                 void push(const T data);
 
                 /**
-                 *  @brief  Add node to the end of a list.
-                 *  @param  data  Data that new node will hold.
-                 *
-                 *  If list is empty, new node will become the head
-                 *  and tail of the list. Otherwisem it will only
-                 *  become the tail of the list.
-                 */
+                   *  @brief  Add node to the end of a list.
+                   *  @param  data  Data that new node will hold.
+                   *
+                   *  If list is empty, new node will become the head
+                   *  and tail of the list. Otherwisem it will only
+                   *  become the tail of the list.
+                   */
                 void append(const T data);
 
                 /**
-                 *  @brief  Remove and return data instance variable of first node.
-                 *  @return Data instance variable of head.
-                 */
+                   *  @brief  Remove and return data instance variable of first node.
+                   *  @return Data instance variable of head.
+                   */
                 T leftPop();
 
                 /**
-                 *  @brief  Remove and return data instance variable of last node.
-                 *  @return Data instance variable of tail.
-                 */
+                   *  @brief  Remove and return data instance variable of last node.
+                   *  @return Data instance variable of tail.
+                   */
                 T rightPop();
 
                 /**
-                 *  @brief  Return data instance variable of first node.
-                 *  @return Data instance variable of head.
-                 */
+                   *  @brief  Return data instance variable of first node.
+                   *  @return Data instance variable of head.
+                   */
                 T leftPeek() const;
 
                 /**
-                 *  @brief  Return data instance variable of last node.
-                 *  @return Data instance variable of tail.
-                 */
+                   *  @brief  Return data instance variable of last node.
+                   *  @return Data instance variable of tail.
+                   */
                 T rightPeek() const;
 
                 /**
-                 *  @brief  Print data instance variable of every node.
-                 */
+                   *  @brief  Print data instance variable of every node.
+                   */
                 void print() const;
         };  /// Dequeue::LinkedList
 
@@ -131,44 +131,44 @@ class Dequeue {
         Dequeue() : dequeue(LinkedList()) { }
 
         /**
-         *  @brief  Add a node to the font of the dequeue.
-         *  @param  data  Data to add to the front of the dequeue.
-         */
+          *  @brief  Add a node to the font of the dequeue.
+          *  @param  data  Data to add to the front of the dequeue.
+          */
         void insertFront(const T data) { dequeue.push(data); }
 
         /**
-         *  @brief  Add a node to the end of the dequeue.
-         *  @param  data  Data to add to the end of the dequeue.
-         */
+          *  @brief  Add a node to the end of the dequeue.
+          *  @param  data  Data to add to the end of the dequeue.
+          */
         void insertRear(const T data) { dequeue.append(data); }
 
         /**
-         *  @brief  Remove and return data instance variable of first node.
-         *  @return Data instance variable of the first node.
-         */
+          *  @brief  Remove and return data instance variable of first node.
+          *  @return Data instance variable of the first node.
+          */
         T deleteFront() { return dequeue.leftPop(); }
 
         /**
-         *  @brief  Remove and return data instance variable of last node.
-         *  @return Data instance variable of the last node.
-         */
+          *  @brief  Remove and return data instance variable of last node.
+          *  @return Data instance variable of the last node.
+          */
         T deleteRear() { return dequeue.rightPop(); }
 
         /**
-         *  @brief  Return data instance variable of first node.
-         *  @return Data instance variable of first node.
-         */
+          *  @brief  Return data instance variable of first node.
+          *  @return Data instance variable of first node.
+          */
         T getFront() const { return dequeue.leftPeek(); }
 
         /**
-         *  @brief  Return data instance variable of last node.
-         *  @return Data instance variable of last node.
-         */
+          *  @brief  Return data instance variable of last node.
+          *  @return Data instance variable of last node.
+          */
         T getRear() const { return dequeue.rightPeek(); }
 
         /**
-         *  @brief  Print every node in the dequeue.
-         */
+          *  @brief  Print every node in the dequeue.
+          */
         void print() const { dequeue.print(); }
 };  /// Dequeue
 
