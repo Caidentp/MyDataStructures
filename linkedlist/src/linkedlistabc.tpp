@@ -39,11 +39,13 @@ void LinkedListABC<TData, TNode>::deleteList() {
 /// Get item operator compatibility
 template <class TData, class TNode>
 inline TData& LinkedListABC<TData, TNode>::operator [] (const int index) {
-    if (head == nullptr || len <= index)
+    if (head == nullptr || len <= index) {
         throw IndexError();
+    }
     TNode* t = head;
-    for (int i = 0; i < index; i++, t = t->next);
-        return t->data;
+    for (int i = 0; i < index; i++, t = t->next) {
+    }
+    return t->data;
 }
 
 
@@ -54,8 +56,9 @@ bool LinkedListABC<TData, TNode>::contains(const TData data) const {
         TNode* temp = head;
         // Need do while loop for circular linked lists
         do {
-            if (temp->data == data)
+            if (temp->data == data) {
                 return true;
+            }
             temp = temp->next;
         }
         while (temp != nullptr && temp != head);
@@ -67,12 +70,13 @@ bool LinkedListABC<TData, TNode>::contains(const TData data) const {
 /// Finds index of data
 template <class TData, class TNode>
 int LinkedListABC<TData, TNode>::index(const TData data) const {
-
     if (head != nullptr) {
         TNode* t = head;
-        for (int i = 0; i < len; i++, t = t->next)
-            if (t->data == data)
+        for (int i = 0; i < len; i++, t = t->next) {
+            if (t->data == data) {
                 return i;
+            }
+        }
     }
     return -1;
 }
@@ -81,7 +85,6 @@ int LinkedListABC<TData, TNode>::index(const TData data) const {
 /// Prints list in ascending order
 template <class TData, class TNode>
 void LinkedListABC<TData, TNode>::print() const {
-
     if (head != nullptr) {
         TNode* temp = head;
         // Need do while loop for curcular linked lists

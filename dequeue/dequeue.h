@@ -306,8 +306,9 @@ void Dequeue<T>::LinkedList::push(const T data) {
 /// Add a node to the end of a list
 template <class T>
 void Dequeue<T>::LinkedList::append(const T data) {
-    if (head == nullptr)
+    if (head == nullptr) {
         this->push(data);
+    }
     else {
         Node* new_node = new Node(data, head, tail);
         tail->next = new_node;
@@ -320,8 +321,9 @@ void Dequeue<T>::LinkedList::append(const T data) {
 /// Delete and return the first node in a list
 template <class T>
 T Dequeue<T>::LinkedList::rightPop() {
-    if (head == nullptr)
+    if (head == nullptr) {
         throw EmptyDequeue();
+    }
 
     Node* temp = tail;
     T data = tail->data;
@@ -344,8 +346,9 @@ T Dequeue<T>::LinkedList::rightPop() {
 /// Delete and return the first node in a list
 template <class T>
 T Dequeue<T>::LinkedList::leftPop() {
-    if (head == nullptr)
+    if (head == nullptr) {
         throw EmptyDequeue();
+    }
 
     Node* temp = head;
     T data = head->data;
@@ -368,8 +371,9 @@ T Dequeue<T>::LinkedList::leftPop() {
 /// View head of dequeue without removing it
 template <class T>
 T Dequeue<T>::LinkedList::leftPeek() const {
-    if (!head)
+    if (!head) {
         throw EmptyDequeue();
+    }
     return head->data;
 }
 
@@ -377,8 +381,9 @@ T Dequeue<T>::LinkedList::leftPeek() const {
 /// View tail of dequeue without removing it
 template <class T>
 T Dequeue<T>::LinkedList::rightPeek() const {
-    if (!tail)
+    if (!tail) {
         throw EmptyDequeue();
+    }
     return tail->data;
 }
 

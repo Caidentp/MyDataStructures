@@ -4,16 +4,17 @@ using namespace linkedlist;
 /// initializer_list compatibility
 template <class TData, class TNode>
 CircularLinkedList<TData, TNode>::CircularLinkedList(const std::initializer_list<TData> il) {
-
-    for (const TData* index = il.begin(); index < il.end(); index++)
+    for (const TData* index = il.begin(); index < il.end(); index++) {
         this->append(*index);
+    }
 }
 
 
 /// Copy constructor
 template <class TData, class TNode>
 CircularLinkedList<TData, TNode>::CircularLinkedList(const CircularLinkedList& list) {
-    for (TNode* i = list.get_head(); i; this->append(i->data), i = i->next);
+    for (TNode* i = list.get_head(); i; this->append(i->data), i = i->next) {
+    }
 }
 
 
@@ -21,7 +22,8 @@ CircularLinkedList<TData, TNode>::CircularLinkedList(const CircularLinkedList& l
 template <class TData, class TNode>
 CircularLinkedList<TData, TNode>& CircularLinkedList<TData, TNode>::operator =(const CircularLinkedList& list) {
     this->deleteList();
-    for (TNode* i = list.get_head(); i; this->append(i->data), i = i->next);
+    for (TNode* i = list.get_head(); i; this->append(i->data), i = i->next) {
+    }
     return *this;
 }
 
@@ -29,7 +31,8 @@ CircularLinkedList<TData, TNode>& CircularLinkedList<TData, TNode>::operator =(c
 /// Move constructor
 template <class TData, class TNode>
 CircularLinkedList<TData, TNode>::CircularLinkedList(CircularLinkedList&& list) {
-    for (TNode* i = list.get_head(); i; this->append(i->data), i = i->next);
+    for (TNode* i = list.get_head(); i; this->append(i->data), i = i->next) {
+    }
     list.deleteList();
 }
 
@@ -38,7 +41,8 @@ CircularLinkedList<TData, TNode>::CircularLinkedList(CircularLinkedList&& list) 
 template <class TData, class TNode>
 CircularLinkedList<TData, TNode>& CircularLinkedList<TData, TNode>::operator =(CircularLinkedList&& list) {
     this->deleteList();
-    for (TNode* i = list.get_head(); i; this->append(i->data), i = i->next);
+    for (TNode* i = list.get_head(); i; this->append(i->data), i = i->next) {
+    }
     list.deleteList();
     return *this;
 }
@@ -85,16 +89,19 @@ void CircularLinkedList<TData, TNode>::append(const TData data)
 template <class TData, class TNode>
 void CircularLinkedList<TData, TNode>::insert(const TData data, const int index) {
 
-    if (this->get_head() == nullptr || this->size() <= index)
+    if (this->get_head() == nullptr || this->size() <= index) {
         throw IndexError();
+    }
 
-    if (index == 0)
+    if (index == 0) {
         this->push(data);
+    }
 
     else {
         TNode* new_node = new TNode(data);
         TNode* temp = this->get_head();
-        for (int i = 1; i < index; i++, temp = temp->next);
+        for (int i = 1; i < index; i++, temp = temp->next) {
+        }
 
         new_node->next = temp->next;
         temp->next = new_node;
@@ -107,8 +114,9 @@ void CircularLinkedList<TData, TNode>::insert(const TData data, const int index)
 template <class TData, class TNode>
 void CircularLinkedList<TData, TNode>::remove(const int index) {
 
-    if (this->get_head() == nullptr || this->size() <= index)
+    if (this->get_head() == nullptr || this->size() <= index) {
         throw IndexError();
+    }
     TNode* temp = this->get_head();
 
     if (index == 0) {
@@ -130,8 +138,9 @@ void CircularLinkedList<TData, TNode>::remove(const int index) {
             temp = temp->next;
         }
         previous->next = temp->next;
-        if (temp == this->get_tail())
+        if (temp == this->get_tail()) {
             this->set_tail(previous);
+        }
     }
     delete temp;
     this->set_len(this->size()-1);

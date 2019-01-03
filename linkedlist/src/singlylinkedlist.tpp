@@ -4,15 +4,17 @@ using namespace linkedlist;
 /// initializer_list compatibility
 template <class TData, class TNode>
 SinglyLinkedList<TData, TNode>::SinglyLinkedList(const std::initializer_list<TData> il) {
-    for (const TData* index = il.begin(); index < il.end(); index++)
+    for (const TData* index = il.begin(); index < il.end(); index++) {
         this->append(*index);
+    }
 }
 
 
 /// Copy constructor
 template <class TData, class TNode>
 SinglyLinkedList<TData, TNode>::SinglyLinkedList(const SinglyLinkedList& list) {
-    for (TNode* i = list.get_head(); i; this->append(i->data), i = i->next);
+    for (TNode* i = list.get_head(); i; this->append(i->data), i = i->next) {
+    }
 }
 
 
@@ -20,7 +22,8 @@ SinglyLinkedList<TData, TNode>::SinglyLinkedList(const SinglyLinkedList& list) {
 template <class TData, class TNode>
 SinglyLinkedList<TData, TNode>& SinglyLinkedList<TData, TNode>::operator =(const SinglyLinkedList& list) {
     this->deleteList();
-    for (TNode* i = list.get_head(); i; this->append(i->data), i = i->next);
+    for (TNode* i = list.get_head(); i; this->append(i->data), i = i->next) {
+    }
     return *this;
 }
 
@@ -28,7 +31,8 @@ SinglyLinkedList<TData, TNode>& SinglyLinkedList<TData, TNode>::operator =(const
 /// Move constructor
 template <class TData, class TNode>
 SinglyLinkedList<TData, TNode>::SinglyLinkedList(SinglyLinkedList&& list) {
-    for (TNode* i = list.get_head(); i; this->append(i->data), i = i->next);
+    for (TNode* i = list.get_head(); i; this->append(i->data), i = i->next) {
+    }
     list.deleteList();
 }
 
@@ -37,7 +41,8 @@ SinglyLinkedList<TData, TNode>::SinglyLinkedList(SinglyLinkedList&& list) {
 template <class TData, class TNode>
 SinglyLinkedList<TData, TNode>& SinglyLinkedList<TData, TNode>::operator =(SinglyLinkedList&& list) {
     this->deleteList();
-    for (TNode* i = list.get_head(); i; this->append(i->data), i = i->next);
+    for (TNode* i = list.get_head(); i; this->append(i->data), i = i->next) {
+    }
     list.deleteList();
     return *this;
 }
@@ -48,10 +53,12 @@ template <class TData, class TNode>
 void SinglyLinkedList<TData, TNode>::push(const TData data) {
     TNode* new_node = new TNode(data);
 
-    if (this->get_head() == nullptr)
+    if (this->get_head() == nullptr) {
         this->set_tail(new_node);
-    else
+    }
+    else {
         new_node->next = this->get_head();
+    }
     this->set_head(new_node);
     this->set_len(this->size()+1);
 }
@@ -79,16 +86,18 @@ void SinglyLinkedList<TData, TNode>::append(const TData data)
 template <class TData, class TNode>
 void SinglyLinkedList<TData, TNode>::insert(const TData data, const int index) {
 
-    if (this->get_head() == nullptr || this->size() <= index)
+    if (this->get_head() == nullptr || this->size() <= index) {
         throw IndexError();
+    }
 
-    if (index == 0)
+    if (index == 0) {
         this->push(data);
-
+    }
     else {
         TNode* new_node = new TNode(data);
         TNode* temp = this->get_head();
-        for (int i = 1; i < index; i++, temp = temp->next);
+        for (int i = 1; i < index; i++, temp = temp->next) {
+        }
 
         new_node->next = temp->next;
         temp->next = new_node;
@@ -101,8 +110,9 @@ void SinglyLinkedList<TData, TNode>::insert(const TData data, const int index) {
 template <class TData, class TNode>
 void SinglyLinkedList<TData, TNode>::remove(const int index) {
 
-    if (this->get_head() == nullptr || this->size() <= index)
+    if (this->get_head() == nullptr || this->size() <= index) {
         throw IndexError();
+    }
     TNode *temp = this->get_head();
 
     if (index == 0) {
@@ -123,8 +133,9 @@ void SinglyLinkedList<TData, TNode>::remove(const int index) {
             temp = temp->next;
         }
         previous->next = temp->next;
-        if (temp == this->get_tail())
-             this->set_tail(previous);
+        if (temp == this->get_tail()) {
+            this->set_tail(previous);
+        }
     }
     delete temp;
     this->set_len(this->size()-1);
