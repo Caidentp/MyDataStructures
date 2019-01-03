@@ -1,7 +1,6 @@
-#include <assert.h>
-
 #define TESTING
 
+#include <assert.h>
 #include "../array_list.h"
 
 
