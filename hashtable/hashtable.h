@@ -106,10 +106,10 @@ class HashTable {
         inline int hash(const K key);
 
     private:
-        HashTable(const HashTable&) = delete;
-        HashTable& operator =(const HashTable&) = delete;
-        HashTable(HashTable&&) = delete;
-        HashTable& operator =(HashTable&&) = delete;
+        HashTable(const HashTable& table) = delete;
+        HashTable& operator =(const HashTable& table) = delete;
+        HashTable(HashTable&& table) = delete;
+        HashTable& operator =(HashTable&& table) = delete;
 
     public:
         HashTable(const int size = 127) : size(size) { table = new LinkedList[size]; }
