@@ -18,7 +18,7 @@ class ArrayHeapABC {
         int length;
 
     protected:
-        ArrayList<T> heap;
+        arraylist::ArrayList<T> heap;
 
         /** 
           *  @brief  Move data to appropriate index in heap after insertion.
@@ -63,7 +63,6 @@ class ArrayHeapABC {
 };
 
 
-
 /** 
  *  @brief  Implementation of min heap using a dynamic array.
  *
@@ -88,7 +87,6 @@ class ArrayMinHeap : public ArrayHeapABC<T> {
 };
 
 
-
 /** 
  *  @brief  Implementation of max heap using a dynamic array.
  *
@@ -111,7 +109,6 @@ class ArrayMaxHeap : public ArrayHeapABC<T> {
           */
         int max_child(int index);
 };
-
 
 
 /// ====================== ARRAY HEAP ABC ======================
