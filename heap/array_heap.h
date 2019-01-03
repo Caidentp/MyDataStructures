@@ -4,7 +4,7 @@
 #include "../arraylist/array_list.h"
 
 namespace heap {
-/** 
+/**
  *  @brief  Array heap class to implement methods and variables common to both
  *          min and max heaps.
  *  @var  length  Keep track of the last index of the heap.
@@ -20,12 +20,12 @@ class ArrayHeapABC {
     protected:
         arraylist::ArrayList<T> heap;
 
-        /** 
+        /**
           *  @brief  Move data to appropriate index in heap after insertion.
           */
         virtual void perc_up() = 0;
 
-        /** 
+        /**
           *  @brief  Move data to appropriate index in heap after deletion.
           */
         virtual void perc_down() = 0;
@@ -38,32 +38,32 @@ class ArrayHeapABC {
 
     public:
         ArrayHeapABC();
-        virtual ~ArrayHeapABC() { delete &heap; }
+        virtual ~ArrayHeapABC() { heap.deleteList; }
         T operator [](const int index) { return this->heap[index]; }
         int size() const { return this->length; }
 
-        /** 
+        /**
           *  @brief  Append data to list, call perc_up to move data to appropriate
           *          position in the heap, increment length.
           *  @param data : Data to insert into the heap.
           */
         void insert(const T data);
 
-        /** 
+        /**
           *  @brief  Get the data at the head of the heap, swap the head of the heap
           *          with the tail, call perc_down to move head to appropriate position.
           *  @return Data that resided at the head of the heap.
           */
         T pop();
 
-        /** 
+        /**
           *  @brief  Print the contents of the heap.
           */
         void print();
 };
 
 
-/** 
+/**
  *  @brief  Implementation of min heap using a dynamic array.
  *
  *  @tparam  T  Type of data heap is to be.
@@ -87,7 +87,7 @@ class ArrayMinHeap : public ArrayHeapABC<T> {
 };
 
 
-/** 
+/**
  *  @brief  Implementation of max heap using a dynamic array.
  *
  *  @tparam  T  Type of data heap is to be.
@@ -102,7 +102,7 @@ class ArrayMaxHeap : public ArrayHeapABC<T> {
         ArrayMaxHeap();
         virtual ~ArrayMaxHeap() { };
 
-        /** 
+        /**
           *  @brief  Find the maximum child node of an index.
           *  @param  index  Index to find the maximum child of.
           *  @return The maximum child of the parent index.

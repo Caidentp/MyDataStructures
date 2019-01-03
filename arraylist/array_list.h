@@ -48,7 +48,8 @@ class ArrayList final
 	 *  @param  max_size  The starting total size of the array.
          */
         ArrayList(int max_size = 10) : max_size(max_size) { array_list = new T[max_size](); }
-        ~ArrayList() { delete [] array_list; }
+        ~ArrayList() { this->deleteList(); }
+        void deleteList() { delete [] array_list; }
 
         /**
 	 *  @brief  Copy constructor.
