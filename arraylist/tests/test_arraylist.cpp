@@ -9,17 +9,17 @@ class TestArrayList
 {
     public:
         TestArrayList() {
-            this->test_default_ctor();
-            this->test_ctor();
-            this->test_append();
-            this->test_pop_populated();
-            this->test_pop_empty();
-            this->test_expand();
-            this->test_getitem_in_range();
-            this->test_getitem_out_of_range();
-            this->test_setitem_in_range();
-            this->test_setitem_out_of_range();
-            this->test_size();
+            test_default_ctor();
+            test_ctor();
+            test_append();
+            test_pop_populated();
+            test_pop_empty();
+            test_expand();
+            test_getitem_in_range();
+            test_getitem_out_of_range();
+            test_setitem_in_range();
+            test_setitem_out_of_range();
+            test_size();
         }
 
     private:
