@@ -38,7 +38,7 @@ class ArrayHeapABC {
 
     public:
         ArrayHeapABC();
-        virtual ~ArrayHeapABC() { heap.deleteList; }
+        virtual ~ArrayHeapABC() { heap.deleteList(); }
         T operator [](const int index) { return this->heap[index]; }
         int size() const { return this->length; }
 
@@ -75,7 +75,7 @@ class ArrayMinHeap : public ArrayHeapABC<T> {
         void perc_down();
 
     public:
-        ArrayMinHeap();
+        ArrayMinHeap() : ArrayHeapABC() { }
         virtual ~ArrayMinHeap() { };
 
         /**
@@ -99,7 +99,7 @@ class ArrayMaxHeap : public ArrayHeapABC<T> {
         void perc_down();
 
     public:
-        ArrayMaxHeap();
+        ArrayMaxHeap() : ArrayHeapABC() { }
         virtual ~ArrayMaxHeap() { };
 
         /**
@@ -134,8 +134,9 @@ void ArrayHeapABC<T>::insert(const T data) {
 /// pop
 template <class T>
 T ArrayHeapABC<T>::pop() {
-    if (length == 0)
+    if (length == 0) {
         return NULL;
+    }
 
     T data = this->heap[1];
     this->heap[1] = this->heap[length];
@@ -149,8 +150,9 @@ T ArrayHeapABC<T>::pop() {
 /// print
 template <class T>
 void ArrayHeapABC<T>::print() {
-    for (int i = 1; i < length+1; i++)
+    for (int i = 1; i < length+1; i++) {
         std::cout << heap[i] << " ";
+    }
 }
 
 /// ====================== ARRAY HEAP ABC ======================
@@ -159,18 +161,13 @@ void ArrayHeapABC<T>::print() {
 
 /// ====================== ARRAY MIN HEAP ======================
 
-/// Default ctor
-template <class T>
-ArrayMinHeap<T>::ArrayMinHeap()
-    : ArrayHeapABC<T>()
-{ }
-
 
 /// min child
 template <class T>
 int ArrayMinHeap<T>::min_child(int index) {
-    if (index*2+1 > this->size())
+    if (index*2+1 > this->size()) {
         return index*2;
+    }
     int smallest_child_index = this->heap[index*2] < this->heap[index*2+1] ? index*2 : index*2+1;
     return smallest_child_index;
 }
@@ -214,18 +211,13 @@ void ArrayMinHeap<T>::perc_down() {
 
 /// ====================== ARRAY MAX HEAP ======================
 
-/// Default ctor
-template <class T>
-ArrayMaxHeap<T>::ArrayMaxHeap()
-    : ArrayHeapABC<T>()
-{ }
-
 
 /// max child
 template <class T>
 int ArrayMaxHeap<T>::max_child(int index) {
-    if (index*2+1 > this->size())
+    if (index*2+1 > this->size()) {
         return index*2;
+    }
     int largest_child_index = this->heap[index*2] > this->heap[index*2+1] ? index*2 : index*2+1;
     return largest_child_index;
 }
