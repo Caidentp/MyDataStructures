@@ -5,8 +5,7 @@
 #include <exception>
 #include "src/node.h"
 
-namespace linkedlist
-{
+namespace linkedlist {
 
 /**
  *  @brief  Abstract Base Class for Singly, Doubly, and Circular linked lists.
@@ -23,8 +22,7 @@ namespace linkedlist
  *  of linked lists, as well as what methods must be defined by the linked lists.
  */
 template <class TData, class TNode>
-class LinkedListABC
-{
+class LinkedListABC {
     private:
         TNode* head{nullptr};
         TNode* tail{nullptr};
@@ -156,8 +154,7 @@ class LinkedListABC
  *  other implementation details are defined within this class.
  */
 template <class TData = int, class TNode = node::SNode<>>
-class SinglyLinkedList final : public LinkedListABC<TData, TNode>
-{
+class SinglyLinkedList final : public LinkedListABC<TData, TNode> {
     public:
         SinglyLinkedList() : LinkedListABC<TData, TNode>() { }
         SinglyLinkedList(const TData data) : LinkedListABC<TData, TNode>(data) { }
@@ -196,8 +193,7 @@ class SinglyLinkedList final : public LinkedListABC<TData, TNode>
  *  other implementation details are defined within this class.
  */
 template <class TData = int, class TNode = node::DNode<>>
-class DoublyLinkedList final : public LinkedListABC<TData, TNode>
-{
+class DoublyLinkedList final : public LinkedListABC<TData, TNode> {
     public:
         DoublyLinkedList() : LinkedListABC<TData, TNode>() { }
         DoublyLinkedList(const TData data) : LinkedListABC<TData, TNode>(data) { }
@@ -236,8 +232,7 @@ class DoublyLinkedList final : public LinkedListABC<TData, TNode>
  *  other implementation details are defined within this class.
  */
 template <class TData = int, class TNode = node::CNode<>>
-class CircularLinkedList final : public LinkedListABC<TData, TNode>
-{
+class CircularLinkedList final : public LinkedListABC<TData, TNode> {
     public:
         CircularLinkedList() : LinkedListABC<TData, TNode>() { }
         CircularLinkedList(const TData data) : LinkedListABC<TData, TNode>(data) { }
