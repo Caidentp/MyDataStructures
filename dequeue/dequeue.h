@@ -14,16 +14,16 @@ namespace dequeue {
  *  @tparam  T  Data type for dequeue.
  *
  *  This is a wrapper class that encapsulates an internal double circular
- *  linked list class. This class is meant to make the lined list class
+ *  linked list class. This class is meant to make the linked list class
  *  behave as a dequeue. Internally, methods from this class call methods
  *  from the internal double circular linked list object.
  */
 template <class T>
 class Dequeue {
-#ifndef TESTING
-    private:
-#endif
 
+#ifndef TESTING
+    protected:
+#endif
 #ifdef TESTING
     public:
 #endif
@@ -37,14 +37,8 @@ class Dequeue {
           *  for this linked list container class to make it behave as a
           *  dequeue.
           */
-         class LinkedList {
-#ifndef TESTING
-            private:
-#endif
-
-#ifdef TESTING
+        class LinkedList {
             public:
-#endif
                 /**
                    *  @brief  Doubly node used for circular linked list.
                    *  @var  data  Data held by node.
@@ -73,7 +67,12 @@ class Dequeue {
                 LinkedList()
                     : head(nullptr)
                     , tail(nullptr) { }
-                ~LinkedList();
+                ~LinkedList() { deleteList(); }
+                
+                /**
+                   *  @brief  Delete all nodes in the list. 
+                   */
+                void deleteList();
 
                 /**
                    *  @brief  Add node to the beginning of a list.
@@ -114,19 +113,19 @@ class Dequeue {
                 T leftPeek() const;
 
                 /**
-                    *  @brief  Return data instance variable of last node.
-                    *  @return Data instance variable of tail.
-                    */
+                   *  @brief  Return data instance variable of last node.
+                   *  @return Data instance variable of tail.
+                   */
                 T rightPeek() const;
 
                 /**
-                    *  @return True if linked list is empty, false otherwise.
-                    */
+                   *  @return True if linked list is empty, false otherwise.
+                   */
                 bool empty() const { return this->head == nullptr; }
 
                 /**
-                    *  @brief  Print data instance variable of every node.
-                    */
+                   *  @brief  Print data instance variable of every node.
+                   */
                 void print() const;
         };  /// Dequeue::LinkedList
 
@@ -134,6 +133,16 @@ class Dequeue {
 
     public:
         Dequeue() : dequeue(LinkedList()) { }
+        ~Dequeue() { deleteDequeue(); }
+        void deleteDequeue() { dequeue.deleteList(); }
+
+        typename Dequeue<T>::LinkedList::Node* getHead() const { return dequeue.head; }
+        typename Dequeue<T>::LinkedList::Node* getTail() const { return dequeue.tail; }
+
+        Dequeue(const Dequeue& q);
+        Dequeue& operator =(const Dequeue& q);
+        Dequeue(Dequeue&& q);
+        Dequeue& operator =(Dequeue&& q);
 
         /**
           *  @brief  Add a node to the font of the dequeue.
@@ -170,8 +179,8 @@ class Dequeue {
           *  @return Data instance variable of last node.
           */
         T getRear() const { return dequeue.rightPeek(); }
-        
-       /**
+
+        /**
           *  @return True if dequeue is empty, false otherwise.
           */
         bool empty() const { return dequeue.empty(); }
@@ -190,22 +199,88 @@ struct EmptyDequeue : public std::exception {
 };
 
 
-/// Destructor
+// ========================== Dequeue=========================
+
+/// copy ctor
 template <class T>
-Dequeue<T>::LinkedList::~LinkedList() {
-    if (head == nullptr || head == tail) {
-        delete head;
-        delete tail;
+Dequeue<T>::Dequeue(const Dequeue& q) {
+    if (q.getHead() == nullptr) {
+        return;
     }
-    else {
-        Node *curr = head;
+    typename Dequeue<T>::LinkedList::Node* temp = q.getHead();
+    do {
+        this->insertRear(temp->data);
+        temp = temp->next;
+    }
+    while (temp != q.getHead());
+}
+
+
+/// copy assignment
+template <class T>
+Dequeue<T>& Dequeue<T>::operator =(const Dequeue& q) {
+    if (q.getHead() != nullptr) {
+        typename Dequeue<T>::LinkedList::Node* temp = q.getHead();
         do {
-            Node *temp = curr;
-            curr = curr->next;
-            delete temp;
+            this->insertRear(temp->data);
+            temp = temp->next;
         }
-        while (curr != head);
+        while (temp != q.getHead());
     }
+    return *this;
+}
+
+
+/// move ctor
+template <class T>
+Dequeue<T>::Dequeue(Dequeue&& q) {
+    if (q.getHead() == nullptr) {
+        return;
+    }
+    typename Dequeue<T>::LinkedList::Node* temp = q.getHead();
+    do {
+        this->insertRear(temp->data);
+        temp = temp->next;
+    }
+    while (temp != q.getHead());
+    q.deleteDequeue();
+}
+
+
+/// move assignment
+template <class T>
+Dequeue<T>& Dequeue<T>::operator =(Dequeue&& q) {
+    if (q.getHead() != nullptr) {
+        typename Dequeue<T>::LinkedList::Node* temp = q.getHead();
+        do {
+            this->insertRear(temp->data);
+            temp = temp->next;
+        }
+        while (temp != q.getHead());
+    }
+    q.deleteDequeue();
+    return *this;
+}
+// ========================== Dequeue=========================
+
+
+// =================== Dequeue::LinkedList ===================
+
+/// delete list
+template <class T>
+void Dequeue<T>::LinkedList::deleteList() {
+    if (head == nullptr) {
+        return;
+    }
+    Node *curr = head;
+    do {
+        Node *temp = curr;
+        curr = curr->next;
+        delete temp;
+    }
+    while (curr != head);
+    head = nullptr;
+    tail = nullptr;
 }
 
 
@@ -312,12 +387,17 @@ T Dequeue<T>::LinkedList::rightPeek() const {
 template <class T>
 void Dequeue<T>::LinkedList::print() const {
     Node* probe = head;
+    if (probe == nullptr) {
+        return;
+    }
     do {
         std::cout << probe->data << " ";
         probe = probe->next;
     }
     while (probe != head);
 }
+
+// =================== Dequeue::LinkedList ===================
 
 }  /// namespace dequeue
 
