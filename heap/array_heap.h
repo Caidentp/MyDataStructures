@@ -1,79 +1,76 @@
 #ifndef ARRAY_HEAP_H
 #define ARRAY_HEAP_H
 
-#include "../../arraylist/array_list.h"
+#include "../arraylist/array_list.h"
 
-
-
-/** Array heap class to implement methods and variables common to both
- * min and max heaps.
- *
- * template class T : Type of data heap is to be.
- *      -Defaults to int.
- *
- * @var length : Keep track of the last index of the heap.
- * @var heap : ArrayHeap object used for array representation of a heap.g
+namespace heap {
+/** 
+ *  @brief  Array heap class to implement methods and variables common to both
+ *          min and max heaps.
+ *  @var  length  Keep track of the last index of the heap.
+ *  @var  heap  ArrayHeap object used for array representation of a heap.
+ *  
+ *  @tparam  T  Type of data heap is to be.
  */
 template <class T = int>
-class ArrayHeapABC
-{
+class ArrayHeapABC {
     private:
         int length;
 
     protected:
         ArrayList<T> heap;
 
-        /** Move data to appropriate index in heap after insertion.
-         */
+        /** 
+          *  @brief  Move data to appropriate index in heap after insertion.
+          */
         virtual void perc_up() = 0;
 
-        /** Move data to appropriate index in heap after deletion.
-         */
+        /** 
+          *  @brief  Move data to appropriate index in heap after deletion.
+          */
         virtual void perc_down() = 0;
 
+        /**
+          *  @brief  Internal method used to set the length of the heap.
+          *  @param  length  New length of heap.
+          */
         void set_length(const int length) { this->length = length; }
 
     public:
         ArrayHeapABC();
         virtual ~ArrayHeapABC() { delete &heap; }
-        T operator [] (const int index) { return this->heap[index]; }
-
-        /** Total number of active heap nodes.
-         *
-         * @return Total number of nodes in the heap.
-         */
+        T operator [](const int index) { return this->heap[index]; }
         int size() const { return this->length; }
 
-        /** Append data to list, call perc_up to move data to appropriate
-         * position in the heap, increment length.
-         *
-         * @param data : Data to insert into the heap.
-         */
+        /** 
+          *  @brief  Append data to list, call perc_up to move data to appropriate
+          *          position in the heap, increment length.
+          *  @param data : Data to insert into the heap.
+          */
         void insert(const T data);
 
-        /** Get the data at the head of the heap, swap the head of the heap
-         * with the tail, call perc_down to move head to appropriate position.
-         *
-         * @return Data that resided at the head of the heap.
-         */
+        /** 
+          *  @brief  Get the data at the head of the heap, swap the head of the heap
+          *          with the tail, call perc_down to move head to appropriate position.
+          *  @return Data that resided at the head of the heap.
+          */
         T pop();
 
-        /** Print the contents of the heap instance variable.
-         */
+        /** 
+          *  @brief  Print the contents of the heap.
+          */
         void print();
 };
 
 
 
-/** Implementation of min heap using a dynamic array.
- * Inherits from ArrayHeapABC.
+/** 
+ *  @brief  Implementation of min heap using a dynamic array.
  *
- * template class T : Type of data heap is to be.
- *      -Defaults to int.
+ *  @tparam  T  Type of data heap is to be.
  */
 template <class T = int>
-class ArrayMinHeap : public ArrayHeapABC<T>
-{
+class ArrayMinHeap : public ArrayHeapABC<T> {
     protected:
         void perc_up();
         void perc_down();
@@ -82,25 +79,23 @@ class ArrayMinHeap : public ArrayHeapABC<T>
         ArrayMinHeap();
         virtual ~ArrayMinHeap() { };
 
-        /** Find the minimum child node of an index.
-         *
-         * @param index : Index to find the minimum child of.
-         * @return The minimum child of the parent index.
-         */
+        /**
+          *  @brief  Find the minimum child node of an index.
+          *  @param  index  Index to find the minimum child of.
+          *  @return The minimum child of the parent index.
+          */
         int min_child(int index);
 };
 
 
 
-/** Implementation of max heap using a dynamic array.
- * Inherits from ArrayHeapABC.
+/** 
+ *  @brief  Implementation of max heap using a dynamic array.
  *
- * template class T : Type of data heap is to be.
- *      -Defaults to int.
+ *  @tparam  T  Type of data heap is to be.
  */
 template <class T = int>
-class ArrayMaxHeap : public ArrayHeapABC<T>
-{
+class ArrayMaxHeap : public ArrayHeapABC<T> {
     protected:
         void perc_up();
         void perc_down();
@@ -109,11 +104,11 @@ class ArrayMaxHeap : public ArrayHeapABC<T>
         ArrayMaxHeap();
         virtual ~ArrayMaxHeap() { };
 
-        /** Find the maximum child node of an index.
-         *
-         * @param index : Index to find the maximum child of.
-         * @return The maximum child of the parent index.
-         */
+        /** 
+          *  @brief  Find the maximum child node of an index.
+          *  @param  index  Index to find the maximum child of.
+          *  @return The maximum child of the parent index.
+          */
         int max_child(int index);
 };
 
@@ -273,5 +268,6 @@ void ArrayMaxHeap<T>::perc_down() {
 
 /// ====================== ARRAY MAX HEAP ======================
 
+}  /// namespace heap
 
 #endif // ARRAY_HEAP_H
