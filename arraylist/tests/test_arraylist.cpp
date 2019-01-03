@@ -19,7 +19,7 @@ class TestArrayList
             this->test_getitem_out_of_range();
             this->test_setitem_in_range();
             this->test_setitem_out_of_range();
-			this->test_size();
+            this->test_size();
         }
 
     private:
