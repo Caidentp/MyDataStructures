@@ -129,8 +129,9 @@ inline void ArrayList<T>::expand() {
     T* new_list = new T[max_size*2]();
     max_size *= 2;
 
-    for (unsigned int i = 0; i < length; i++)
+    for (unsigned int i = 0; i < length; i++) {
         new_list[i] = array_list[i];
+    }
     delete [] array_list;
     array_list = new_list;
 }
@@ -145,8 +146,9 @@ template <class T>
 ArrayList<T>::ArrayList(ArrayList& rhs) {
     T* new_list = new T[rhs.size()]();
 
-    for (unsigned int i = 0; i < rhs.size(); i++)
+    for (unsigned int i = 0; i < rhs.size(); i++) {
         new_list[i] = rhs[i];
+    }
 
     this->array_list = new_list;
     this->max_size = rhs.size();
@@ -170,8 +172,9 @@ ArrayList<T>::ArrayList(ArrayList&& rhs)
 /// Move assignment operator
 template <class T>
 ArrayList<T>& ArrayList<T>::operator=(ArrayList&& rhs) {
-    if (this == &rhs)
+    if (this == &rhs) {
         return *this;
+    }
 
     delete [] array_list;
 
@@ -190,8 +193,9 @@ ArrayList<T>& ArrayList<T>::operator=(ArrayList&& rhs) {
 /// Get item
 template <class T>
 inline T& ArrayList<T>::operator[](const int index) {
-    if ((unsigned)index >= length)
+    if ((unsigned)index >= length) {
         throw IndexError();
+    }
     return array_list[index];
 }
 
@@ -199,8 +203,9 @@ inline T& ArrayList<T>::operator[](const int index) {
 /// Assignment operator
 template <class T>
 ArrayList<T>& ArrayList<T>::operator=(const ArrayList& rhs) {
-    if (this == &rhs)
+    if (this == &rhs) {
         return *this;
+    }
 
     this->array_list = rhs.array_list;
     this->length = rhs.length;
@@ -212,8 +217,9 @@ ArrayList<T>& ArrayList<T>::operator=(const ArrayList& rhs) {
 /// append
 template <class T>
 void ArrayList<T>::append(const T data) {
-    if (length == max_size)
+    if (length == max_size) {
         expand();
+    }
     array_list[length] = data;
     length++;
 }
@@ -222,8 +228,9 @@ void ArrayList<T>::append(const T data) {
 /// pop
 template <class T>
 T ArrayList<T>::pop() {
-    if (length == 0)
+    if (length == 0) {
         throw EmptyList();
+    }
     length--;
     T data = array_list[length];
     array_list[length] = 0;
