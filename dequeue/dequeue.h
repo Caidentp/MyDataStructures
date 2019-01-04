@@ -40,15 +40,15 @@ class Dequeue {
         class LinkedList {
             public:
                 /**
-                   *  @brief  Doubly node used for circular linked list.
-                   *  @var  data  Data held by node.
-                   *  @var  next  Pointer to next node in list.
-                   *  @var  prev  Pointer to previous node in list.
-                   *
-                   *  This is the node object for the double circular linked
-                   *  list class. This is the most fundamental representation
-                   *  of data in the dequeue.
-                   */
+                  *  @brief  Doubly node used for circular linked list.
+                  *  @var  data  Data held by node.
+                  *  @var  next  Pointer to next node in list.
+                  *  @var  prev  Pointer to previous node in list.
+                  *
+                  *  This is the node object for the double circular linked
+                  *  list class. This is the most fundamental representation
+                  *  of data in the dequeue.
+                  */
                 class Node {
                     public:
                         T data;
@@ -68,64 +68,64 @@ class Dequeue {
                     : head(nullptr)
                     , tail(nullptr) { }
                 ~LinkedList() { deleteList(); }
-                
+
                 /**
-                   *  @brief  Delete all nodes in the list. 
-                   */
+                  *  @brief  Delete all nodes in the list.
+                  */
                 void deleteList();
 
                 /**
-                   *  @brief  Add node to the beginning of a list.
-                   *  @param  data  Data that new node will hold.
-                   *
-                   *  If list is empty, new node will become the head
-                   *  and tail of the list. Otherwise, it will only
-                   *  become the head of the list.
-                   */
+                  *  @brief  Add node to the beginning of a list.
+                  *  @param  data  Data that new node will hold.
+                  *
+                  *  If list is empty, new node will become the head
+                  *  and tail of the list. Otherwise, it will only
+                  *  become the head of the list.
+                  */
                 void push(const T data);
 
                 /**
-                   *  @brief  Add node to the end of a list.
-                   *  @param  data  Data that new node will hold.
-                   *
-                   *  If list is empty, new node will become the head
-                   *  and tail of the list. Otherwisem it will only
-                   *  become the tail of the list.
-                   */
+                  *  @brief  Add node to the end of a list.
+                  *  @param  data  Data that new node will hold.
+                  *
+                  *  If list is empty, new node will become the head
+                  *  and tail of the list. Otherwisem it will only
+                  *  become the tail of the list.
+                  */
                 void append(const T data);
 
                 /**
-                   *  @brief  Remove and return data instance variable of first node.
-                   *  @return Data instance variable of head.
-                   */
+                  *  @brief  Remove and return data instance variable of first node.
+                  *  @return Data instance variable of head.
+                  */
                 T leftPop();
 
                 /**
-                   *  @brief  Remove and return data instance variable of last node.
-                   *  @return Data instance variable of tail.
-                   */
+                  *  @brief  Remove and return data instance variable of last node.
+                  *  @return Data instance variable of tail.
+                  */
                 T rightPop();
 
                 /**
-                   *  @brief  Return data instance variable of first node.
-                   *  @return Data instance variable of head.
-                   */
+                  *  @brief  Return data instance variable of first node.
+                  *  @return Data instance variable of head.
+                  */
                 T leftPeek() const;
 
                 /**
-                   *  @brief  Return data instance variable of last node.
-                   *  @return Data instance variable of tail.
-                   */
+                  *  @brief  Return data instance variable of last node.
+                  *  @return Data instance variable of tail.
+                  */
                 T rightPeek() const;
 
                 /**
-                   *  @return True if linked list is empty, false otherwise.
-                   */
+                  *  @return True if linked list is empty, false otherwise.
+                  */
                 bool empty() const { return this->head == nullptr; }
 
                 /**
-                   *  @brief  Print data instance variable of every node.
-                   */
+                  *  @brief  Print data instance variable of every node.
+                  */
                 void print() const;
         };  /// Dequeue::LinkedList
 
