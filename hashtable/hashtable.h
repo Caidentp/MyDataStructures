@@ -29,19 +29,19 @@ class HashTable {
 #ifdef TESTING
     public:
 #endif
-        /** 
+        /**
           *  @brief  Linked list class used for collision avoidance.
           *  @var  head  Pointer to first node in list.
           *  @var  tail  Pointer to last node in list.
           */
         class LinkedList {
             public:
-                /** 
-                   *  @brief  Nodes for linked lists have keys and values.
-                   *  @var  key  Key for looking up value.
-                   *  @var  val  Value that can be looked up by key.
-                   *  @var  next  Pointer to next node in list.
-                   */
+                /**
+                  *  @brief  Nodes for linked lists have keys and values.
+                  *  @var  key  Key for looking up value.
+                  *  @var  val  Value that can be looked up by key.
+                  *  @var  next  Pointer to next node in list.
+                  */
                 class Node {
                     public:
                         K key;
@@ -60,27 +60,27 @@ class HashTable {
                 LinkedList() : head(nullptr), tail(nullptr) { }
                 ~LinkedList();
 
-                /** 
-                   *  @brief  Insert a node into a linked list. 
-                   *  @param  key  Key to lookup value by.
-                   *  @param  val  Value to be looked up by key.
-                   *
-                   *  If the key already exists in the list, the value instance
-                   *  variable of the node will be updated to contain the new val.
-                   */
+                /**
+                  *  @brief  Insert a node into a linked list.
+                  *  @param  key  Key to lookup value by.
+                  *  @param  val  Value to be looked up by key.
+                  *
+                  *  If the key already exists in the list, the value instance
+                  *  variable of the node will be updated to contain the new val.
+                  */
                 void insert(const K key, const V val);
 
                 /** Find a node's value by its key.
-                   *
-                   * @param key : Key to lookup node by.
-                   * @return Value of key if key exists in list, NULL otherwise.
-                   */
+                  *
+                  * @param key : Key to lookup node by.
+                  * @return Value of key if key exists in list, NULL otherwise.
+                  */
                 V find(const K key) const;
 
-                /** 
-                   *  @brief  Remove a node from a linked list if it exists.
-                   *  @param  key  Key of node to remove from list.
-                   */
+                /**
+                  *  @brief  Remove a node from a linked list if it exists.
+                  *  @param  key  Key of node to remove from list.
+                  */
                 void remove(const K key);
         };  /// HashTable::LinkedList
 
@@ -99,7 +99,7 @@ class HashTable {
 #ifdef TESTING
     public:
 #endif
-        /** 
+        /**
           *  @brief  Return a valid index in range of 0 to this->size.
           *  @param  key  Hash is calculated by the key passed to the function.
           */
@@ -115,7 +115,7 @@ class HashTable {
         HashTable(const int size = 127) : size(size) { table = new LinkedList[size]; }
         ~HashTable() { delete [] table; }
 
-        /** 
+        /**
           *  @brief  Put a key-value pair into the hash table. If key already
           *          exists, value will be written over.
           *  @param  key  Key to lookup value by.
@@ -125,7 +125,7 @@ class HashTable {
             table[this->hash(key)].insert(key, val);
         }
 
-        /** 
+        /**
           *  @brief  Retrieve a value by its key if it exists in the table.
           *  @param  key  Key of value to find.
           *  @return Value that matches key if it exists.
@@ -134,7 +134,7 @@ class HashTable {
             return table[this->hash(key)].find(key);
         }
 
-        /** 
+        /**
           *  @brief  Remove a key-value pair from the table by key.
           *  @param  key  Key of key-value pair to remove from table.
           */
