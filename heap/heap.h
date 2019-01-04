@@ -18,33 +18,38 @@ class ArrayHeapABC {
     private:
         int length;
 
+#ifndef TESTING
     protected:
+#endif
+#ifdef TESTING
+    public:
+#endif
         arraylist::ArrayList<T> heap;
 
         /**
           *  @brief  Move data to appropriate index in heap after insertion.
           */
-        virtual void perc_up() = 0;
+        virtual void percUp() = 0;
 
         /**
           *  @brief  Move data to appropriate index in heap after deletion.
           */
-        virtual void perc_down() = 0;
+        virtual void percDown() = 0;
 
         /**
           *  @brief  Internal method used to set the length of the heap.
           *  @param  length  New length of heap.
           */
-        void set_length(const int length) { this->length = length; }
+        void setLength(const int length) { this->length = length; }
 
     public:
-        ArrayHeapABC();
+        ArrayHeapABC() : length(0) { this->heap.append(0); }
         virtual ~ArrayHeapABC() { heap.deleteList(); }
         T operator [](const int index) { return this->heap[index]; }
         int size() const { return this->length; }
 
         /**
-          *  @brief  Append data to list, call perc_up to move data to appropriate
+          *  @brief  Append data to list, call percUp to move data to appropriate
           *          position in the heap, increment length.
           *  @param data : Data to insert into the heap.
           */
@@ -52,7 +57,7 @@ class ArrayHeapABC {
 
         /**
           *  @brief  Get the data at the head of the heap, swap the head of the heap
-          *          with the tail, call perc_down to move head to appropriate position.
+          *          with the tail, call percDown to move head to appropriate position.
           *  @return Data that resided at the head of the heap.
           */
         T pop();
@@ -60,20 +65,19 @@ class ArrayHeapABC {
         /**
           *  @brief  Print the contents of the heap.
           */
-        void print();
+        void print() const;
 };
 
 
 /**
  *  @brief  Implementation of min heap using a dynamic array.
- *
  *  @tparam  T  Type of data heap is to be.
  */
 template <class T = int>
 class ArrayMinHeap : public ArrayHeapABC<T> {
     protected:
-        void perc_up();
-        void perc_down();
+        void percUp();
+        void percDown();
 
     public:
         ArrayMinHeap() : ArrayHeapABC() { }
@@ -84,20 +88,19 @@ class ArrayMinHeap : public ArrayHeapABC<T> {
           *  @param  index  Index to find the minimum child of.
           *  @return The minimum child of the parent index.
           */
-        int min_child(int index);
+        int minChild(int index);
 };
 
 
 /**
  *  @brief  Implementation of max heap using a dynamic array.
- *
  *  @tparam  T  Type of data heap is to be.
  */
 template <class T = int>
 class ArrayMaxHeap : public ArrayHeapABC<T> {
     protected:
-        void perc_up();
-        void perc_down();
+        void percUp();
+        void percDown();
 
     public:
         ArrayMaxHeap() : ArrayHeapABC() { }
@@ -108,27 +111,18 @@ class ArrayMaxHeap : public ArrayHeapABC<T> {
           *  @param  index  Index to find the maximum child of.
           *  @return The maximum child of the parent index.
           */
-        int max_child(int index);
+        int maxChild(int index);
 };
 
 
 /// ====================== ARRAY HEAP ABC ======================
-
-/// Default ctor
-template <class T>
-ArrayHeapABC<T>::ArrayHeapABC()
-    : length(0)
-{
-    this->heap.append(0);
-}
-
 
 /// insert
 template <class T>
 void ArrayHeapABC<T>::insert(const T data) {
     heap.append(data);
     this->length++;
-    this->perc_up();
+    this->percUp();
 }
 
 
@@ -138,10 +132,9 @@ T ArrayHeapABC<T>::pop() {
     if (length == 0) {
         return NULL;
     }
-
     T data = this->heap[1];
     this->heap[1] = this->heap[length];
-    this->perc_down();
+    this->percDown();
     this->heap.pop();
     this->length--;
     return data;
@@ -159,100 +152,90 @@ void ArrayHeapABC<T>::print() {
 /// ====================== ARRAY HEAP ABC ======================
 
 
-
 /// ====================== ARRAY MIN HEAP ======================
-
 
 /// min child
 template <class T>
-int ArrayMinHeap<T>::min_child(int index) {
+int ArrayMinHeap<T>::minChild(int index) {
     if (index*2+1 > this->size()) {
         return index*2;
     }
-    int smallest_child_index = this->heap[index*2] < this->heap[index*2+1] ? index*2 : index*2+1;
-    return smallest_child_index;
+    int smallestChildIndex = this->heap[index*2] < this->heap[index*2+1] ? index*2 : index*2+1;
+    return smallestChildIndex;
 }
 
 
 /// perc up
 template <class T>
-void ArrayMinHeap<T>::perc_up() {
-    int parent_index = this->size() / 2;
-    int child_index = this->size();
-
-    while (parent_index > 0 && this->heap[child_index] < this->heap[parent_index]) {
-        T temp = this->heap[child_index];
-        this->heap[child_index] = this->heap[parent_index];
-        this->heap[parent_index] = temp;
-        child_index = parent_index;
-        parent_index /= 2;
+void ArrayMinHeap<T>::percUp() {
+    int parentIndex = this->size() / 2;
+    int childIndex = this->size();
+    while (parentIndex > 0 && this->heap[childIndex] < this->heap[parentIndex]) {
+        T temp = this->heap[childIndex];
+        this->heap[childIndex] = this->heap[parentIndex];
+        this->heap[parentIndex] = temp;
+        childIndex = parentIndex;
+        parentIndex /= 2;
     }
 }
 
 
 /// perc down
 template <class T>
-void ArrayMinHeap<T>::perc_down() {
-    int parent_index = 1;
-    int child_index = min_child(parent_index);
-
-    while (child_index <= this->size() && this->heap[parent_index] > this->heap[child_index]) {
-        T temp = this->heap[parent_index];
-        this->heap[parent_index] = this->heap[child_index];
-        this->heap[child_index] = temp;
-
-        parent_index = child_index;
-        child_index = min_child(parent_index);
+void ArrayMinHeap<T>::percDown() {
+    int parentIndex = 1;
+    int childIndex = minChild(parentIndex);
+    while (childIndex <= this->size() && this->heap[parentIndex] > this->heap[childIndex]) {
+        T temp = this->heap[parentIndex];
+        this->heap[parentIndex] = this->heap[childIndex];
+        this->heap[childIndex] = temp;
+        parentIndex = childIndex;
+        childIndex = minChild(parentIndex);
     }
 }
 
 /// ====================== ARRAY MIN HEAP ======================
-
 
 
 /// ====================== ARRAY MAX HEAP ======================
 
-
 /// max child
 template <class T>
-int ArrayMaxHeap<T>::max_child(int index) {
+int ArrayMaxHeap<T>::maxChild(int index) {
     if (index*2+1 > this->size()) {
         return index*2;
     }
-    int largest_child_index = this->heap[index*2] > this->heap[index*2+1] ? index*2 : index*2+1;
-    return largest_child_index;
+    int largestChildIndex = this->heap[index*2] > this->heap[index*2+1] ? index*2 : index*2+1;
+    return largestChildIndex;
 }
 
 
 /// perc up
 template <class T>
-void ArrayMaxHeap<T>::perc_up() {
-    int parent_index = this->size() / 2;
-    int child_index = this->size();
-
-    while (parent_index > 0 && this->heap[child_index] > this->heap[parent_index]) {
-        T temp = this->heap[child_index];
-        this->heap[child_index] = this->heap[parent_index];
-        this->heap[parent_index] = temp;
-        child_index = parent_index;
-        parent_index /= 2;
+void ArrayMaxHeap<T>::percUp() {
+    int parentIndex = this->size() / 2;
+    int childIndex = this->size();
+    while (parentIndex > 0 && this->heap[childIndex] > this->heap[parentIndex]) {
+        T temp = this->heap[childIndex];
+        this->heap[childIndex] = this->heap[parentIndex];
+        this->heap[parentIndex] = temp;
+        childIndex = parentIndex;
+        parentIndex /= 2;
     }
 }
 
 
 /// perc down
 template <class T>
-void ArrayMaxHeap<T>::perc_down() {
-    int parent_index = 1;
-    int child_index = max_child(parent_index);
-
-    while (child_index <= this->size() && this->heap[parent_index] < this->heap[child_index]) {
-        T temp = this->heap[parent_index];
-        this->heap[parent_index] = this->heap[child_index];
-        this->heap[child_index] = temp;
-
-        parent_index = child_index;
-        child_index = max_child(parent_index);
+void ArrayMaxHeap<T>::percDown() {
+    int parentIndex = 1;
+    int childIndex = maxChild(parentIndex);
+    while (childIndex <= this->size() && this->heap[parentIndex] < this->heap[childIndex]) {
+        T temp = this->heap[parentIndex];
+        this->heap[parentIndex] = this->heap[childIndex];
+        this->heap[childIndex] = temp;
+        parentIndex = childIndex;
+        childIndex = maxChild(parentIndex);
     }
 }
 
