@@ -4,6 +4,7 @@
 #include "../arraylist/array_list.h"
 
 namespace heap {
+
 /**
  *  @brief  Array heap class to implement methods and variables common to both
  *          min and max heaps.
