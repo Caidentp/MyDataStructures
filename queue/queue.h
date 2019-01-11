@@ -1,6 +1,8 @@
 #ifndef MYQUEUE_H
 #define MYQUEUE_H
 
+#include <exception>
+
 namespace myqueue {
 
 /**
@@ -17,7 +19,12 @@ namespace myqueue {
  */
 template <class T = int>
 class Queue {
+#ifndef TESTING
     private:
+#endif
+#ifdef TESTING
+    public:
+#endif
 	    /**
 		 *  @brief  Doubly linked list node to hold queue data variables.
 		 *  @var  next  Pointer to next node in the list.
@@ -56,7 +63,7 @@ class Queue {
 		 *  @brief  See top item in queue without removing it.
 		 *  @return Data instance variable of top node.
 		 */
-        T peek() const;
+        inline T peek() const;
 
         /**
 		 *  @brief  Check whether the queue is empty or not.
@@ -64,6 +71,26 @@ class Queue {
 		 */
         bool empty() const { return head == nullptr; }
 };  /// Queue
+
+
+struct EmptyQueue : public std::exception {
+	const char* what() const throw() {
+		return "Queue is empty.";
+	}
+};
+
+
+template <class T>
+Queue<T>::~Queue() {
+	Node* temp = head;
+	while (temp) {
+		Node* previous = temp;
+		temp = temp->next;
+		delete previous;
+	}
+	head = nullptr;
+	tail = nullptr;
+}
 
 
 template <class T>
@@ -80,22 +107,9 @@ inline void Queue<T>::enqueue(const T data) {
 
 
 template <class T>
-Queue<T>::~Queue() {
-	Node<T>* temp = head;
-	while (temp) {
-		Node<T>* previous = temp;
-		temp = temp->next;
-		delete previous;
-	}
-	head = nullptr;
-	tail = nullptr;
-}
-
-
-template <class T>
 inline T Queue<T>::dequeue() {
 	if (tail != nullptr) {
-		Node<T>* temp = head;
+		Node* temp = head;
 		T data = temp->data;
 		if (head == tail) {
 			head = nullptr;
@@ -107,7 +121,7 @@ inline T Queue<T>::dequeue() {
 		delete temp;
 		return data;
 	}
-	return NULL;
+	throw EmptyQueue();
 }
 
 
@@ -116,9 +130,11 @@ inline T Queue<T>::peek() const {
 	if (head != nullptr) {
 		return head->data;
 	}
-	return NULL;
+	throw EmptyQueue();
 }
 
 }  /// namespace myqueue
+
+typedef myqueue::Queue<int> queue;
 
 #endif  /// MYQUEUE_H
