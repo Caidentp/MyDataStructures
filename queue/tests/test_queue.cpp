@@ -127,9 +127,9 @@ class TestQueue {
 
 
 int main() {
-	TestQueue testSuite = TestQueue();
-	(void)testSuite;
+    TestQueue testSuite = TestQueue();
+    (void)testSuite;
 
-	std::cout << std::endl << "All tests passed." << std::endl;
-	return 0;
+    std::cout << std::endl << "All tests passed." << std::endl;
+    return 0;
 }
