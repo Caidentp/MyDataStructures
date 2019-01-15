@@ -2,6 +2,14 @@
 #define ARRAY_STACK_H
 
 namespace gstack {
+	
+#include <exception>
+
+struct EmptyStack : public std::exception {
+	const char * what() const throw() {
+		return "Stack is empty.";
+	}
+};
 
 /**
  *  @brief  Stack using an array.
@@ -17,12 +25,17 @@ template <class T = int>
 class Stack {
     static const short MAX_SIZE = 10;
 
+#ifndef TESTING
     private:
-        T *stack[MAX_SIZE];
+#endif
+#ifdef TESTING
+    public:
+#endif
+        T *stack;
         int top;
 
     public:
-        Stack() : top(-1) { };
+        Stack() : top(-1) { stack = new int[MAX_SIZE](); };
         ~Stack() { delete [] stack; }
 
         /**
@@ -47,15 +60,17 @@ class Stack {
          *  @brief  Return top of stack and removing it.
          *  @return Top of stack if it exists.
          */
-        T pop() { if (top > -1) { return stack[top--]; } }
+        T pop() { if (top > -1) { return stack[top--]; } throw EmptyStack(); }
 
         /**
          *  @brief  Return top of stack and remove it.
          *  @return Top of stack if it exists.
          */
-        T peek() const { if (top > -1) { return stack[top]; } }
+        T peek() const { if (top > -1) { return stack[top]; } throw EmptyStack(); }
 };
 
 }  /// namespace gstack
+
+typedef gstack::Stack<int> stak;
 
 #endif // ARRAY_STACK_H
