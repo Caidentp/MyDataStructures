@@ -2,13 +2,13 @@
 #define ARRAY_STACK_H
 
 namespace gstack {
-	
+
 #include <exception>
 
 struct EmptyStack : public std::exception {
-	const char * what() const throw() {
-		return "Stack is empty.";
-	}
+    const char * what() const throw() {
+        return "Stack is empty.";
+    }
 };
 
 /**
