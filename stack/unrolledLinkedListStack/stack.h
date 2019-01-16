@@ -19,7 +19,10 @@ namespace ustack {
  */
 template <class T = int>
 class Stack {
+    private:
+#ifdef TESTING
     public:
+#endif
         /** 
          *  @brief  Linked list node.
          *  @var  array  Data member of unrolled linked list node.
@@ -33,13 +36,15 @@ class Stack {
             public:
                 T array[SIZE];
                 int top{0};
-                Node* next{nullptr};
-                Node* previous{nullptr};
+                Node* next;
+                Node(Node* next = nullptr) 
+                    : next(next) { }
         };
-    
+
         Node* head;
 
         Stack() : head(nullptr) { }
+        ~Stack();
 
         /** 
          *  @brief  Returns true if stack has 0 members.
@@ -75,14 +80,24 @@ struct EmptyStack : public std::exception {
 
 
 template <class T>
+Stack<T>::~Stack() {
+    Node* temp = head;
+    while (temp) {
+        Node* next = temp->next;
+        delete temp;
+        temp = next;
+    }
+    head = nullptr;
+}
+
+
+template <class T>
 void Stack<T>::push(const T data) {
     if (head == nullptr) {
         head = new Node();
     }
     else if (head->top == 10) {
-        head->previous = new Node<T>();
-        head->previous->next = head;
-        head = head->previous;
+        head = new Node(head);
     }
     head->array[head->top++] = data;
 }
@@ -91,12 +106,11 @@ void Stack<T>::push(const T data) {
 template <class T>
 T Stack<T>::pop() {
     if (head != nullptr) {
-        T data = head->array[--head->top];
+        Node* temp = head;
+        T data = temp->array[--head->top];
         if (head->top == 0) {
             head = head->next;
-            if (head != nullptr) {
-                head->previous = nullptr;
-            }
+            delete temp;
         }
         return data;
     }
@@ -113,5 +127,7 @@ T Stack<T>::peek() const {
 }
 
 }  ///  namespace ustack
+
+typedef ustack::Stack<int> stak;
 
 #endif /// UNROLLED_LINKED_LIST_STACK_H
