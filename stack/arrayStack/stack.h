@@ -25,9 +25,7 @@ template <class T = int>
 class Stack {
     static const short MAX_SIZE = 10;
 
-#ifndef TESTING
     private:
-#endif
 #ifdef TESTING
     public:
 #endif
