@@ -5,7 +5,7 @@ namespace ustack {
 
 #include <exception>
 
-/** 
+/**
  *  @brief  Unrolled linked list stack class.
  *  @var  head  Head node of the linked list.
  *
@@ -23,7 +23,7 @@ class Stack {
 #ifdef TESTING
     public:
 #endif
-        /** 
+        /**
          *  @brief  Linked list node.
          *  @var  array  Data member of unrolled linked list node.
          *  @var  next   Pointer to next node.
@@ -34,11 +34,12 @@ class Stack {
             static const short SIZE = 10;
 
             public:
-                T array[SIZE];
+                T* array;
                 int top{0};
                 Node* next;
-                Node(Node* next = nullptr) 
-                    : next(next) { }
+                Node(Node* next = nullptr)
+                    : next(next) { array = new T[SIZE](); }
+                ~Node() { delete [] array; }
         };
 
         Node* head;
@@ -46,25 +47,25 @@ class Stack {
         Stack() : head(nullptr) { }
         ~Stack();
 
-        /** 
+        /**
          *  @brief  Returns true if stack has 0 members.
          *  @return True if stack is empty, false otherwise.
          */
         bool empty() { return head == nullptr; }
 
-        /** 
+        /**
          *  @brief  Add a data member to the top of the stack.
          *  @param  data  Data to add to the stack.
          */
         void push(const T data);
 
-        /** 
+        /**
          *  @brief  Remove the top of the stack and return it.
          *  @return Data that resides at the top of the stack.
          */
         T pop();
 
-        /** 
+        /**
          *  @brief  Return the top of the stack without removing it from the stack.
          *  @return Data that resides at the top of the stack.
          */
@@ -106,11 +107,9 @@ void Stack<T>::push(const T data) {
 template <class T>
 T Stack<T>::pop() {
     if (head != nullptr) {
-        Node* temp = head;
-        T data = temp->array[--head->top];
+        T data = head->array[--head->top];
         if (head->top == 0) {
             head = head->next;
-            delete temp;
         }
         return data;
     }

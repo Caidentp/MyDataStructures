@@ -11,6 +11,12 @@ class TestStack {
             test_push_empty();
             test_push_one_element();
             test_push_full();
+            test_pop_empty();
+            test_pop_one_element();
+            test_peek_empty();
+            test_peek_one_element();
+            test_empty_empty();
+            test_empty_not_empty();
         }
 
     private:
@@ -77,8 +83,6 @@ class TestStack {
             stak s = stak();
             s.push(1);
             assert(s.pop() == 1 &&
-                   "TestStack::test_pop_one_element()");
-            assert(s.head->top == 0 &&
                    "TestStack::test_pop_one_element()");
         }
 
