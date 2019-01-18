@@ -19,12 +19,8 @@ namespace arraylist {
  *  will double in size.
  */
 template <class T = int>
-class ArrayList final
-{
-#ifndef TESTING
+class ArrayList final {
     private:
-#endif
-
 #ifdef TESTING
     public:
 #endif
